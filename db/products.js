@@ -38,3 +38,9 @@ async function createProduct({name, description, price, imageURL, inStock, categ
         throw error;
     };
 };
+
+module.exports = {
+    getProductById,
+    getAllProducts,
+    createProduct
+};

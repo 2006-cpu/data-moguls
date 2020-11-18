@@ -10,4 +10,5 @@ const client = new Client(DB_URL);
 module.exports = {
   client,
   // db methods
+  ...require('./products')
 }
