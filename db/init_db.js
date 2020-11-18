@@ -24,6 +24,16 @@ async function buildTables() {
     console.log('Starting to build tables...');
     try {
       await client.query(`
+        CREATE TABLE users(
+          id SERIAL PRIMARY KEY,
+          "firstName" VARCHAR(255) NOT NULL,
+          "lastName" VARCHAR(255) NOT NULL,
+          email VARCHAR(255) UNIQUE NOT NULL, 
+          "imageURL" VARCHAR(255) DEFAULT 'imageUrl',  
+          username VARCHAR(255) UNIQUE NOT NULL,
+          password VARCHAR(255) UNIQUE NOT NULL,
+          "isAdmin" BOOLEAN DEFAULT false NOT NULL  
+        );
         CREATE TABLE products (
           id SERIAL PRIMARY KEY,
           name VARCHAR(255) NOT NULL,
@@ -39,21 +49,10 @@ async function buildTables() {
           "userId" INTEGER REFERENCES users(id),
           "datePlaced" DATE NOT NULL DEFAULT CURRENT_DATE
         );
-        CREATE TABLE users(
-          id SERIAL PRIMARY KEY,
-          "firstName" VARCHAR(255) NOT NULL,
-          "lastName" VARCHAR(255) NOT NULL,
-          email VARCHAR(255) UNIQUE NOT NULL, 
-          "imageURL" VARCHAR(255) DEFAULT 'imageUrl',  
-          username VARCHAR(255) UNIQUE NOT NULL,
-          password VARCHAR(255) UNIQUE NOT NULL,
-          "isAdmin" BOOLEAN DEFAULT false NOT NULL  );
-        
       `);
     } catch (error) {
       throw error;
     };
-
   } catch (error) {
     throw error;
   };
