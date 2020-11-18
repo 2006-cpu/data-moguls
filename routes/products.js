@@ -7,6 +7,8 @@ productsRouter.get("/", async (req, res) => {
   try {
     const allProducts = await getAllProducts();
 
+    console.log("HERE")
+
     res.send(allProducts);
   } catch ({ name, message }) {
     next({ name, message });
@@ -28,3 +30,5 @@ productsRouter.get("/:productId", async (req, res, next) => {
     next({ name, message });
   }
 });
+
+module.exports = productsRouter;
