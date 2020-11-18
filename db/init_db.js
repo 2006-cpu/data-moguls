@@ -13,6 +13,7 @@ async function buildTables() {
     try {
       await client.query(`
         DROP TABLE IF EXISTS products;
+        DROP TABLE IF EXISTS orders;
       `);
     } catch (error) {
       throw error;
@@ -31,6 +32,13 @@ async function buildTables() {
           "inStock" BOOLEAN NOT NULL DEFAULT false,
           category VARCHAR(255) NOT NULL
         );
+        CREATE TABLE orders (
+          id SERIAL PRIMARY KEY,
+          status VARCHAR(255) DEFAULT 'created',
+          "userId" INTEGER REFERENCES users(id),
+          "datePlaced" DATE NOT NULL DEFAULT CURRENT_DATE
+        );
+        
       `);
     } catch (error) {
       throw error;
