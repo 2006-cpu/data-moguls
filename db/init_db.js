@@ -12,7 +12,6 @@ async function buildTables() {
     console.log('Dropping All Tables..');
     try {
       await client.query(`
-       
         DROP TABLE IF EXISTS order_products;
         DROP TABLE IF EXISTS orders;
         DROP TABLE IF EXISTS products;

@@ -4,11 +4,19 @@ import { getAllProducts } from '../api';
 export default function Allproducts () {
 
   const [products, setProducts] = useState([]);
+
+  const fetchAllProducts = async () => {
+    try {
+      const products = await getAllProducts();
+
+      setProducts(products);
+    } catch (error) {
+      throw error;
+    };
+  };
+
   useEffect(() => {
-    getAllProducts
-      .then(result => {
-        setProducts(result);
-      })
+    fetchAllProducts();
   }, []);
 
   return (

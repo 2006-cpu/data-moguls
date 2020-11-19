@@ -26,7 +26,7 @@ server.use((req, res, next) => {
 const { client } = require('./db');
 
 // connect to the server
-const PORT = process.env.PORT;
+const { PORT = 5000 } = process.env;
 server.listen(PORT, async () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 
