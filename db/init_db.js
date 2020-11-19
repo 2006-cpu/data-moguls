@@ -60,12 +60,14 @@ async function buildTables() {
 
 async function populateInitialData() {
   try {
-    // create useful starting data
+    await client.query(`
+    INSERT INTO products (name, description, price, "imageURL", "inStock", category)
+    VALUES ('apple', 'Its jus an apple.', 25, 'url', true, 'Food');
+    `)
   } catch (error) {
     throw error;
-  }
-}
-
+  };
+};
 buildTables()
   .then(populateInitialData)
   .catch(console.error)
