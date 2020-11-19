@@ -19,7 +19,7 @@ productsRouter.get("/:productId", async (req, res, next) => {
     const product = await getProductById(productId);
     
     if (product) {
-      res.send({product});
+      res.send(product);
     } else {
       next({ message: "failed to pull product." });
       return;

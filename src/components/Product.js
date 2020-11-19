@@ -11,7 +11,7 @@ const Product = () => {
         try {
             const productFetched = await getProductById(productId);
 
-            setProduct(productFetched.product);
+            setProduct(productFetched);
         } catch (error) {
             throw error;
         };
