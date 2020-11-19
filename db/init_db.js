@@ -13,6 +13,7 @@ async function buildTables() {
     try {
       await client.query(`
         DROP TABLE IF EXISTS products;
+        DROP TABLE IF EXISTS order_products;
       `);
     } catch (error) {
       throw error;
