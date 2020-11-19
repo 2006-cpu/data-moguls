@@ -6,7 +6,9 @@ import {
   Switch
 } from 'react-router-dom';
 
-import { Navbar, Product, Allproducts } from './components';
+/* import { Navbar } from './Navbar'; */
+
+import { Navbar, Product, Allproducts } from './';
 
 import {
   getSomething
@@ -40,7 +42,6 @@ const App = () => {
           </Route>
 
         </Switch>
-        <Footer />
       </Router>
       <h2>{message}</h2>
     </div>

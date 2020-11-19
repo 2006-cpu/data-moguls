@@ -26,17 +26,16 @@ async function buildTables() {
     console.log('Starting to build tables...');
     try {
       await client.query(`
-
-      CREATE TABLE users(
-        id SERIAL PRIMARY KEY,
-        "firstName" VARCHAR(255) NOT NULL,
-        "lastName" VARCHAR(255) NOT NULL,
-        email VARCHAR(255) UNIQUE NOT NULL, 
-        "imageURL" VARCHAR(255) DEFAULT 'imageUrl',  
-        username VARCHAR(255) UNIQUE NOT NULL,
-        password VARCHAR(255) UNIQUE NOT NULL,
-        "isAdmin" BOOLEAN DEFAULT false NOT NULL  );
-
+        CREATE TABLE users(
+          id SERIAL PRIMARY KEY,
+          "firstName" VARCHAR(255) NOT NULL,
+          "lastName" VARCHAR(255) NOT NULL,
+          email VARCHAR(255) UNIQUE NOT NULL, 
+          "imageURL" VARCHAR(255) DEFAULT 'imageUrl',  
+          username VARCHAR(255) UNIQUE NOT NULL,
+          password VARCHAR(255) UNIQUE NOT NULL,
+          "isAdmin" BOOLEAN DEFAULT false NOT NULL  
+        );
         CREATE TABLE products (
           id SERIAL PRIMARY KEY,
           name VARCHAR(255) NOT NULL,
@@ -58,15 +57,11 @@ async function buildTables() {
           "orderId" INTEGER REFERENCES orders(id),
           price INTEGER NOT NULL,
           quantity INTEGER NOT NULL DEFAULT 0
-        );
-      
-       
-        
+        );      
       `);
     } catch (error) {
       throw error;
     };
-
   } catch (error) {
     throw error;
   };
@@ -74,12 +69,14 @@ async function buildTables() {
 
 async function populateInitialData() {
   try {
-    // create useful starting data
+    await client.query(`
+    INSERT INTO products (name, description, price, "imageURL", "inStock", category)
+    VALUES ('apple', 'Its jus an apple.', 25, 'url', true, 'Food');
+    `)
   } catch (error) {
     throw error;
-  }
-}
-
+  };
+};
 buildTables()
   .then(populateInitialData)
   .catch(console.error)
