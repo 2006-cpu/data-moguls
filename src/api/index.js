@@ -8,3 +8,4 @@ export async function getSomething() {
     throw error;
   }
 }
+

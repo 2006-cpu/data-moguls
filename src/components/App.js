@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from 'react';
 
 import {
+  BrowserRouter as Router,
+  Route,
+  Switch
+} from 'react-router-dom';
+
+import { Navbar, Product, Allproducts } from './components';
+
+import {
   getSomething
 } from '../api';
 
@@ -19,8 +27,22 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1>Hello, World!</h1>
-      <h2>{ message }</h2>
+      <Router>
+        <Navbar />
+        <Switch>
+
+          <Route path='/products'>
+            <Allproducts />
+          </Route>
+
+          <Route path='/product/:productId'>
+            <Product />
+          </Route>
+
+        </Switch>
+        <Footer />
+      </Router>
+      <h2>{message}</h2>
     </div>
   );
 }

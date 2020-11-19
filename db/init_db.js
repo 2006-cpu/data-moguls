@@ -12,8 +12,11 @@ async function buildTables() {
     console.log('Dropping All Tables..');
     try {
       await client.query(`
-        DROP TABLE IF EXISTS products;
+       
         DROP TABLE IF EXISTS order_products;
+        DROP TABLE IF EXISTS orders;
+        DROP TABLE IF EXISTS products;
+        DROP TABLE IF EXISTS users
       `);
     } catch (error) {
       throw error;
@@ -23,6 +26,17 @@ async function buildTables() {
     console.log('Starting to build tables...');
     try {
       await client.query(`
+
+      CREATE TABLE users(
+        id SERIAL PRIMARY KEY,
+        "firstName" VARCHAR(255) NOT NULL,
+        "lastName" VARCHAR(255) NOT NULL,
+        email VARCHAR(255) UNIQUE NOT NULL, 
+        "imageURL" VARCHAR(255) DEFAULT 'imageUrl',  
+        username VARCHAR(255) UNIQUE NOT NULL,
+        password VARCHAR(255) UNIQUE NOT NULL,
+        "isAdmin" BOOLEAN DEFAULT false NOT NULL  );
+
         CREATE TABLE products (
           id SERIAL PRIMARY KEY,
           name VARCHAR(255) NOT NULL,
@@ -32,6 +46,12 @@ async function buildTables() {
           "inStock" BOOLEAN NOT NULL DEFAULT false,
           category VARCHAR(255) NOT NULL
         );
+        CREATE TABLE orders (
+          id SERIAL PRIMARY KEY,
+          status VARCHAR(255) DEFAULT 'created',
+          "userId" INTEGER REFERENCES users(id),
+          "datePlaced" DATE NOT NULL DEFAULT CURRENT_DATE
+        );
         CREATE TABLE order_products (
           id SERIAL PRIMARY KEY,
           "productId" INTEGER REFERENCES products(id),
@@ -39,6 +59,9 @@ async function buildTables() {
           price INTEGER NOT NULL,
           quantity INTEGER NOT NULL DEFAULT 0
         );
+      
+       
+        
       `);
     } catch (error) {
       throw error;
