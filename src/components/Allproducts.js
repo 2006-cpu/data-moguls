@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { getAllProducts } from '../db/products.js';
+import { getAllProducts } from '../api';
 
 export default function Allproducts () {
 
   const [products, setProducts] = useState([]);
   useEffect(() => {
-    getAllProducts()
+    getAllProducts
       .then(result => {
         setProducts(result);
       })

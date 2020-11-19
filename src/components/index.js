@@ -1,4 +1,4 @@
 export { default as App } from './App';
-export { default as Navbar } from './components';
-export { default as Product } from './components';
-export { default as Allproducts } from './components';
+export { default as Navbar } from './Navbar';
+export { default as Product } from './Product';
+export { default as Allproducts } from './Allproducts';

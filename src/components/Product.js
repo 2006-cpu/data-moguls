@@ -1,24 +1,35 @@
 import React, { useState, useEffect } from 'react';
-import { getProductById } from '../db/products.js';
 
-export default function Product () {
+import { useParams } from "react-router";
+import { getProductById } from '../api';
 
-  const [product, setProduct] = useState([]);
-  useEffect(() => {
-    getProductById()
-      .then(result => {
-        setProduct(result);
-      })
-  }, []);
+const Product = () => {
+    let { productId } = useParams();
+    const [product, setProduct] = useState(null);
 
-  return (
-    <div>
-      <h1>Products</h1>
-        <div key={id}>
-          <h2>{name} in {category}</h2>
-          <p>Description: {description}</p>
-          <p>Price: {price}</p>
-        </div>
-    </div>
-  )
+    const fetchProduct = async () => {
+        try {
+            const productFetched = await getProductById(productId);
+
+            setProduct(productFetched);
+        } catch (error) {
+            throw error;
+        };
+    };
+
+    useEffect(()=>{
+        fetchProduct();
+    }, []);
+
+    console.log(product);
+
+    return <>
+        <h1>This is the product with id: {productId}</h1>
+        {product ?<><p>Name of product: {product.name}</p>
+        <p>Product description: {product.description}</p>
+        <p>Price: ${product.price}</p></>
+        : ''}
+    </>
 };
+
+export default Product;

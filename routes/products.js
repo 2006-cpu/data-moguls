@@ -3,7 +3,7 @@ const productsRouter = express.Router();
 
 const { getProductById, getAllProducts, createProduct } = require("../db");
 
-productsRouter.get("/", async (req, res) => {
+productsRouter.get("/", async (req, res, next) => {
   try {
     const allProducts = await getAllProducts();
 
@@ -17,7 +17,7 @@ productsRouter.get("/:productId", async (req, res, next) => {
   const { productId } = req.params;
   try {
     const product = await getProductById(productId);
-
+    
     if (product) {
       res.send(product);
     } else {
@@ -28,3 +28,5 @@ productsRouter.get("/:productId", async (req, res, next) => {
     next({ name, message });
   }
 });
+
+module.exports = productsRouter;
