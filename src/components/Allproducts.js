@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getAllProducts } from '../api';
 
-export default function Allproducts () {
+export default function Allproducts() {
 
   const [products, setProducts] = useState([]);
 
@@ -17,7 +17,7 @@ export default function Allproducts () {
 
   useEffect(() => {
     fetchAllProducts();
-  }, []);
+  });
 
   return (
     <div>
