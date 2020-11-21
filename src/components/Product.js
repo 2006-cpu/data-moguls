@@ -17,18 +17,18 @@ const Product = () => {
         };
     };
 
-    useEffect(()=>{
+    useEffect(() => {
         fetchProduct();
-    }, []);
+    });
 
     console.log(product);
 
     return <>
         <h1>This is the product with id: {productId}</h1>
-        {product ?<><p>Name of product: {product.name}</p>
-        <p>Product description: {product.description}</p>
-        <p>Price: ${product.price}</p></>
-        : ''}
+        {product ? <><p>Name of product: {product.name}</p>
+            <p>Product description: {product.description}</p>
+            <p>Price: ${product.price}</p></>
+            : ''}
     </>
 };
 

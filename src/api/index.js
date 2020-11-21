@@ -9,7 +9,7 @@ export async function getSomething() {
   }
 }
 
-export async function getProductById(id){
+export async function getProductById(id) {
   try {
     const { data } = await axios.get(`/api/products/${id}`);
 
@@ -19,7 +19,7 @@ export async function getProductById(id){
   };
 };
 
-export async function getAllProducts(){
+export async function getAllProducts() {
   try {
     const { data } = await axios.get('/api/products');
 
@@ -28,4 +28,7 @@ export async function getAllProducts(){
     throw error;
   };
 };
+
+
+
 
