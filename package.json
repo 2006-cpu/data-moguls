@@ -18,11 +18,12 @@
     "axios": "^0.19.2",
     "express": "^4.17.1",
     "morgan": "^1.10.0",
+    "node": "^15.2.1",
     "pg": "^8.5.1",
     "react": "^16.14.0",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^3.4.1"
+    "react-scripts": "^4.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
