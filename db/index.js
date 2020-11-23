@@ -58,8 +58,17 @@ async function getAllOrders(){
   try {
     const {rows : orders} = await client.query(`
     SELECT * FROM orders;
-  `)
+  `);
 
+  for(let order of orders){
+    const { rows: [products]} = await client.query(`
+      SELECT * FROM order_products
+      WHERE "orderId" = $1;
+    `, [order.id]);
+
+    order.products = products;
+  };
+  
   return orders
   } catch (error) {
     throw error;

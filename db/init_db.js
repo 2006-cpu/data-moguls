@@ -137,6 +137,7 @@ async function createInitialOrderProducts(){
   };
 };
 
+
 async function rebuildDB() {
   try {
     client.connect();
