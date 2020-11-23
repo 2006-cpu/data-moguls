@@ -88,7 +88,7 @@ async function createInitialProducts() {
   try {
 
     const productsToCreate = [
-      { name: 'beer', description: 'its tasty', price: '$2,000', imageURL: '', inStock: 'yes', category: 'IPA' },
+      { name: 'beer', description: 'its tasty', price: '$2,000', imageURL: '', inStock: true, category: 'IPA' },
 
     ]
     const createTheProducts = await Promise.all(productsToCreate.map(createProduct));
