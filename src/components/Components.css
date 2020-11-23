@@ -199,26 +199,37 @@ body {
 
 /* ALL PRODUCTS */
 
-.allproducts {
-margin-top: 9.5rem;
+.all-products {
+margin-top: 10rem;
 display: flex;
 flex-direction: row;
 flex-wrap: wrap;
 align-items: center;
 font-family: 'Marmelad', sans-serif;
 color: #333;
-font-size: 1.3rem;
+/* font-size: 1rem; */
 padding: 2rem;
 padding-bottom: 0rem;
-margin-left: 10rem;
-margin-right: 10rem;
+margin-left: 5rem;
+margin-right: 5rem;
 }
 
 .product-card {
   display: flex;
+  flex-basis: 270px;
   flex-direction: column;
-  border: 1px solid black;
+  font-size: 1rem;
+  border: 1px solid #999;
+  box-shadow: 5px 5px 10px 1px #999;
   border-radius: 7px;
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.thumbnail {
+  width: 230px;
+  padding: 2rem;
+
 }
 
 /* ORDERS */
@@ -245,7 +256,6 @@ margin-right: 10rem;
   font-family: 'Marmelad', sans-serif;
   font-size: 1.2rem;
   letter-spacing: .15rem;
-  ;
   color: white;
   justify-content: space-around;
   background: #999;
@@ -259,9 +269,23 @@ margin-right: 10rem;
   border-top: 2px solid #FF6666;
 }
 
+.footer a {
+  font-family: 'Marmelad', sans-serif;
+  font-size: 1.2rem;
+  letter-spacing: .15rem;
+  color: white;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  color: #000;
+  text-decoration: underline;
+}
+
 .logo {
   width: 50px;
   height: 50px;
   padding-left: 2rem;
   padding-right: 2rem;
+  z-index: 1000;
 }
