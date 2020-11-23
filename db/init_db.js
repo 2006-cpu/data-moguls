@@ -1,7 +1,13 @@
 // code to build and initialize DB goes here
 const {
   client,
-  createProduct
+  createProduct,
+  createOrder,
+  getAllOrders,
+  getOrderById,
+  getOrderByUser,
+  getOrderByProduct,
+  getCartByUser
   // other db methods 
 } = require('./index');
 
@@ -50,7 +56,7 @@ async function buildTables() {
           id SERIAL PRIMARY KEY,
           status VARCHAR(255) DEFAULT 'created',
           "userId" INTEGER REFERENCES users(id),
-          "datePlaced" DATE NOT NULL DEFAULT CURRENT_DATE
+          "datePlaced" DATE DEFAULT CURRENT_DATE
         );
         CREATE TABLE order_products (
           id SERIAL PRIMARY KEY,
@@ -65,8 +71,17 @@ async function buildTables() {
   }
 }
 
-/* async function createInitialUsers() {
-  console.log('Starting to create users...');
+async function createInitialUsers() {
+  try {
+    await client.query(`
+      INSERT INTO users("firstName", "lastName", email, username, password)
+      VALUES ('Tommy-da-boi', 'Smith', 'tommy93@gmail.com', 'tsmith', 'tomtom')
+      RETURNING *;
+    `);
+  } catch (error) {
+    throw error;
+  };
+  /* console.log('Starting to create users...');
   try {
 
     const usersToCreate = [
@@ -82,8 +97,8 @@ async function buildTables() {
   } catch (error) {
     console.error('Error creating users!');
     throw error;
-  }
-} */
+  } */
+}
 
 async function createInitialProducts() {
   try {
@@ -98,17 +113,64 @@ async function createInitialProducts() {
     console.log('Finished creating products!')
   } catch (error) {
     throw error;
-  }
-}
+  };
+};
+
+async function createInitialOrders() {
+  try {
+    const ordersToCreate = [
+      {userId: 1, datePlaced: "2020-11-23", status: 'created'}
+    ]
+
+    const createTheOrders = await Promise.all(ordersToCreate.map(createOrder));
+    console.log("Orders created.");
+    console.log(createTheOrders);
+    console.log('Finished creating orders!');
+  } catch (error) {
+    throw error;
+  };
+};
+
+async function createInitialOrderProducts(){
+  try {
+    await client.query(`
+      INSERT INTO order_products("productId", "orderId", price, quantity)
+      VALUES (1, 1, 2000, 1);
+    `);
+  } catch (error) {
+    throw error;
+  };
+};
+
+async function testingMyFunctions(){
+  try {
+    console.log("TESTING FUNCTIONS...")
+    const allOfTheOrders = await getAllOrders();
+    const orderWithId1 = await getOrderById({id: 1});
+    const getOrderByUsername = await getOrderByUser({username: "tsmith"}) ;
+    const productOrderByProduct = await getOrderByProduct({id: 1});
+    const cart = await getCartByUser({id: 1});
+
+    console.log("THIS should be all of the orders", allOfTheOrders);
+    console.log("This should be orders with id 1", orderWithId1);
+    console.log("THIS HSOULD BE thoms order", getOrderByUsername);
+    console.log("THIS SHOULD BE order_products for product 1", productOrderByProduct);
+  } catch (error) {
+    throw error;
+  };
+};
 
 async function rebuildDB() {
   try {
     client.connect();
     await dropTables();
     await buildTables();
-    /* await createInitialUsers(); */
+    await createInitialUsers();
     await createInitialProducts();
-
+    await createInitialOrders();
+    await createInitialOrderProducts();
+    await testingMyFunctions();
+    client.end();
   } catch (error) {
     console.log('error durring rebuildDB');
     throw error;
