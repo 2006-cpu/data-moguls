@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getAllProducts } from '../api';
+import { NavLink } from 'react-router-dom';
+import './Components.css';
 
 export default function Allproducts() {
 
@@ -20,15 +22,20 @@ export default function Allproducts() {
   });
 
   return (
-    <div>
+    <div className='allproducts'>
       <h1>Products</h1>
+
+      <div className='product-card'>
+
       {products.map(({ id, name, description, price, isPublic, category }) => (
-        <div key={id}>
-          <h2>{name} in {category}</h2>
+              <div key={id}>
+          <h2><Navlink to='product:productId'>{name} in {category}</Navlink></h2>
           <p>Description: {description}</p>
           <p>Price: {price}</p>
         </div>
       ))}
+
+      </div>
     </div>
   )
 };

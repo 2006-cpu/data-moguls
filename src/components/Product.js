@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { useParams } from "react-router";
 import { getProductById } from '../api';
+import './Components.css';
 
 const Product = () => {
     let { productId } = useParams();

@@ -1,12 +1,16 @@
 import React from 'react';
+import { Search } from './';
 import { NavLink } from 'react-router-dom';
+import './Components.css';
 
 export default function Navbar() {
   return (
-    <div>
-      <NavLink to='/'><button>HOME</button></NavLink>
-      <NavLink to='/product/:productId'><button>PRODUCT</button></NavLink>
-      <NavLink to='/products'><button>ALL PRODUCTS</button></NavLink>
+    <div className='navbar'>
+      <NavLink to='/' className='button'>HOME</NavLink>
+      <NavLink to='/products' className='button'>SHOP PRODUCTS</NavLink>
+      <NavLink to='/login' className='button'>LOGIN</NavLink>
+      <NavLink to='/orders' className='button'>ORDERS</NavLink>
+      <Search />
     </div>
   );
 };
