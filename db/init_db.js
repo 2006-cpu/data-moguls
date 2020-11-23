@@ -1,30 +1,31 @@
 // code to build and initialize DB goes here
 const {
-  client
+  client,
+  createProduct,
   // other db methods 
 } = require('./index');
 
-async function buildTables() {
+async function dropTables() {
+  console.log('Dropping All Tables..');
   try {
-    client.connect();
 
-    // drop tables in correct order
-    console.log('Dropping All Tables..');
-    try {
-      await client.query(`
+    await client.query(`
         DROP TABLE IF EXISTS order_products;
         DROP TABLE IF EXISTS orders;
         DROP TABLE IF EXISTS products;
         DROP TABLE IF EXISTS users
       `);
-    } catch (error) {
-      throw error;
-    };
+  } catch (error) {
+    throw error;
+  }
+}
 
-    // build tables in correct order
-    console.log('Starting to build tables...');
-    try {
-      await client.query(`
+async function buildTables() {
+
+  console.log('Starting to build tables...');
+  try {
+
+    await client.query(`
         CREATE TABLE users(
           id SERIAL PRIMARY KEY,
           "firstName" VARCHAR(255) NOT NULL,
@@ -58,25 +59,61 @@ async function buildTables() {
           quantity INTEGER NOT NULL DEFAULT 0
         );      
       `);
-    } catch (error) {
-      throw error;
-    };
   } catch (error) {
     throw error;
-  };
-};
+  }
+}
 
-async function populateInitialData() {
+async function createInitialUsers() {
+  console.log('Starting to create users...');
   try {
-    await client.query(`
-    INSERT INTO products (name, description, price, "imageURL", "inStock", category)
-    VALUES ('apple', 'Its jus an apple.', 25, 'url', true, 'Food');
-    `)
+
+    const usersToCreate = [
+      { username: 'Tommy-da-boi', password: 'tomtom' },
+      { username: 'Turtles', password: 'turtleTime' },
+      { username: 'Sandy', password: 'sandyBeach' },
+    ]
+    const users = await Promise.all(usersToCreate.map(createUser));
+
+    console.log('Users created:');
+    console.log(users);
+    console.log('Finished creating users!');
+  } catch (error) {
+    console.error('Error creating users!');
+    throw error;
+  }
+}
+
+async function createInitialProducts() {
+  try {
+
+    const productsToCreate = [
+      { name: 'beer', description: 'its tasty', price: '$2,000', imageURL: '', inStock: 'yes', category: 'IPA' },
+
+    ]
+    const createTheProducts = await Promise.all(productsToCreate.map(createProduct));
+    console.log('product created')
+    console.log(createTheProducts)
+    console.log('Finished creating products!')
   } catch (error) {
     throw error;
-  };
-};
-buildTables()
-  .then(populateInitialData)
-  .catch(console.error)
-  .finally(() => client.end());
+  }
+}
+
+async function rebuildDB() {
+  try {
+    client.connect()
+    await dropTables()
+    await buildTables()
+    await createInitialUsers()
+    await createInitialProducts();
+
+  } catch (error) {
+    console.log('error durring rebuildDB')
+    throw error
+  }
+}
+
+module.exports = {
+  rebuildDB
+}
