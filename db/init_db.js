@@ -1,11 +1,12 @@
 // code to build and initialize DB goes here
 const {
   client,
-  createProduct,
+  createProduct
   // other db methods 
 } = require('./index');
 
 async function dropTables() {
+
   console.log('Dropping All Tables..');
   try {
 
@@ -64,7 +65,7 @@ async function buildTables() {
   }
 }
 
-async function createInitialUsers() {
+/* async function createInitialUsers() {
   console.log('Starting to create users...');
   try {
 
@@ -82,13 +83,13 @@ async function createInitialUsers() {
     console.error('Error creating users!');
     throw error;
   }
-}
+} */
 
 async function createInitialProducts() {
   try {
 
     const productsToCreate = [
-      { name: 'beer', description: 'its tasty', price: '$2,000', imageURL: '', inStock: 'yes', category: 'IPA' },
+      { name: 'beer', description: 'its tasty', price: 2000, imageURL: '', inStock: 'yes', category: 'IPA' },
 
     ]
     const createTheProducts = await Promise.all(productsToCreate.map(createProduct));
@@ -102,18 +103,16 @@ async function createInitialProducts() {
 
 async function rebuildDB() {
   try {
-    client.connect()
-    await dropTables()
-    await buildTables()
-    await createInitialUsers()
+    client.connect();
+    await dropTables();
+    await buildTables();
+    /* await createInitialUsers(); */
     await createInitialProducts();
 
   } catch (error) {
-    console.log('error durring rebuildDB')
-    throw error
-  }
-}
+    console.log('error durring rebuildDB');
+    throw error;
+  };
+};
 
-module.exports = {
-  rebuildDB
-}
+rebuildDB();
