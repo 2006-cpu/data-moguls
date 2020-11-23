@@ -142,24 +142,6 @@ async function createInitialOrderProducts(){
   };
 };
 
-async function testingMyFunctions(){
-  try {
-    console.log("TESTING FUNCTIONS...")
-    const allOfTheOrders = await getAllOrders();
-    const orderWithId1 = await getOrderById({id: 1});
-    const getOrderByUsername = await getOrderByUser({username: "tsmith"}) ;
-    const productOrderByProduct = await getOrderByProduct({id: 1});
-    const cart = await getCartByUser({id: 1});
-
-    console.log("THIS should be all of the orders", allOfTheOrders);
-    console.log("This should be orders with id 1", orderWithId1);
-    console.log("THIS HSOULD BE thoms order", getOrderByUsername);
-    console.log("THIS SHOULD BE order_products for product 1", productOrderByProduct);
-  } catch (error) {
-    throw error;
-  };
-};
-
 async function rebuildDB() {
   try {
     client.connect();
@@ -169,7 +151,6 @@ async function rebuildDB() {
     await createInitialProducts();
     await createInitialOrders();
     await createInitialOrderProducts();
-    await testingMyFunctions();
     client.end();
   } catch (error) {
     console.log('error durring rebuildDB');
