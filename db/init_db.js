@@ -1,9 +1,11 @@
-// code to build and initialize DB goes here
+
 const {
   client,
   createProduct,
   // other db methods
 } = require('./index');
+
+const { createUser } = require('./users')
 
 async function dropTables() {
   console.log('Dropping All Tables..');
@@ -88,6 +90,7 @@ async function createInitialProducts() {
   try {
 
     const productsToCreate = [
+
       { name: 'AleSmith San Diego Pale Ale .394',
       description: 'AleSmith dialed in the recipe resulting in an extremely drinkable 6% ABV Pale Ale with light bitterness and accentuated hoppiness designed to fill the gap between AleSmith X Extra Pale Ale and AleSmith IPA. This San Diego Pale Ale will showcase abundant piney and citrusy hop aroma and flavor from an intense dry-hopping schedule. A balanced malt profile will round out these hoppy flavors with a biscuity finish to enhance drinkability throughout the innings. (12 oz. can).',
       imageURL: './assets/image001.jpeg',
@@ -227,6 +230,7 @@ async function createInitialProducts() {
       price: 499,
       inStock: true,
       category: 'Porter - American' },
+
 
     ]
     const createTheProducts = await Promise.all(productsToCreate.map(createProduct));
