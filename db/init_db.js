@@ -1,9 +1,10 @@
-// code to build and initialize DB goes here
+
 const {
   client,
   createProduct,
-  // other db methods 
 } = require('./index');
+
+const { createUser } = require('./users')
 
 async function dropTables() {
   console.log('Dropping All Tables..');
@@ -88,7 +89,7 @@ async function createInitialProducts() {
   try {
 
     const productsToCreate = [
-      { name: 'beer', description: 'its tasty', price: '$2,000', imageURL: '', inStock: true, category: 'IPA' },
+      { name: 'beer', description: 'its tasty', price: '2,000', imageURL: '', inStock: true, category: 'IPA' },
 
     ]
     const createTheProducts = await Promise.all(productsToCreate.map(createProduct));
