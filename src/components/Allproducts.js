@@ -19,7 +19,7 @@ export default function Allproducts() {
 
   useEffect(() => {
     fetchAllProducts();
-  });
+  }, []);
 
   return (
     <div className='allproducts'>
@@ -27,13 +27,13 @@ export default function Allproducts() {
 
       <div className='product-card'>
 
-      {products.map(({ id, name, description, price, isPublic, category }) => (
-              <div key={id}>
-          <h2><Navlink to='product:productId'>{name} in {category}</Navlink></h2>
-          <p>Description: {description}</p>
-          <p>Price: {price}</p>
-        </div>
-      ))}
+        {products.map(({ id, name, description, price, category }) => (
+          <div key={id}>
+            <h2><NavLink to='product:productId'>{name} in {category}</NavLink></h2>
+            <p>Description: {description}</p>
+            <p>Price: {price}</p>
+          </div>
+        ))}
 
       </div>
     </div>
