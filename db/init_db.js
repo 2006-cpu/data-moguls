@@ -2,12 +2,7 @@
 const {
   client,
   createProduct,
-  createOrder,
-  getAllOrders,
-  getOrderById,
-  getOrderByUser,
-  getOrderByProduct,
-  getCartByUser
+  createOrder
   // other db methods 
 } = require('./index');
 
