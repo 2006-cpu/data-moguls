@@ -71,9 +71,9 @@ async function createInitialUsers() {
   try {
 
     const usersToCreate = [
-      { username: 'Tommy-da-boi', password: 'tomtom' },
-      { username: 'Turtles', password: 'turtleTime' },
-      { username: 'Sandy', password: 'sandyBeach' },
+      { firstName:'Thom', lastName: 'Smith', email: 'tsmith@gmail.com', username: 'Tommy-da-boi', password: 'tomtom', isAdmin: false},
+      { firstName:'Jack', lastName: 'Turtle', email: 'turtlemaster@yahoo.com',username: 'Turtles', password: 'turtleTime', isAdmin: false},
+      { firstName:'Sandy', lastName: 'Beach', email: 'sandybeach@gmail.com', username: 'Sandy', password: 'sandyBeach', isAdmin: false}
     ]
     const users = await Promise.all(usersToCreate.map(createUser));
 
@@ -244,16 +244,16 @@ async function createInitialProducts() {
 
 async function rebuildDB() {
   try {
-    client.connect()
-    await dropTables()
-    await buildTables()
-    await createInitialUsers()
+    client.connect();
+    await dropTables();
+    await buildTables();
+    await createInitialUsers();
     await createInitialProducts();
-
+    client.end();
   } catch (error) {
     console.log('error durring rebuildDB')
-    throw error
-  }
-}
+    throw error;
+  };
+};
 
 rebuildDB();
