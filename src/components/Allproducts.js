@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { getAllProducts } from '../api';
 import { NavLink } from 'react-router-dom';
 import './Components.css';
-// import Image001 from '/assets/image001.jpeg';
 
 export default function Allproducts() {
 
