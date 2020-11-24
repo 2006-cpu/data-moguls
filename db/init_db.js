@@ -1,10 +1,6 @@
 
-const {
-  client,
-  createProduct,
-  // other db methods
-} = require('./index');
-
+const { client } = require('./client');
+const { createProduct } = require('./products')
 const { createUser } = require('./users')
 
 async function dropTables() {
@@ -71,9 +67,9 @@ async function createInitialUsers() {
   try {
 
     const usersToCreate = [
-      { firstName:'Thom', lastName: 'Smith', email: 'tsmith@gmail.com', username: 'Tommy-da-boi', password: 'tomtom', isAdmin: false},
-      { firstName:'Jack', lastName: 'Turtle', email: 'turtlemaster@yahoo.com',username: 'Turtles', password: 'turtleTime', isAdmin: false},
-      { firstName:'Sandy', lastName: 'Beach', email: 'sandybeach@gmail.com', username: 'Sandy', password: 'sandyBeach', isAdmin: false}
+      { username: 'Tommy-da-boi', password: 'tomtom', firstName: 'blah', lastName: 'blah', email: "tommy93@gmail.com", isAdmin: 'false' },
+      { username: 'Turtles', password: 'turtleTime', firstName: 'blah', lastName: 'blah', email: "tommy9@gmail.com", isAdmin: 'false' },
+      { username: 'Sandy', password: 'sandyBeach', firstName: 'blah', lastName: 'blah', email: "tommy3@gmail.com", isAdmin: 'false' },
     ]
     const users = await Promise.all(usersToCreate.map(createUser));
 
@@ -90,7 +86,7 @@ async function createInitialProducts() {
   try {
 
     const productsToCreate = [
-
+      
       { name: 'AleSmith San Diego Pale Ale .394',
       description: 'AleSmith dialed in the recipe resulting in an extremely drinkable 6% ABV Pale Ale with light bitterness and accentuated hoppiness designed to fill the gap between AleSmith X Extra Pale Ale and AleSmith IPA. This San Diego Pale Ale will showcase abundant piney and citrusy hop aroma and flavor from an intense dry-hopping schedule. A balanced malt profile will round out these hoppy flavors with a biscuity finish to enhance drinkability throughout the innings. (12 oz. can).',
       imageURL: '/assets/image001.jpeg',
@@ -188,51 +184,8 @@ async function createInitialProducts() {
       price: 599,
       inStock: true,
       category: 'Pilsner - Czech' },
-
-      { name: 'Fort Point Sfizio Pilsner',
-      description: 'Sfizio is an Italian Style Pilsner with a snappy, cracker-like malt body and a tantalizingly bitter finish. This modern approach to pilsner is hopped as generously as an American IPA, but with Noble hop varieties that are more delicate than their American counterparts. Heaps of Hallertau Mittelfrüh and Aurora hops create fragrant notes of pine and eucalyptus as lively as a zip around San Francisco\'s rolling city streets. (12 oz. can).',
-      imageURL: './assets/image015.jpg',
-      price: 499,
-      inStock: true,
-      category: 'Pilsner - Italian' },
-
-      { name: 'Maui Pau Hana Pilsner',
-      description: 'European Pilsner malt offers sweetness balanced by a spicy hop profile. (12 oz. can).',
-      imageURL: '/assets/image016.jpeg',
-      price: 499,
-      inStock: true,
-      category: 'Pilsner - Czech' },
-
-      { name: 'Clown Shoes Pecan Pie Porter',
-      description: 'Genghis Pecan rules with an iron fist.  He conquers all that he surveys. But he also is a strategic genius. Genghis plans his meals weeks and weeks ahead so that he arrives at the Clown Shoes Pecan Pie Eating Contest ravenous and ready for another conquest. A seasonal favorite to go alongside a classic dessert, Pecan Pie Porter puts sweet dessert flavors inside a full-bodied and robust porter. (16 oz. can).',
-      imageURL: '/assets/image017.jpeg',
-      price: 499,
-      inStock: true,
-      category: 'Porter - American' },
-
-      { name: 'Garage Piston Pumpkin Porter',
-      description: 'Decadent and satisfying Pump-Kin Spiced Porter will get you rev\'d up since the winter season is just around the corner. (12 oz. can).',
-      imageURL: '/assets/image018.jpeg',
-      price: 499,
-      inStock: true,
-      category: 'Porter - American' },
-
-      { name: 'Deschutes Black Butte Porter',
-      description: 'This is the beer that started it all. A delicate, creamy mouthfeel contrasts with layered depth revealing distinctive chocolate and coffee notes. Dark and rich, yet easy to drink. (12 oz. bottle).',
-      imageURL: '/assets/image019.jpeg',
-      price: 499,
-      inStock: true,
-      category: 'Porter - American' },
-
-      { name: 'Pizza Port Bacon and Eggs',
-      description: 'With award-winning cold-pressed coffee from Bird Rock Roasters of La Jolla, this Coffee Porter is black in color with a khaki tan head. Strong coffee flavors with rich chocolate and roasted malts. (16 oz. can).',
-      imageURL: '/assets/image020.jpg',
-      price: 499,
-      inStock: true,
-      category: 'Porter - American' },
-
-
     ]
+    
     const createTheProducts = await Promise.all(productsToCreate.map(createProduct));
     console.log('product created')
     console.log(createTheProducts)
