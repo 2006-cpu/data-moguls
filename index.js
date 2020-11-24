@@ -1,4 +1,5 @@
 // This is the Web Server
+require('dotenv').config();
 const express = require('express');
 const server = express();
 
@@ -18,17 +19,22 @@ server.use(express.static(path.join(__dirname, 'build')));
 server.use('/api', require('./routes'));
 
 // by default serve up the react app if we don't recognize the route
-server.use((req, res, next) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'))
-});
+//server.use((req, res, next) => {
+//  res.sendFile(path.join(__dirname, 'build', 'index.html'))
+//});
+
 
 // bring in the DB connection
 const { client } = require('./db');
 
+server.use((err, req, res, next) => {
+  res.status(500).send(err)
+})
+
 // connect to the server
-const PORT = process.env.PORT || 5000;
+const { PORT = 5000 } = process.env;
 server.listen(PORT, async () => {
-  console.log(`Server is running on ${ PORT }!`);
+  console.log(`Server is running on http://localhost:${PORT}`);
 
   try {
     await client.connect();

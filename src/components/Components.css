@@ -1,0 +1,291 @@
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:ital,wght@1,500&family=Marmelad&display=swap');
+* {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+}
+
+/* HOME */
+
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Marmelad', sans-serif;
+  color: #333;
+  font-size: 1.3rem;
+  padding: 2rem;
+  padding-bottom: 0rem;
+  margin-left: 10rem;
+  margin-right: 10rem;
+}
+
+.home2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  font-family: 'Marmelad', sans-serif;
+  color: #333;
+  font-size: 1.3rem;
+  padding: 2rem;
+  margin-left: 10rem;
+  margin-right: 10rem;
+}
+
+.home h1 {
+  font-family: 'Marmelad', sans-serif;
+  align-self: center;
+  font-size: 2.5rem;
+  font-style: italic;
+  color: black;
+  margin-bottom: 2rem;
+}
+
+.homeimage {
+  display: flex;
+  flex-direction: row;
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+  border-bottom: 2px solid black;
+  min-width: 100%;
+  background-image: url(./images/homeimage.jpg);
+  margin-top: 9.5rem;
+  height: 25rem;
+}
+
+.button {
+  display: inline-block;
+  font-family: 'Marmelad', sans-serif;
+  font-size: 1.2rem;
+  padding: .6rem;
+  margin-left: .5rem;
+  margin-right: .5rem;
+  letter-spacing: .1rem;
+  text-decoration: none;
+  background-color: #FF6666;
+  color: #FFF;
+  border-radius: 7px;
+  border: 1px solid #666;
+}
+
+.button:hover {
+  background-color: #666;
+  text-decoration: underline;
+  color: #FFF;
+  border: 1px solid white;
+}
+
+/* HEADER */
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+  background: #FF6666;
+  padding: .3rem;
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  left: 0px;
+  z-index: 999;
+}
+
+.title {
+  font-family: 'Alegreya Sans SC', sans-serif;
+  font-size: 4rem;
+  font-weight: bold;
+  color: white;
+  text-shadow: 1px 1px 3px black;
+  letter-spacing: .7rem;
+  margin-left: 1.5rem;
+}
+
+.slogan {
+  font-family: 'Marmelad', sans-serif;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: white;
+  text-shadow: 1px 1px 3px black;
+  font-style: italic;
+  letter-spacing: .2rem;
+  margin-right: 1.5rem;
+}
+
+/* NAVBAR */
+
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  font-family: 'Balsamic Sans', sans-serif;
+  background: #CCC;
+  padding: 1rem;
+  position: fixed;
+  z-index: 1000;
+  top: 87px;
+  right: 0px;
+  left: 0px;
+  border-bottom: 1px solid black;
+}
+
+.navbar .button {
+  display: inline-block;
+  justify-content: center;
+  font-family: 'Marmelad', sans-serif;
+  font-size: 1.2rem;
+  padding: .6rem;
+  margin-left: .5rem;
+  margin-right: .5rem;
+  letter-spacing: .1rem;
+  text-decoration: none;
+  background-color: #FF6666;
+  color: #FFF;
+  border-radius: 7px;
+  border: 1px solid #666;
+}
+
+.navbar .button:hover {
+  background-color: #666;
+  color: #FFF;
+  border: 1px solid white;
+}
+
+/* SEARCH */
+
+.search {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: #CCC;
+}
+
+.search input {
+  height: 2.7rem;
+  justify-content: center;
+  font-family: 'Marmelad', sans-serif;
+  font-size: 1.2rem;
+  padding: .6rem;
+  margin-left: .5rem;
+  margin-right: .5rem;
+  letter-spacing: .1rem;
+  border-radius: 7px;
+  border: 1px solid #FF6666;
+}
+
+/* LOGIN */
+
+.login {
+  margin-top: 9.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Marmelad', sans-serif;
+  color: #333;
+  font-size: 1.3rem;
+  padding: 2rem;
+  padding-bottom: 0rem;
+  margin-left: 10rem;
+  margin-right: 10rem;
+}
+
+/* ALL PRODUCTS */
+
+.all-products {
+margin-top: 10rem;
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+align-items: center;
+font-family: 'Marmelad', sans-serif;
+color: #333;
+/* font-size: 1rem; */
+padding: 2rem;
+padding-bottom: 0rem;
+margin-left: 5rem;
+margin-right: 5rem;
+}
+
+.product-card {
+  display: flex;
+  flex-basis: 270px;
+  flex-direction: column;
+  font-size: 1rem;
+  border: 1px solid #999;
+  box-shadow: 5px 5px 10px 1px #999;
+  border-radius: 7px;
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.thumbnail {
+  width: 230px;
+  padding: 2rem;
+
+}
+
+/* ORDERS */
+
+.orders {
+  margin-top: 9.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Marmelad', sans-serif;
+  color: #333;
+  font-size: 1.3rem;
+  padding: 2rem;
+  padding-bottom: 0rem;
+  margin-left: 10rem;
+  margin-right: 10rem;
+}
+
+/* FOOTER */
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  font-family: 'Marmelad', sans-serif;
+  font-size: 1.2rem;
+  letter-spacing: .15rem;
+  color: white;
+  justify-content: space-around;
+  background: #999;
+  padding: .5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+  border-top: 2px solid #FF6666;
+}
+
+.footer a {
+  font-family: 'Marmelad', sans-serif;
+  font-size: 1.2rem;
+  letter-spacing: .15rem;
+  color: white;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  color: #000;
+  text-decoration: underline;
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  z-index: 1000;
+}
