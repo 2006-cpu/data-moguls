@@ -256,6 +256,4 @@ async function rebuildDB() {
   }
 }
 
-module.exports = {
-  rebuildDB
-}
+rebuildDB();
