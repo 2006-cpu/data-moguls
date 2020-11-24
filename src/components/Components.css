@@ -200,18 +200,19 @@ body {
 /* ALL PRODUCTS */
 
 .all-products {
-margin-top: 10rem;
-display: flex;
-flex-direction: row;
-flex-wrap: wrap;
-align-items: center;
-font-family: 'Marmelad', sans-serif;
-color: #333;
-/* font-size: 1rem; */
-padding: 2rem;
-padding-bottom: 0rem;
-margin-left: 5rem;
-margin-right: 5rem;
+  margin-top: 10rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-items: top;
+  font-family: 'Marmelad', sans-serif;
+  color: #333;
+  padding: 2rem;
+  padding-bottom: 0rem;
+  margin-left: 5rem;
+  margin-right: 5rem;
+  margin-bottom: 5rem;
 }
 
 .product-card {
@@ -226,10 +227,13 @@ margin-right: 5rem;
   margin: 1rem;
 }
 
+.product-card h3 {
+  margin-bottom: .8rem;
+}
+
 .thumbnail {
   width: 230px;
   padding: 2rem;
-
 }
 
 /* ORDERS */
