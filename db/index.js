@@ -46,9 +46,11 @@ async function getProductById(id) {
 
 // export
 module.exports = {
+  ...require('./users'),
   client,
   // db methods
   createProduct,
   getAllProducts,
-  getProductById
+  getProductById,
+  
 }
