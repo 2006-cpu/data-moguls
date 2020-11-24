@@ -1,5 +1,5 @@
 
-const client = require('./index');
+const {client} = require('./client');
 const { rebuildDB } = require('./init_db')
 
 rebuildDB()

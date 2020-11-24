@@ -1,10 +1,6 @@
 
-const {
-  client,
-  createProduct,
-  // other db methods
-} = require('./index');
-
+const {client} = require('./client');
+const {createProduct} = require('./products')
 const { createUser } = require('./users')
 
 async function dropTables() {
@@ -71,9 +67,9 @@ async function createInitialUsers() {
   try {
 
     const usersToCreate = [
-      { username: 'Tommy-da-boi', password: 'tomtom' },
-      { username: 'Turtles', password: 'turtleTime' },
-      { username: 'Sandy', password: 'sandyBeach' },
+      { username: 'Tommy-da-boi', password: 'tomtom', firstName:'blah', lastName: 'blah', email:"tommy93@gmail.com", isAdmin: 'false' },
+      { username: 'Turtles', password: 'turtleTime', firstName:'blah', lastName: 'blah', email:"tommy9@gmail.com",isAdmin: 'false' },
+      { username: 'Sandy', password: 'sandyBeach', firstName:'blah', lastName: 'blah', email:"tommy3@gmail.com", isAdmin: 'false' },
     ]
     const users = await Promise.all(usersToCreate.map(createUser));
 

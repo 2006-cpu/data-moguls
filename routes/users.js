@@ -9,7 +9,15 @@ const bcrypt = require("bcrypt");
 const { getUserByUsername, createUser } = require("../db");
 
 usersRouter.post("/register", async (req, res, next) => {
-  const { username, password } = req.body;
+  const {
+    username,
+    password,
+    firstName,
+    lastName,
+    email,
+    imageURL,
+    isAdmin,
+  } = req.body;
 
   try {
     const _user = await getUserByUsername(username);
@@ -28,7 +36,15 @@ usersRouter.post("/register", async (req, res, next) => {
       });
       return;
     }
-    const user = await createUser({ username: username, password: password });
+    const user = await createUser({
+      username: username,
+      password: password,
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      imageURL: imageURL,
+      isAdmin: isAdmin,
+    });
 
     const token = jwt.sign(
       {
@@ -63,7 +79,7 @@ usersRouter.post("/login", async (req, res, next) => {
 
   try {
     const user = await getUserByUsername(username);
-
+    console.log(user);
     if (user && bcrypt.compare(password, user.password)) {
       const token = jwt.sign(user, JWT_SECRET);
       res.send({ message: "you're logged in!", token });
