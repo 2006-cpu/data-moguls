@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { getAllOrders } from '../api';
 
@@ -28,7 +28,7 @@ export default function Orders() {
           <NavLink to='/orders:orderId'></NavLink>
           <h3>{status}</h3>
           <p>{userId}</p>
-          <p>{datePlace}</p>
+          <p>{datePlaced}</p>
         </div>
       ))}
     </div>
