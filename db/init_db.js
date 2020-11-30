@@ -1,6 +1,6 @@
 
 const { client } = require('./client');
-const { createOrder } = require('./orders');
+const { createOrder, getAllOrders, getOrderById, getOrderByUser, getOrderByProduct, getCartByUser } = require('./orders');
 const { createProduct } = require('./products')
 const { createUser } = require('./users')
 
@@ -200,7 +200,7 @@ async function createInitialOrders(){
   console.log('Starting to create orders...');
 
   const ordersToCreate = [
-    {userId: 2, status: 'created'}, {userId: 3, status: 'created'}
+    {userId: 2, status: 'created'}, {userId: 1, status: 'created'}, {userId: 3, status: 'created'}
   ];
 
   try {
@@ -222,7 +222,15 @@ async function createInitialOrderProducts(){
     `);
     await client.query(`
       INSERT INTO order_products("productId", "orderId", price, quantity)
-      Values (5, 1, 499, 1);
+      Values (5, 1, 799, 1);
+    `);
+    await client.query(`
+      INSERT INTO order_products("productId", "orderId", price, quantity)
+      Values (1, 3, 998, 2);
+    `);
+    await client.query(`
+      INSERT INTO order_products("productId", "orderId", price, quantity)
+      Values (1, 2, 499, 1);
     `);
   } catch (error) {
     throw error;
