@@ -1,5 +1,6 @@
 
 const { client } = require('./client');
+const { createOrder } = require('./orders');
 const { createProduct } = require('./products')
 const { createUser } = require('./users')
 
@@ -81,6 +82,8 @@ async function createInitialUsers() {
     throw error;
   }
 }
+
+
 
 async function createInitialProducts() {
   try {
@@ -223,6 +226,27 @@ async function createInitialProducts() {
   }
 }
 
+async function createInitialOrders() {
+  console.log('Starting to create orders...');
+  try {
+
+    const ordersToCreate = [
+      {status:"created", userId:"1"},
+      {status:"created", userId:"2"},
+      {status:"created", userId:"3"},
+     
+    ]
+    const orders = await Promise.all(ordersToCreate.map(createOrder));
+
+    console.log('Orders created:');
+    console.log(orders);
+    console.log('Finished creating orders!');
+  } catch (error) {
+    console.error('Error creating orders!');
+    throw error;
+  }
+}
+
 async function rebuildDB() {
   try {
     client.connect();
@@ -230,6 +254,7 @@ async function rebuildDB() {
     await buildTables();
     await createInitialUsers();
     await createInitialProducts();
+    await createInitialOrders();
     client.end();
   } catch (error) {
     console.log('error durring rebuildDB')

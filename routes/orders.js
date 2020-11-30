@@ -1,47 +1,63 @@
-const express = require('express');
+const express = require("express");
 const ordersRouter = express.Router();
-const { getOrderByUser, getCartByUser, createOrder } = require("../db/orders")
-const { requireUser } = require('../db/utils')
 
-ordersRouter.get('/', async (req, res, next) => {
-    const { username } = req.user
+const {
+    createOrder,
+    getAllOrders,
+    getOrderById,
+    getOrderByUser,
+    getOrderByProduct,
+    getCartByUser,
+} = require("../db");
+const {
+    requireAdmin,
+    requireUser,
+} = require("./utils");
+
+ordersRouter.get("/", requireAdmin, async (req, res, next) => {
     try {
-        const userOrders = await getOrderByUser({ username })
-        res.send(userOrders)
+        const allorders = await getAllOrders();
 
-    } catch (error) {
-        console.error(error)
-    }
-})
-
-ordersRouter.get('/cart', async (req, res, next) => {
-    const { username } = req.user
-    try {
-
-    } catch (error) {
-        console.error(error)
-    }
-})
-
-ordersRouter.get('/users/:userId/orders', requireUser, async (req, res, next) => {
-    try {
-        const { username } = req.params
-        if (req.user.username === username) {
-            const userOrders = await getOrderByUser({ username })
-            return res.send(userOrders)
-        }
-    } catch (error) {
-        next(error)
-    }
-})
-
-ordersRouter.post('/', async (req, res, next) => {
-    const { status } = req.params
-    try {
-
-        const createAnOrder = await createOrder({ status, userId })
-
-    } catch (error) {
-        console.error(error)
+        res.send(allorders);
+    } catch ({ name, message }) {
+        next({ name, message });
     }
 });
+
+ordersRouter.get("/cart", requireUser, async (req, res, next) => {
+    const { productId } = req.params;
+    try {
+        const cart = await getCartByUser(req.user.id);
+
+        if (cart) {
+            res.send(cart);
+        } else {
+            next({ message: "failed to pull cart." });
+            return;
+        }
+    } catch ({ name, message }) {
+        next({ name, message });
+    }
+});
+
+ordersRouter.post("/", requireUser, async (req, res, next) => {
+
+    try {
+        const order = await createOrder({
+            status: "created",
+            userId: req.user.id,
+        });
+        if (order) {
+            res.send(order);
+        } else {
+            next({ message: "failed to create order." });
+            return;
+        }
+    } catch ({ name, message }) {
+        next({ name, message });
+    }
+});
+
+
+
+module.exports = ordersRouter;
