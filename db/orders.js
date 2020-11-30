@@ -15,12 +15,13 @@ async function getAllOrders(){
         const {rows : orders} = await client.query(`
         SELECT * FROM orders;
     `)
-
     return orders
     } catch (error) {
         throw error;
     };
 }
+
+
 
 async function getOrderById({id}){
     try {
@@ -57,6 +58,22 @@ async function getOrderByUser({username}){
     };
 };
 
+async function getOrderByUserId({id}){
+    try {
+        const {rows} = await client.query(`
+        SELECT * FROM orders
+        WHERE "userId" = $1;
+        `, [id]);
+
+        const orders = rows;
+
+        
+        return orders;
+    } catch (error) {
+        throw error;
+    };
+};
+
 async function getOrderByProduct({id}){
     try {
         const { rows: orders} = await client.query(`
@@ -70,7 +87,7 @@ async function getOrderByProduct({id}){
     };
 };
 
-async function getCartByUser({id}){
+async function getCartByUser(id){
     try {
         const { rows: orders} = await client.query(`
         SELECT * FROM orders
@@ -90,5 +107,6 @@ module.exports = {
     getOrderById,
     getOrderByUser,
     getOrderByProduct,
-    getCartByUser
+    getCartByUser,
+    getOrderByUserId
 };
