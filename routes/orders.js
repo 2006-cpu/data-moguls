@@ -8,6 +8,7 @@ const {
     getOrderByUser,
     getOrderByProduct,
     getCartByUser,
+    cancelOrder,
 } = require("../db");
 const {
     requireAdmin,
@@ -57,6 +58,30 @@ ordersRouter.post("/", requireUser, async (req, res, next) => {
         next({ name, message });
     }
 });
+
+ordersRouter.patch('/:orderId', async (req, res, next) => {
+    const { orderId } = req.params;
+    const { status } = req.body;
+    const { userId } = req.user.id;
+    try {
+        const order = await updateOrder({ orderId, status, userId });
+        res.send(order);
+    } catch (error) {
+        next(error);
+    }
+})
+
+ordersRouter.delete('/orderId', async (req, res, next) => {
+    const { orderId } = req.params;
+    try {
+        const order = await cancelOrder({ orderId })
+        res.send(order)
+
+    } catch (error) {
+        next(error)
+    }
+})
+
 
 
 
