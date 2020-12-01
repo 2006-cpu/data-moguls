@@ -1,6 +1,10 @@
 
 const { client } = require('./client');
+<<<<<<< HEAD
+const { createOrder, getAllOrders, getOrderById, getOrderByUser, getOrderByProduct, getCartByUser } = require('./orders');
+=======
 const { createOrder } = require('./orders');
+>>>>>>> dev
 const { createProduct } = require('./products')
 const { createUser } = require('./users')
 
@@ -68,9 +72,9 @@ async function createInitialUsers() {
   try {
 
     const usersToCreate = [
-      { username: 'Tommy-da-boi', password: 'tomtom', firstName: 'blah', lastName: 'blah', email: "tommy93@gmail.com", isAdmin: 'false' },
-      { username: 'Turtles', password: 'turtleTime', firstName: 'blah', lastName: 'blah', email: "tommy9@gmail.com", isAdmin: 'false' },
-      { username: 'Sandy', password: 'sandyBeach', firstName: 'blah', lastName: 'blah', email: "tommy3@gmail.com", isAdmin: 'false' },
+      { username: 'Tommy-da-boi', password: 'tomtom', firstName: 'Tom', lastName: 'Smith', email: "tommy93@gmail.com", isAdmin: 'false' },
+      { username: 'Turtles', password: 'turtleTime', firstName: 'Bob', lastName: 'Rodgers', email: "turtle@gmail.com", isAdmin: 'false' },
+      { username: 'Sandy', password: 'sandyBeach', firstName: 'Sandra', lastName: 'Beach', email: "sandy@gmail.com", isAdmin: 'false' },
     ]
     const users = await Promise.all(usersToCreate.map(createUser));
 
@@ -226,6 +230,17 @@ async function createInitialProducts() {
   }
 }
 
+<<<<<<< HEAD
+async function createInitialOrders(){
+  console.log('Starting to create orders...');
+
+  const ordersToCreate = [
+    {userId: 2, status: 'created'}, {userId: 1, status: 'created'}, {userId: 3, status: 'created'}
+  ];
+
+  try {
+    const orders = await Promise.all(ordersToCreate.map(createOrder));
+=======
 async function createInitialOrders() {
   console.log('Starting to create orders...');
   try {
@@ -238,14 +253,45 @@ async function createInitialOrders() {
     ]
     const orders = await Promise.all(ordersToCreate.map(createOrder));
 
+>>>>>>> dev
     console.log('Orders created:');
     console.log(orders);
     console.log('Finished creating orders!');
   } catch (error) {
+<<<<<<< HEAD
+    console.error('Error creating orders!')
+    throw error;
+  };
+};
+
+async function createInitialOrderProducts(){
+  try {
+    await client.query(`
+      INSERT INTO order_products("productId", "orderId", price, quantity)
+      Values (4, 1, 1299, 1);
+    `);
+    await client.query(`
+      INSERT INTO order_products("productId", "orderId", price, quantity)
+      Values (5, 1, 799, 1);
+    `);
+    await client.query(`
+      INSERT INTO order_products("productId", "orderId", price, quantity)
+      Values (1, 3, 998, 2);
+    `);
+    await client.query(`
+      INSERT INTO order_products("productId", "orderId", price, quantity)
+      Values (1, 2, 499, 1);
+    `);
+  } catch (error) {
+    throw error;
+  };
+};
+=======
     console.error('Error creating orders!');
     throw error;
   }
 }
+>>>>>>> dev
 
 async function rebuildDB() {
   try {
@@ -255,6 +301,10 @@ async function rebuildDB() {
     await createInitialUsers();
     await createInitialProducts();
     await createInitialOrders();
+<<<<<<< HEAD
+    await createInitialOrderProducts();
+=======
+>>>>>>> dev
     client.end();
   } catch (error) {
     console.log('error durring rebuildDB')
