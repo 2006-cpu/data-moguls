@@ -86,7 +86,7 @@ async function createInitialProducts() {
   try {
 
     const productsToCreate = [
-      
+
       { name: 'AleSmith San Diego Pale Ale .394',
       description: 'AleSmith dialed in the recipe resulting in an extremely drinkable 6% ABV Pale Ale with light bitterness and accentuated hoppiness designed to fill the gap between AleSmith X Extra Pale Ale and AleSmith IPA. This San Diego Pale Ale will showcase abundant piney and citrusy hop aroma and flavor from an intense dry-hopping schedule. A balanced malt profile will round out these hoppy flavors with a biscuity finish to enhance drinkability throughout the innings. (12 oz. can).',
       imageURL: '/assets/image001.jpeg',
@@ -124,7 +124,7 @@ async function createInitialProducts() {
 
       { name: 'Amplified Ale Works Midnigh Barrel-Aged Baltic',
       description: 'A barrel-aged baltic porter. (22 oz. bottle).',
-      imageURL: './assets/image006.jpg',
+      imageURL: '/assets/image006.jpg',
       price: 1799,
       inStock: true,
       category: 'Barrel-aged Beer - American' },
@@ -159,7 +159,7 @@ async function createInitialProducts() {
 
       { name: 'Beachwood Hayabusa',
       description: 'Hayabusa is an ultra-crisp and refreshing Japanese-style lager made with American barley, Canadian pilsner, toasted flaked rice and German Hallertau Mittelfruh. (12 oz. can).',
-      imageURL: './assets/image011.jpeg',
+      imageURL: '/assets/image011.jpeg',
       price: 499,
       inStock: true,
       category: 'Lager - American' },
@@ -185,7 +185,7 @@ async function createInitialProducts() {
       inStock: true,
       category: 'Pilsner - Czech' },
     ]
-    
+
     const createTheProducts = await Promise.all(productsToCreate.map(createProduct));
     console.log('product created')
     console.log(createTheProducts)
