@@ -2,6 +2,7 @@ const express = require("express");
 const productsRouter = express.Router();
 
 const { getProductById, getAllProducts, createProduct } = require("../db");
+const ordersRouter = require("./orders");
 
 productsRouter.get("/", async (req, res, next) => {
   try {
@@ -28,5 +29,8 @@ productsRouter.get("/:productId", async (req, res, next) => {
     next({ name, message });
   }
 });
+
+
+
 
 module.exports = productsRouter;
