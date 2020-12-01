@@ -1,5 +1,6 @@
 
 const { client } = require('./client');
+const { createOrder } = require('./orders');
 const { createProduct } = require('./products')
 const { createUser } = require('./users')
 
@@ -67,9 +68,9 @@ async function createInitialUsers() {
   try {
 
     const usersToCreate = [
-      { username: 'Tommy-da-boi', password: 'tomtom', firstName: 'blah', lastName: 'blah', email: "tommy93@gmail.com", isAdmin: 'false' },
-      { username: 'Turtles', password: 'turtleTime', firstName: 'blah', lastName: 'blah', email: "tommy9@gmail.com", isAdmin: 'false' },
-      { username: 'Sandy', password: 'sandyBeach', firstName: 'blah', lastName: 'blah', email: "tommy3@gmail.com", isAdmin: 'false' },
+      { username: 'Tommy-da-boi', password: 'tomtom', firstName: 'Tom', lastName: 'Smith', email: "tommy93@gmail.com", isAdmin: 'false' },
+      { username: 'Turtles', password: 'turtleTime', firstName: 'Bob', lastName: 'Rodgers', email: "turtle@gmail.com", isAdmin: 'false' },
+      { username: 'Sandy', password: 'sandyBeach', firstName: 'Sandra', lastName: 'Beach', email: "sandy@gmail.com", isAdmin: 'false' },
     ]
     const users = await Promise.all(usersToCreate.map(createUser));
 
@@ -81,6 +82,8 @@ async function createInitialUsers() {
     throw error;
   }
 }
+
+
 
 async function createInitialProducts() {
   try {
@@ -195,6 +198,47 @@ async function createInitialProducts() {
   }
 }
 
+async function createInitialOrders(){
+  console.log('Starting to create orders...');
+
+  const ordersToCreate = [
+    {userId: 2, status: 'created'}, {userId: 1, status: 'created'}, {userId: 3, status: 'created'}
+  ];
+
+  try {
+    const orders = await Promise.all(ordersToCreate.map(createOrder));
+    console.log('Orders created:');
+    console.log(orders);
+    console.log('Finished creating orders!');
+  } catch (error) {
+    console.error('Error creating orders!')
+    throw error;
+  };
+};
+
+async function createInitialOrderProducts(){
+  try {
+    await client.query(`
+      INSERT INTO order_products("productId", "orderId", price, quantity)
+      Values (4, 1, 1299, 1);
+    `);
+    await client.query(`
+      INSERT INTO order_products("productId", "orderId", price, quantity)
+      Values (5, 1, 799, 1);
+    `);
+    await client.query(`
+      INSERT INTO order_products("productId", "orderId", price, quantity)
+      Values (1, 3, 998, 2);
+    `);
+    await client.query(`
+      INSERT INTO order_products("productId", "orderId", price, quantity)
+      Values (1, 2, 499, 1);
+    `);
+  } catch (error) {
+    throw error;
+  };
+};
+
 async function rebuildDB() {
   try {
     client.connect();
@@ -202,6 +246,8 @@ async function rebuildDB() {
     await buildTables();
     await createInitialUsers();
     await createInitialProducts();
+    await createInitialOrders();
+    await createInitialOrderProducts();
     client.end();
   } catch (error) {
     console.log('error durring rebuildDB')
