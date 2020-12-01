@@ -10,7 +10,7 @@ export async function getSomething() {
   }
 }
 
-export async function signUp({username, password, firstName, lastName, email, imageURL, isAdmin}) {
+export async function signUp(username, password, firstName, lastName, email, imageURL, isAdmin) {
 
   try {
     const { data } = await axios.post(`/api/users/register`, { username, password, firstName, lastName, email, imageURL, isAdmin },
