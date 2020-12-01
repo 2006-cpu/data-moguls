@@ -1,10 +1,6 @@
 
 const { client } = require('./client');
-<<<<<<< HEAD
-const { createOrder, getAllOrders, getOrderById, getOrderByUser, getOrderByProduct, getCartByUser } = require('./orders');
-=======
 const { createOrder } = require('./orders');
->>>>>>> dev
 const { createProduct } = require('./products')
 const { createUser } = require('./users')
 
@@ -230,7 +226,6 @@ async function createInitialProducts() {
   }
 }
 
-<<<<<<< HEAD
 async function createInitialOrders(){
   console.log('Starting to create orders...');
 
@@ -240,25 +235,10 @@ async function createInitialOrders(){
 
   try {
     const orders = await Promise.all(ordersToCreate.map(createOrder));
-=======
-async function createInitialOrders() {
-  console.log('Starting to create orders...');
-  try {
-
-    const ordersToCreate = [
-      {status:"created", userId:"1"},
-      {status:"created", userId:"2"},
-      {status:"created", userId:"3"},
-     
-    ]
-    const orders = await Promise.all(ordersToCreate.map(createOrder));
-
->>>>>>> dev
     console.log('Orders created:');
     console.log(orders);
     console.log('Finished creating orders!');
   } catch (error) {
-<<<<<<< HEAD
     console.error('Error creating orders!')
     throw error;
   };
@@ -286,12 +266,6 @@ async function createInitialOrderProducts(){
     throw error;
   };
 };
-=======
-    console.error('Error creating orders!');
-    throw error;
-  }
-}
->>>>>>> dev
 
 async function rebuildDB() {
   try {
@@ -301,10 +275,7 @@ async function rebuildDB() {
     await createInitialUsers();
     await createInitialProducts();
     await createInitialOrders();
-<<<<<<< HEAD
     await createInitialOrderProducts();
-=======
->>>>>>> dev
     client.end();
   } catch (error) {
     console.log('error durring rebuildDB')
