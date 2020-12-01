@@ -6,7 +6,8 @@ const { JWT_SECRET } = process.env;
 
 const bcrypt = require("bcrypt");
 
-const { getUserByUsername, createUser } = require("../db");
+const { getUserByUsername, createUser, getOrderById, getOrderByUserId } = require("../db");
+const { requireUser } = require("./utils");
 
 usersRouter.post("/register", async (req, res, next) => {
   const {
@@ -94,7 +95,7 @@ usersRouter.post("/login", async (req, res, next) => {
   }
 });
 
-usersRouter.get("/me", async (req, res, next) => {
+usersRouter.get("/me", requireUser, async (req, res, next) => {
   const prefix = "Bearer ";
   const auth = req.header("Authorization");
 
@@ -122,6 +123,17 @@ usersRouter.get("/me", async (req, res, next) => {
       name: "AuthorizationHeaderError",
       message: `You must be logged in to perform this action`,
     });
+  }
+});
+
+usersRouter.get("/:userId/orders", requireUser, async (req, res, next) => {
+  const {userId} = req.params;
+  try {
+    const userOrders = await getOrderByUserId({id:userId});
+
+    res.send(userOrders);
+  } catch ({ name, message }) {
+    next({ name, message });
   }
 });
 
