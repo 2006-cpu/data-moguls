@@ -1,10 +1,6 @@
 
 const { client } = require('./client');
-<<<<<<< HEAD
-const { createOrder, getAllOrders, getOrderById, getOrderByUser, getOrderByProduct, getCartByUser } = require('./orders');
-=======
 const { createOrder } = require('./orders');
->>>>>>> dev
 const { createProduct } = require('./products')
 const { createUser } = require('./users')
 
