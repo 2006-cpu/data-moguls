@@ -74,9 +74,8 @@ ordersRouter.patch('/:orderId', async (req, res, next) => {
 ordersRouter.delete('/orderId', async (req, res, next) => {
     const { orderId } = req.params;
     try {
-        const order = await cancelOrder({ orderId })
+        const order = await cancelOrder(orderId)
         res.send(order)
-
     } catch (error) {
         next(error)
     }
