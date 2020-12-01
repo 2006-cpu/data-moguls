@@ -9,7 +9,7 @@ import {
   NavLink
 } from 'react-router-dom';
 
-import { Header, Navbar, Orders, Login, Product, Allproducts, Footer } from './';
+import { Header, Navbar, Orders, Login, Signup, Product, Allproducts, Footer } from './';
 
 export default function App() {
 
@@ -34,8 +34,16 @@ export default function App() {
             <Allproducts />
           </Route>
 
+          <Route path='/product/:productId'>
+            <Product />
+          </Route>
+
           <Route path='/login'>
             <Login />
+          </Route>
+
+          <Route path='/signup'>
+            <Signup />
           </Route>
 
           <Route path='/orders'>
