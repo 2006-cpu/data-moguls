@@ -8,8 +8,8 @@ export default function Navbar() {
     <div className='navbar'>
       <NavLink to='/' className='button'>HOME</NavLink>
       <NavLink to='/products' className='button'>SHOP PRODUCTS</NavLink>
-      <NavLink to='/login' className='button'>LOGIN</NavLink>
-      <NavLink to='/orders' className='button'>VIEW CART</NavLink>
+      <NavLink to='/login' className='button'>LOGIN/SIGNUP</NavLink>
+      <NavLink to='/orders' className='button'>ORDERS</NavLink>
       <Search />
     </div>
   );
