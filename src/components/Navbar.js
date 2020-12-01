@@ -9,7 +9,7 @@ export default function Navbar() {
       <NavLink to='/' className='button'>HOME</NavLink>
       <NavLink to='/products' className='button'>SHOP PRODUCTS</NavLink>
       <NavLink to='/login' className='button'>LOGIN</NavLink>
-      <NavLink to='/orders' className='button'>ORDERS</NavLink>
+      <NavLink to='/orders' className='button'>VIEW CART</NavLink>
       <Search />
     </div>
   );
