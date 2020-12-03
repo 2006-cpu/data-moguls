@@ -44,7 +44,7 @@ export default function Signup() {
             setUsername(event.target.value)
           }} />
           <label>Password: </label>
-          <input type="text" value={password} onChange={(event) => {
+          <input type="password" value={password} onChange={(event) => {
             setPassword(event.target.value)
           }} />
           <label>First Name: </label>
