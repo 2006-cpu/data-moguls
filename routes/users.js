@@ -2,11 +2,12 @@ const express = require("express");
 const usersRouter = express.Router();
 
 const jwt = require("jsonwebtoken");
-const { JWT_SECRET } = process.env;
+const { JWT_SECRET = 'dontTell' } = process.env;
 
 const bcrypt = require("bcrypt");
 
-const { getUserByUsername, createUser } = require("../db");
+const { getUserByUsername, createUser, getOrderById, getOrderByUserId } = require("../db");
+const { requireUser } = require("./utils");
 
 usersRouter.post("/register", async (req, res, next) => {
   const {
@@ -51,7 +52,7 @@ usersRouter.post("/register", async (req, res, next) => {
         id: user.id,
         username,
       },
-      process.env.JWT_SECRET,
+      JWT_SECRET,
       {
         expiresIn: "1w",
       }
@@ -79,10 +80,10 @@ usersRouter.post("/login", async (req, res, next) => {
 
   try {
     const user = await getUserByUsername(username);
-    console.log(user);
+
     if (user && bcrypt.compare(password, user.password)) {
       const token = jwt.sign(user, JWT_SECRET);
-      res.send({ message: "you're logged in!", token });
+      res.send({ message: "You are logged in!", token });
     } else {
       next({
         name: "IncorrectCredentialsError",
@@ -94,7 +95,7 @@ usersRouter.post("/login", async (req, res, next) => {
   }
 });
 
-usersRouter.get("/me", async (req, res, next) => {
+usersRouter.get("/me", requireUser, async (req, res, next) => {
   const prefix = "Bearer ";
   const auth = req.header("Authorization");
 
@@ -122,6 +123,17 @@ usersRouter.get("/me", async (req, res, next) => {
       name: "AuthorizationHeaderError",
       message: `You must be logged in to perform this action`,
     });
+  }
+});
+
+usersRouter.get("/:userId/orders", requireUser, async (req, res, next) => {
+  const { userId } = req.params;
+  try {
+    const userOrders = await getOrderByUserId({ id: userId });
+
+    res.send(userOrders);
+  } catch ({ name, message }) {
+    next({ name, message });
   }
 });
 

@@ -3,7 +3,6 @@
 module.exports = {
   ...require('./users'),
   ...require('./client'),
-  ...require('./products')
- 
-  
+  ...require('./products'),
+  ...require('./orders')
 }
