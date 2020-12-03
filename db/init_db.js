@@ -1,6 +1,6 @@
 
 const { client } = require('./client');
-const { createOrder } = require('./orders');
+const { createOrder, getAllOrders } = require('./orders');
 const { createProduct } = require('./products')
 const { createUser } = require('./users')
 
@@ -239,15 +239,24 @@ async function createInitialOrderProducts(){
   };
 };
 
+async function testOrderDb(){
+  try {
+    const allOrders = await getAllOrders();
+    console.log("THESE ARE ALL THE ORDERS", allOrders)
+  } catch (error) {
+    throw error;
+  };
+};
 async function rebuildDB() {
   try {
     client.connect();
-    await dropTables();
+    await testOrderDb();
+    /* await dropTables();
     await buildTables();
     await createInitialUsers();
     await createInitialProducts();
     await createInitialOrders();
-    await createInitialOrderProducts();
+    await createInitialOrderProducts(); */
     client.end();
   } catch (error) {
     console.log('error durring rebuildDB')
