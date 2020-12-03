@@ -62,7 +62,7 @@ async function getOrderById(id){
     };
 };
 
-async function getOrderByUser(username){
+async function getOrdersByUser(username){
     try {
         const { rows: [user] } = await client.query(`
             SELECT * FROM users
@@ -140,9 +140,9 @@ async function getCartByUser(id){
                 message: `There is no order with the id ${id} and that is still pending.`};
         };
 
-        const newOrders = await addProductsToOrderObj(order);
+        const newOrder = await addProductsToOrderObj(order);
 
-        return newOrders;
+        return newOrder;
     } catch (error) {
         throw error;
     };
@@ -229,7 +229,7 @@ module.exports = {
     createOrder,
     getAllOrders,
     getOrderById,
-    getOrderByUser,
+    getOrdersByUser,
     getOrderByProduct,
     getCartByUser,
     updateOrder,
