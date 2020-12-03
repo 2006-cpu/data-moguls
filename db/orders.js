@@ -1,5 +1,4 @@
 const {client} = require('./client');
-const { getProductById } = require('./products');
 
 async function createOrder({ status, userId }) {
     const { rows: [order] } = await client.query(`
@@ -11,11 +10,15 @@ async function createOrder({ status, userId }) {
     return order;
 };
 
-async function addProductsToOrder(order){
+async function addProductsToOrderObj(order){
     try {
-        order.product = await getProductById(order.productId);
+        const {rows: products} = await client.query(`
+            SELECT products.id, products.name, products.price, order_products.quantity, order_products.price AS "totalProductPrice", products."inStock"
+            FROM order_products
+            JOIN products on order_products."productId" = products.id AND "orderId" = $1;
+        `, [order.id]);
 
-        delete order.productId;
+        order.products = products;
 
         return order;
     } catch (error) {
@@ -26,26 +29,10 @@ async function addProductsToOrder(order){
 async function getAllOrders(){
     try {
         const {rows : orders} = await client.query(`
-        SELECT * FROM orders
-        LEFT JOIN order_products on orders.id = order_products."orderId";
-    `);
+            SELECT * FROM orders;
+        `);
 
-    const newOrders = await Promise.all(orders.map(addProductsToOrder));
-
-    return newOrders;
-    } catch (error) {
-        throw error;
-    };
-}
-
-async function getOrderById(id){
-    try {
-        const { rows: orders} = await client.query(`
-        SELECT * FROM orders
-        INNER JOIN order_products on orders.id = order_products."orderId" AND orders.id = $1;
-        `, [id]);
-
-        const newOrders = await Promise.all(orders.map(addProductsToOrder));
+        const newOrders = await Promise.all(orders.map(addProductsToOrderObj));
 
         return newOrders;
     } catch (error) {
@@ -53,20 +40,55 @@ async function getOrderById(id){
     };
 };
 
-async function getOrderByUser(username){
+async function getOrderById(id){
+    try {
+        const { rows: [order]} = await client.query(`
+            SELECT * FROM orders
+            WHERE orders.id = $1;
+        `, [id]);
+
+        if(!order){
+            return {
+                name: 'NoOrderFound',
+                message: `There are no orders with id: ${id}`
+            };
+        };
+
+        const newOrders = await addProductsToOrderObj(order);
+
+        return newOrders;
+    } catch (error) {
+        throw error;
+    };
+};
+
+async function getOrdersByUser(username){
     try {
         const { rows: [user] } = await client.query(`
-        SELECT * FROM users
-        WHERE username = $1;
+            SELECT * FROM users
+            WHERE username = $1;
         `, [username]);
-        console.log("USER", user)
 
-        const { rows: orders} = await client.query(`
-        SELECT * FROM orders
-        INNER JOIN order_products on orders.id = order_products."orderId" AND orders."userId" = $1;
+        if(!user){
+            return {
+                name: 'NoUserFound',
+                message: `There is no user under username: ${username}`
+            };
+        };
+
+        const { rows: [order]} = await client.query(`
+            SELECT * FROM orders
+            WHERE orders."userId" = $1;
         `, [user.id]);
 
-        const newOrders = await Promise.all(orders.map(addProductsToOrder));
+        if(!order){
+            return {
+                name:'NoOrderFoundForUser',
+                message: `There are no orders found unser username: ${username}`
+            };
+        };
+
+        const newOrders = await addProductsToOrderObj(order);
 
         return newOrders;
     } catch (error) {
@@ -76,12 +98,27 @@ async function getOrderByUser(username){
 
 async function getOrderByProduct(id){
     try {
-        const { rows: orders } = await client.query(`
-        SELECT * FROM order_products
-        WHERE "productId" = $1;
-    `, [id]);
+        const allOrders = await getAllOrders();
 
-        const newOrders = await Promise.all(orders.map(addProductsToOrder));
+        const newOrders = allOrders.filter(order => {
+            let result = false;
+            order.products.map(product => {
+                if(product.id === id){
+                    result = true;
+                };
+            });
+
+            if (result){
+                return order;
+            };
+        });
+
+        if(newOrders.length === 0){
+            return {
+                name: 'NoOrderWithProduct',
+                message: `There are no orders with product id: ${id}.`
+            };
+        };
 
         return newOrders;
     } catch (error) {
@@ -91,79 +128,111 @@ async function getOrderByProduct(id){
 
 async function getCartByUser(id){
     try {
-        const { rows: orders } = await client.query(`
-        SELECT * FROM orders
-        INNER JOIN order_products on orders.id = order_products."orderId" AND orders."userId" = $1
-        AND status = 'created';
+        const { rows: [order] } = await client.query(`
+            SELECT * FROM orders
+            WHERE orders."userId" = $1
+            AND status = 'created';
         `, [id]);
 
-        const newOrders = await Promise.all(orders.map(addProductsToOrder));
+        if(!order){
+            return {
+                name: 'NoOrder',
+                message: `There is no order with the id ${id} and that is still pending.`};
+        };
 
-        return newOrders;
+        const newOrder = await addProductsToOrderObj(order);
+
+        return newOrder;
     } catch (error) {
         throw error;
     };
 };
 
-async function updateOrder({ id, ...fields }) {
-    const setString = Object.keys(fields).map(
-        (key, index) => `"${key}"=$${index + 1}`
-    ).join(', ');
-    const objValues = Object.values(fields)
+async function updateOrder(id, fields = {}) {
+
+    const setString = Object.keys(fields).map((key, index) =>
+        `"${ key }"=$${ index + 1 }`).join(', ');
+
     if (setString.length === 0) {
         return;
-    }
-    objValues.push(id)
+    };
+
     try {
         const { rows: [order] } = await client.query(`
-        UPDATE orders
-        SET ${setString}
-        WHERE id = $${objValues.length}
-        RETURNING *;
-      `, objValues);
-        return order;
+            UPDATE orders
+            SET ${ setString }
+            WHERE id = ${ id }
+            RETURNING *;
+        `, Object.values(fields));
+
+        if(!order){
+            return {
+                name: 'NoOrderFound',
+                message: `There are no orders with id: ${id}.`};
+        };
+
+        const newOrder = await addProductsToOrderObj(order);
+
+        return newOrder;
     } catch (error) {
         throw error;
-    }
-}
+    };
+};
 
-async function completeOrder({ id }) {
+async function completeOrder(id){
     try {
-        const { rows: [order] } = await client.query(`
-        UPDATE orders
-        SET status = 'completed'
-        WHERE id = $1
-        RETURNING *;
-        `, [id])
-        return order
+        const {rows: [order]} = await client.query(`
+            UPDATE orders
+            SET STATUS = 'completed'
+            WHERE id = $1
+            RETURNING *;
+        `, [id]);
 
+        if(!order){
+            return {
+                name: 'NoOrderFound',
+                message: `There are no orders with id: ${id}.`};
+        };
+
+        const newOrder = await addProductsToOrderObj(order);
+
+        return newOrder;
     } catch (error) {
-        throw error
-    }
-}
+      throw error;  
+    };
+};
 
 async function cancelOrder(id) {
     try {
         const { rows: [order] } = await client.query(`
-        UPDATE orders
-        SET status = 'cancel'
-        WHERE id = $1
-        RETURNING *;
-        `, [id])
-        return order
+            UPDATE orders
+            SET status = 'cancel'
+            WHERE id = $1
+            RETURNING *;
+        `, [id]);
+
+        if(!order){
+            return {
+                name: 'NoOrderFound',
+                message: `There are no orders with id: ${id}.`};
+        };
+        
+        const newOrder = await addProductsToOrderObj(order);
+
+        return newOrder;
     } catch (error) {
-        throw error
-    }
-}
+        throw error;
+    };
+};
 
 module.exports = {
     createOrder,
     getAllOrders,
     getOrderById,
-    getOrderByUser,
+    getOrdersByUser,
     getOrderByProduct,
     getCartByUser,
     updateOrder,
-    cancelOrder,
-    completeOrder
+    completeOrder,
+    cancelOrder
 };
