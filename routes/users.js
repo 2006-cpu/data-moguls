@@ -52,7 +52,7 @@ usersRouter.post("/register", async (req, res, next) => {
         id: user.id,
         username,
       },
-      process.env.JWT_SECRET,
+      JWT_SECRET,
       {
         expiresIn: "1w",
       }
@@ -80,7 +80,7 @@ usersRouter.post("/login", async (req, res, next) => {
 
   try {
     const user = await getUserByUsername(username);
-    
+
     if (user && bcrypt.compare(password, user.password)) {
       const token = jwt.sign(user, JWT_SECRET);
       res.send({ message: "You are logged in!", token });
@@ -127,9 +127,9 @@ usersRouter.get("/me", requireUser, async (req, res, next) => {
 });
 
 usersRouter.get("/:userId/orders", requireUser, async (req, res, next) => {
-  const {userId} = req.params;
+  const { userId } = req.params;
   try {
-    const userOrders = await getOrderByUserId({id:userId});
+    const userOrders = await getOrderByUserId({ id: userId });
 
     res.send(userOrders);
   } catch ({ name, message }) {
