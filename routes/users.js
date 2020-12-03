@@ -2,7 +2,7 @@ const express = require("express");
 const usersRouter = express.Router();
 
 const jwt = require("jsonwebtoken");
-const { JWT_SECRET } = process.env;
+const { JWT_SECRET = 'dontTell' } = process.env;
 
 const bcrypt = require("bcrypt");
 
@@ -80,10 +80,10 @@ usersRouter.post("/login", async (req, res, next) => {
 
   try {
     const user = await getUserByUsername(username);
-    console.log(user);
+    
     if (user && bcrypt.compare(password, user.password)) {
       const token = jwt.sign(user, JWT_SECRET);
-      res.send({ message: "you're logged in!", token });
+      res.send({ message: "You are logged in!", token });
     } else {
       next({
         name: "IncorrectCredentialsError",
