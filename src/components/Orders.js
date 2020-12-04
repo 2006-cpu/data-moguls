@@ -1,33 +1,12 @@
-// import React from 'react';
-// import { getAllOrders } from '../api'
-// import './Components.css';
+import React from 'react';
 
-// const Order = ({
-//   user,
-// }) => {
-//   let { orderId } = useParams();
-//   const [order, setOrder] = useState([])
-//   // const [status, setStatus] = useState([])
+import './Components.css';
 
-//   const fetchOrder = async () => {
-//     try {
-//       const orderFetched = await getAllOrders(orderId)
-//       setOrder(orderFetched)
-//     } catch (error) {
-//       throw error
-//     }
-//   }
+export default function Orders() {
 
-//   useEffect(() => {
-//     fetchOrder(user)
-//   }, [user]);
-
-//   return (
-//     <div className='orders'>
-//       <div key={order.id} className='order-card'></div>
-//       <h3>{order.status}</h3>
-//       <h3>{order.dataPlaced}</h3>
-//     </div>
-//   );
-// };
-// export default Order
+    return (
+        <div className='orders'>
+            <h1>Orders Tab Under Construction...</h1>
+        </div>
+    );
+};

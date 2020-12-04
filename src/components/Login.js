@@ -16,7 +16,7 @@ export default function Login() {
       event.preventDefault();
       const data = await logIn(username, password);
 
-      if (data) {
+      if (data && data.message) {
         setUser(data.user);
         setToken(data.token);
         alert(data.message);
@@ -34,7 +34,7 @@ export default function Login() {
         <form
           className='login-card'
           onSubmit={handleLogin}>
-                    <h2>Log In Form</h2>
+          <h2>Log In Form</h2>
           <label>Username: </label>
           <input type="text" value={username} onChange={(event) => {
             setUsername(event.target.value)
