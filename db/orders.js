@@ -148,38 +148,71 @@ async function getCartByUser(id) {
         throw error;
     };
 };
+const updateOrder = async ({ id, ...fields }) => {
+    const fieldKeys = Object.keys(fields);
 
-async function updateOrder(id, fields = {}) {
+    const setString = fieldKeys
+        .map((fieldName, index) => {
+            return `"${fieldName}"=$${index + 1}`;
+        })
+        .join(", ");
 
-    const setString = Object.keys(fields).map((key, index) =>
-        `"${key}"=$${index + 1}`).join(', ');
+    const setValues = Object.values(fields);
+    setValues.push(id);
 
-    if (setString.length === 0) {
+    if (fieldKeys.length === 0) {
         return;
-    };
+    }
 
     try {
-        const { rows: [order] } = await client.query(`
+        const {
+            rows: [order],
+        } = await client.query(
+            `
             UPDATE orders
             SET ${setString}
-            WHERE id = ${id}
+            WHERE id = $${setValues.length}
             RETURNING *;
-        `, Object.values(fields));
-
-        if (!order) {
-            return {
-                name: 'NoOrderFound',
-                message: `There are no orders with id: ${id}.`
-            };
-        };
-
-        const newOrder = await addProductsToOrderObj(order);
-
-        return newOrder;
+            `,
+            setValues
+        );
+        return order;
     } catch (error) {
         throw error;
-    };
+    }
 };
+
+// async function updateOrder(id, fields = {}) {
+
+//     const setString = Object.keys(fields).map((key, index) =>
+//         `"${key}"=$${index + 1}`).join(', ');
+
+//     if (setString.length === 0) {
+//         return;
+//     };
+
+//     try {
+//         const { rows: [order] } = await client.query(`
+//             UPDATE orders
+//             SET ${setString}
+//             WHERE id = ${id}
+//             RETURNING *;
+//         `, Object.values(fields));
+
+//         if (!order) {
+//             return {
+//                 name: 'NoOrderFound',
+//                 message: `There are no orders with id: ${id}.`
+//             };
+//         };
+
+//         const newOrder = await addProductsToOrderObj(order);
+
+//         return newOrder;
+//     } catch (error) {
+//         throw error;
+//     };
+// };
 
 async function completeOrder(id) {
     try {
@@ -205,29 +238,48 @@ async function completeOrder(id) {
     };
 };
 
-async function cancelOrder(id) {
+const cancelOrder = async (id) => {
     try {
-        const { rows: [order] } = await client.query(`
-            UPDATE orders
-            SET status = 'cancel'
-            WHERE id = $1
-            RETURNING *;
-        `, [id]);
 
-        if (!order) {
-            return {
-                name: 'NoOrderFound',
-                message: `There are no orders with id: ${id}.`
-            };
-        };
-
-        const newOrder = await addProductsToOrderObj(order);
-
-        return newOrder;
+        const {
+            rows: [order],
+        } = await client.query(
+            `
+      UPDATE orders
+      SET status = 'cancelled'
+      WHERE id = $1
+      RETURNING *;
+  `,
+            [id]
+        );
+        return order;
     } catch (error) {
         throw error;
-    };
+    }
 };
+// async function cancelOrder(id) {
+//     try {
+//         const { rows: [order] } = await client.query(`
+//             UPDATE orders
+//             SET status = 'cancel'
+//             WHERE id = $1
+//             RETURNING *;
+//         `, [id]);
+
+//         if (!order) {
+//             return {
+//                 name: 'NoOrderFound',
+//                 message: `There are no orders with id: ${id}.`
+//             };
+//         };
+
+//         const newOrder = await addProductsToOrderObj(order);
+
+//         return newOrder;
+//     } catch (error) {
+//         throw error;
+//     };
+// };
 
 module.exports = {
     createOrder,
