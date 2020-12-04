@@ -4,9 +4,10 @@ import { useParams } from "react-router";
 import { getOrderById } from '../api';
 import { NavLink } from 'react-router-dom';
 
-export default function singleOrder() {
-    const [order, setOrder] = useState([])
+const SingleOrder = () => {
     let { orderId } = useParams();
+    const [order, setOrder] = useState([])
+
 
 
     const fetchOrder = async () => {
@@ -24,14 +25,15 @@ export default function singleOrder() {
         fetchOrder();
     }, []);
 
-    return <>
-        <h1>This is the order with id: {orderId}</h1>
-        {order ? <><p>Name of : { }</p>
-            <p> description: { }</p>
-            <p>Price: ${ }</p></>
-            : ''}
-    </>
+    return (<>
+        <div className='orders'>
+            <div key={order.id} className='order-card'></div>
+            <NavLink to={`/order/${id}`}></NavLink>
+            <h3>{order.status}</h3>
+            <h3>{order.dataPlaced}</h3>
+        </div>
+    </>)
 };
 
-export default Product;
+export default SingleOrder;
 
