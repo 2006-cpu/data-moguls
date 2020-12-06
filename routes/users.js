@@ -83,7 +83,7 @@ usersRouter.post("/login", async (req, res, next) => {
 
     if (user && bcrypt.compare(password, user.password)) {
       const token = jwt.sign(user, JWT_SECRET);
-      res.send({ message: "You are logged in!", token });
+      res.send({ message: "You are logged in!", token, username });
     } else {
       next({
         name: "IncorrectCredentialsError",

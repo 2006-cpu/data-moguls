@@ -37,6 +37,21 @@ export async function logIn(username, password) {
   }
 }
 
+export async function getUserByUsername(username) {
+
+  try {
+    const { data } = await axios.get(`/api/users/me`, { username },
+    { headers: {
+      'Content-Type': 'application/json'
+    }}
+    );
+    console.log(data);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
 export async function getProductById(id) {
   try {
     const { data } = await axios.get(`/api/products/${id}`);

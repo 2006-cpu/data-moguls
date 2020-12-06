@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { signUp } from '../api';
-import './Components.css';
-
+import './Styles.css';
 
 export default function Signup() {
 
@@ -19,8 +18,6 @@ export default function Signup() {
     try {
       event.preventDefault();
       const data = await signUp(username, password, firstName, lastName, email, imageURL, isAdmin);
-
-      console.log(data);
 
       if (data && data.user) {
         alert(data.message);
@@ -58,14 +55,6 @@ export default function Signup() {
           <label>Email Address: </label>
           <input type="text" value={email} onChange={(event) => {
             setEmail(event.target.value)
-          }} />
-          <label>Profile Photo: </label>
-          <input type="text" value={imageURL} onChange={(event) => {
-            setImageURL(event.target.value)
-          }} />
-          <label>Are you an admin? </label>
-          <input type="text" value={isAdmin} onChange={(event) => {
-            setIsAdmin(event.target.value)
           }} />
           <button type="submit" >SIGN UP</button>
           <NavLink to='/login' className='button'>LOGIN HERE</NavLink>
