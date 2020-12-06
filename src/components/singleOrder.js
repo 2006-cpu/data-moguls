@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router";
 import { getOrderById } from '../api';
 import { NavLink } from 'react-router-dom';
+import './Styles.css';
 
 export default function singleOrder() {
     const [order, setOrder] = useState([])
