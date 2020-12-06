@@ -14,9 +14,12 @@ export async function signUp(username, password, firstName, lastName, email, ima
 
   try {
     const { data } = await axios.post(`/api/users/register`, { username, password, firstName, lastName, email, imageURL, isAdmin },
-    { headers: {
-      'Content-Type': 'application/json'
-    }});
+      {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+    localStorage.setItem('data.token', data.token)
     return data;
   } catch (error) {
     throw error;
@@ -28,9 +31,12 @@ export async function logIn(username, password) {
   try {
 
     const { data } = await axios.post(`/api/users/login`, { username, password },
-    { headers: {
-      'Content-Type': 'application/json'
-    }});
+      {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+    localStorage.setItem('data.token', data.token)
     return data;
   } catch (error) {
     throw error;

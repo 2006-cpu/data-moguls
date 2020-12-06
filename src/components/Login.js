@@ -18,8 +18,8 @@ export default function Login() {
       event.preventDefault();
       const data = await logIn(username, password);
 
-      if (data) {
-        setUser(data.username);
+      if (data && data.message) {
+        setUser(data.user);
         setToken(data.token);
         storeCurrentToken(data.token);
         storeCurrentUser(data.username);
