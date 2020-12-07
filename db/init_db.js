@@ -285,7 +285,7 @@ async function createInitialOrders(){
 async function createInitialOrderProducts(){
   const orderProductsToCreate = [
     {productId: 1, orderId: 1, price: 499, quantity: 1},
-    {productId: 4, orderId: 1, price: 1299, quantity: 1},
+    {productId: 4, orderId: 1, price: 2598, quantity: 2},
     {productId: 5, orderId: 2, price: 799, quantity: 1},
     {productId: 4, orderId: 2, price: 1299, quantity: 1},
     {productId: 1, orderId: 3, price: 998, quantity: 1},

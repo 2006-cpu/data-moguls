@@ -107,6 +107,7 @@ export async function getUserOrdersById(id, token){
       'Authorization' : `Bearer ${token}`
     }}
     );
+    
     return data;
   } catch (error) {
     throw error;

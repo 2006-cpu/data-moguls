@@ -45,6 +45,17 @@ ordersRouter.get("/cart", requireUser, async (req, res, next) => {
     }
 });
 
+ordersRouter.get("/:orderId", async(req, res, next) => {
+    const { orderId } = req.params;
+    try {
+        const order = await getOrderById(orderId);
+
+        res.send(order);
+    } catch (error) {
+        throw error;
+    }
+})
+
 ordersRouter.post("/", requireUser, async (req, res, next) => {
 
     try {

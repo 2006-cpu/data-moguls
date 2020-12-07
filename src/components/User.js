@@ -33,11 +33,11 @@ export default function User ({user, token, orders, setOrders}) {
       </div>
       <div key={user.id + 1} className='user-card'>
         <h2>Order History:</h2>
-        {orders ? orders.map((order, indx) => {
+        {orders.length > 0 ? orders.map((order, indx) => {
           return <div key={order.id}>
-          <NavLink to={`/order/${order.id}`}>Order {indx + 1}: {order.status}</NavLink>
+          <NavLink to={`/order/${order.id}`} className='button'>Order {indx + 1}: {order.status}</NavLink>
           </div>
-        }) : ''}
+        }) : <h2>No orders</h2>}
       </div>
       
     </div>

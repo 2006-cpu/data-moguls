@@ -13,7 +13,7 @@ async function createOrder({ status, userId }) {
 async function addProductsToOrderObj(order) {
     try {
         const { rows: products } = await client.query(`
-            SELECT products.id, products.name, products.price, order_products.quantity, order_products.price AS "totalProductPrice", products."inStock"
+            SELECT products.id, products.name, products.price, products."imageURL", order_products.quantity, order_products.price AS "totalProductPrice", products."inStock"
             FROM order_products
             JOIN products on order_products."productId" = products.id AND "orderId" = $1;
         `, [order.id]);

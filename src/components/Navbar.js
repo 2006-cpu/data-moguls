@@ -24,7 +24,7 @@ export default function Navbar({token, setUser, setToken, cart}) {
         <NavLink to='/' className='button'>HOME</NavLink>
         <NavLink to='/products' className='button'>SHOP PRODUCTS</NavLink>
         <NavLink to='/users' className='button'>MY INFO</NavLink>
-        <NavLink to={`/order/${cart.id}`} className='button'>VIEW CART</NavLink>
+        {cart ? <NavLink to={`/order/${cart.id}`} className='button'>VIEW CART</NavLink> : ''}
         <button className='button' onClick={handleClick}>LOGOUT</button>
       </div> :
 

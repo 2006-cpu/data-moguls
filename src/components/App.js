@@ -34,7 +34,12 @@ export default function App() {
   const fetchCart = async () => {
     try {
       const cart = await getUsersCart(token);
-      setCart(cart);
+      if(cart.name === 'NoOrder'){
+        setCart('')
+      } else{
+        setCart(cart);
+      }; 
+      
 
     } catch (error) {
       throw error;
