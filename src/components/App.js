@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import './Components.css';
+import React from 'react';
+import { getCurrentToken } from '../auth';
 
 import {
   BrowserRouter as Router,
@@ -9,7 +9,8 @@ import {
   NavLink
 } from 'react-router-dom';
 
-import { Header, Navbar, Orders, Login, Signup, Product, Allproducts, Footer } from './';
+import { Header, Navbar, Orders, Login, Signup, User, Product, Allproducts, Footer } from './';
+import './Styles.css';
 
 export default function App() {
 
@@ -24,7 +25,8 @@ export default function App() {
             <>
               <div className='homeimage'></div>
               <div className='home'><h1>Welcome to KraftBier.com</h1>
-                <p>Lorem ipsum dolor sit amet, vix et tamquam atomorum, mundi possit nec an, simul aliquam conclusionemque pro ad. Cu menandri disputationi sit, ad nobis commodo usu. Per at altera latine, consul quaerendum an eos. Vim regione fuisset te, amet falli ex vel. Per et congue aeterno interesset, vel id voluptatibus interpretaris. Duo fugit conceptam ad, everti accusam appetere ex ius, sit ex odio aliquando persecuti. In mea utamur inermis salutandi, pro no quem omnium aliquam, te tollit accusata ius. Pri inani partem molestie id, omnis graeci quaeque has cu, nam agam postulant expetendis ex. Mel definiebas definitiones ad, at quo nominavi interesset. Pro copiosae delicatissimi an, at sea mundi expetenda.</p>
+                <p>Modern U.S. craft beer history began in the 1960s. You may know part of the story, the increasing popularity of homebrewing beer in the 1970s and the rise of microbreweries in the 1990s. The sheer number of beer styles that make up the craft beer scene is exciting, but it can also be intimidating, and that’s okay!<br /><br /></p>
+                <p>With all of the different beer name and styles, it may be tough to remember what differentiates beers from one another. At KraftBier.com, we have compiled a collection of craft beers that have been favorites over the years, and have made it available direct to you, straight from the brewers themselves.</p>
               </div>
               <div className='home2'><NavLink to='/products' className='button'>SHOP OUR PRODUCTS</NavLink></div>
             </>
@@ -46,9 +48,13 @@ export default function App() {
             <Signup />
           </Route>
 
-          <Route path='/orders'>
+          ({getCurrentToken() ? <Route path='/users'>
+            <User />
+          </Route> : null})
+
+          ({getCurrentToken() ? <Route path='/orders'>
             <Orders />
-          </Route>
+          </Route> : null})
 
           <Redirect to='/' />
 

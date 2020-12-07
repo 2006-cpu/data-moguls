@@ -71,6 +71,7 @@ async function createInitialUsers() {
       { username: 'Tommy-da-boi', password: 'tomtom', firstName: 'Tom', lastName: 'Smith', email: "tommy93@gmail.com", isAdmin: 'false' },
       { username: 'Turtles', password: 'turtleTime', firstName: 'Bob', lastName: 'Rodgers', email: "turtle@gmail.com", isAdmin: 'false' },
       { username: 'Sandy', password: 'sandyBeach', firstName: 'Sandra', lastName: 'Beach', email: "sandy@gmail.com", isAdmin: 'false' },
+      { username: 'BigBoss', password: 'bigboss123', firstName: 'Big', lastName: 'Boss', email: "bigboss@gmail.com", isAdmin: 'true' },
     ]
     const users = await Promise.all(usersToCreate.map(createUser));
 
@@ -128,7 +129,7 @@ async function createInitialProducts() {
       { name: 'Amplified Ale Works Midnigh Barrel-Aged Baltic',
       description: 'A barrel-aged baltic porter. (22 oz. bottle).',
       imageURL: '/assets/image006.jpg',
-      price: 1799,
+      price: 1299,
       inStock: true,
       category: 'Barrel-aged Beer - American' },
 
@@ -187,6 +188,70 @@ async function createInitialProducts() {
       price: 599,
       inStock: true,
       category: 'Pilsner - Czech' },
+
+      { name: 'Fort Point Sfizio Pilsner',
+      description: 'Sfizio is an Italian Style Pilsner with a snappy, cracker-like malt body and a tantalizingly bitter finish. This modern approach to pilsner is hopped as generously as an American IPA, but with Noble hop varieties that are more delicate than their American counterparts. Heaps of Hallertau Mittelfrüh and Aurora hops create fragrant notes of pine and eucalyptus as lively as a zip around San Francisco\'s rolling city streets. (12 oz. can).',
+      imageURL: '/assets/image015.jpg',
+      price: 499,
+      inStock: true,
+      category: 'Pilsner - Italian' },
+
+      { name: 'Maui Pau Hana Pilsner',
+      description: 'European Pilsner malt offers sweetness balanced by a spicy hop profile. (12 oz. can).',
+      imageURL: '/assets/image016.jpeg',
+      price: 499,
+      inStock: true,
+      category: 'Pilsner - Czech' },
+
+      { name: 'Clown Shoes Pecan Pie Porter',
+      description: 'Genghis Pecan rules with an iron fist.  He conquers all that he surveys. But he also is a strategic genius. Genghis plans his meals weeks and weeks ahead so that he arrives at the Clown Shoes Pecan Pie Eating Contest ravenous and ready for another conquest. A seasonal favorite to go alongside a classic dessert, Pecan Pie Porter puts sweet dessert flavors inside a full-bodied and robust porter. (16 oz. can).',
+      imageURL: '/assets/image017.jpeg',
+      price: 499,
+      inStock: true,
+      category: 'Porter - American' },
+
+      { name: 'Garage Piston Pumpkin Porter',
+      description: 'Decadent and satisfying Pump-Kin Spiced Porter will get you rev\'d up since the winter season is just around the corner. (12 oz. can).',
+      imageURL: '/assets/image018.jpeg',
+      price: 499,
+      inStock: true,
+      category: 'Porter - American' },
+
+      { name: 'Deschutes Black Butte Porter',
+      description: 'This is the beer that started it all. A delicate, creamy mouthfeel contrasts with layered depth revealing distinctive chocolate and coffee notes. Dark and rich, yet easy to drink. (12 oz. bottle).',
+      imageURL: '/assets/image019.jpeg',
+      price: 499,
+      inStock: true,
+      category: 'Porter - American' },
+
+      { name: 'Pizza Port Bacon and Eggs',
+      description: 'With award-winning cold-pressed coffee from Bird Rock Roasters of La Jolla, this Coffee Porter is black in color with a khaki tan head. Strong coffee flavors with rich chocolate and roasted malts. (16 oz. can).',
+      imageURL: '/assets/image020.jpg',
+      price: 499,
+      inStock: true,
+      category: 'Porter - American' },
+
+      { name: 'Castro Valley Honey Ale',
+      description: 'From the historic Castro Valley Brewery in Northern California comes their latest offering. Light, refreshing and perfect for those hot summer nights by the lake. (16 oz. can).',
+      imageURL: '/assets/defaultimage.jpg',
+      price: 599,
+      inStock: true,
+      category: 'Honey Ale - American' },
+
+      { name: 'Sonoma Valley Wheat Ale',
+      description: 'The Sonoma Valley is usually known for its wine. But from rolling hills of wine country in Northern California comes their latest offering. Use it as a substitue for Chardonnay. Exquisite! (12 oz. can).',
+      imageURL: '/assets/defaultimage.jpg',
+      price: 699,
+      inStock: true,
+      category: 'Wheat Ale - American' },
+
+      { name: 'Sonoma Valley Wheat Ale',
+      description: 'The Sonoma Valley is usually known for its wine. But from rolling hills of wine country in Northern California comes their latest offering. Use it as a substitue for Chardonnay. Exquisite! (12 oz. can).',
+      imageURL: '/assets/defaultimage.jpg',
+      price: 699,
+      inStock: false,
+      category: 'Wheat Ale - American' },
+
     ]
 
     const createTheProducts = await Promise.all(productsToCreate.map(createProduct));

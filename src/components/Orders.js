@@ -1,6 +1,5 @@
 import React from 'react';
-
-import './Components.css';
+import './Styles.css';
 
 export default function Orders() {
 
