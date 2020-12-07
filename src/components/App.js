@@ -59,7 +59,7 @@ export default function App() {
           </Route>
 
           <Route path='/users'>
-            <User user={user} setUser={setUser}/>
+            <User user={user} token={token} setUser={setUser}/>
           </Route>
 
           <Route path='/orders'>

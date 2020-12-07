@@ -43,15 +43,16 @@ export async function logIn(username, password) {
   }
 }
 
-export async function getUserByUsername(username) {
+export async function getUserByUsername(token) {
 
   try {
-    const { data } = await axios.get(`/api/users/me`, { username },
+    const { data } = await axios.get(`/api/users/me`,
     { headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization' : `Bearer ${token}`
     }}
     );
-    console.log(data);
+
     return data;
   } catch (error) {
     throw error;

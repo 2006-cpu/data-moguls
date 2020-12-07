@@ -95,37 +95,6 @@ usersRouter.post("/login", async (req, res, next) => {
   }
 });
 
-usersRouter.get("/me", requireUser, async (req, res, next) => {
-  const prefix = "Bearer ";
-  const auth = req.header("Authorization");
-
-  if (!auth) {
-    next({
-      name: "No auth",
-      message: "You must be logged in to perform this action",
-    });
-    return;
-  } else if (auth.startsWith(prefix)) {
-    const token = auth.slice(prefix.length);
-
-    try {
-      const { username } = jwt.verify(token, JWT_SECRET);
-
-      if (username) {
-        req.user = await getUserByUsername(username);
-        res.send({ username: req.user.username });
-      }
-    } catch ({ name, message }) {
-      next({ name, message });
-    }
-  } else {
-    next({
-      name: "AuthorizationHeaderError",
-      message: `You must be logged in to perform this action`,
-    });
-  }
-});
-
 usersRouter.get("/:userId/orders", requireUser, async (req, res, next) => {
   const { userId } = req.params;
   try {
@@ -135,6 +104,15 @@ usersRouter.get("/:userId/orders", requireUser, async (req, res, next) => {
   } catch ({ name, message }) {
     next({ name, message });
   }
+});
+
+usersRouter.get("/me", requireUser, async (req, res, next) => {
+  try {
+    const data = req.user;
+    res.send(data);
+  } catch (error) {
+    throw error;
+  };
 });
 
 module.exports = usersRouter;

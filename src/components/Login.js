@@ -17,7 +17,7 @@ export default function Login({token, setUser, setToken}) {
       const data = await logIn(username, password);
 
       if (data && data.message === 'You are logged in!') {
-        setUser(data.user);
+        setUser(data.username);
         setToken(data.token);
         storeCurrentToken(data.token);
         storeCurrentUser(data.username);
