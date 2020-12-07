@@ -9,7 +9,7 @@ import {
   NavLink
 } from 'react-router-dom';
 
-import { Header, Navbar, Orders, Login, Signup, User, Product, Allproducts, Footer } from './';
+import { Header, Navbar, Orders, Login, Signup, User, Product, Allproducts, Footer, Success, Cancel, Checkout } from './';
 import './Styles.css';
 
 export default function App() {
@@ -46,6 +46,18 @@ export default function App() {
 
           <Route path='/signup'>
             <Signup />
+          </Route>
+
+          <Route path='/success'>
+            <Success />
+          </Route>
+
+          <Route path='/cancel'>
+            <Cancel />
+          </Route>
+
+          <Route path='/Checkout'>
+            <Checkout />
           </Route>
 
           ({getCurrentToken() ? <Route path='/users'>

@@ -8,3 +8,6 @@ export { default as User } from './User';
 export { default as Orders } from './Orders';
 export { default as Allproducts } from './Allproducts';
 export { default as Footer } from './Footer';
+export { default as Success } from './Success';
+export { default as Cancel } from './Cancel';
+export { default as Checkout } from './Checkout';
