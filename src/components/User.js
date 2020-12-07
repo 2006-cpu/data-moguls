@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router";
-import { NavLink } from 'react-router-dom';
-import { getUserByUsername } from '../api';
+// import { NavLink } from 'react-router-dom';
+import { getUser } from '../api';
 import './Styles.css';
 
 export default function User() {
@@ -10,7 +10,7 @@ export default function User() {
 
   const fetchUser = async () => {
     try {
-      const userFetched = await getUserByUsername(username);
+      const userFetched = await getUser(username);
 
       setUser(userFetched);
     } catch (error) {
