@@ -6,7 +6,7 @@ const { JWT_SECRET = 'dontTell' } = process.env;
 
 const bcrypt = require("bcrypt");
 
-const { getUserByUsername, createUser, getOrderById, getOrderByUserId } = require("../db");
+const { getUserByUsername, createUser, getOrdersByUser } = require("../db");
 const { requireUser } = require("./utils");
 
 usersRouter.post("/register", async (req, res, next) => {
@@ -98,7 +98,7 @@ usersRouter.post("/login", async (req, res, next) => {
 usersRouter.get("/:userId/orders", requireUser, async (req, res, next) => {
   const { userId } = req.params;
   try {
-    const userOrders = await getOrderByUserId({ id: userId });
+    const userOrders = await getOrdersByUser(userId);
 
     res.send(userOrders);
   } catch ({ name, message }) {

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { storeCurrentUser, storeCurrentToken, getCurrentToken } from '../auth';
-import { logIn } from '../api';
+import { logIn, getUserByUsername, getUserOrdersById } from '../api';
 import './Styles.css';
 
-export default function Login({token, setUser, setToken}) {
+export default function Login({token, setUser, setToken, setOrders}) {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -17,10 +17,14 @@ export default function Login({token, setUser, setToken}) {
       const data = await logIn(username, password);
 
       if (data && data.message === 'You are logged in!') {
-        setUser(data.username);
+        const userInfo = await getUserByUsername(data.token);
+        
+        setUser(userInfo);
         setToken(data.token);
+        
         storeCurrentToken(data.token);
         storeCurrentUser(data.username);
+        
         alert(data.message);
         history.push('/users');
       } else {

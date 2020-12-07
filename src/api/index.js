@@ -99,6 +99,33 @@ export async function getAllOrders() {
   };
 };
 
+export async function getUserOrdersById(id, token){
+  try {
+    const { data } = await axios.get(`/api/users/${id}/orders`,
+    { headers: {
+      'Content-Type': 'application/json',
+      'Authorization' : `Bearer ${token}`
+    }}
+    );
+    return data;
+  } catch (error) {
+    throw error;
+  };
+};
+
+export async function getUsersCart(token){
+  try {
+    const { data } = await axios.get(`/api/orders/cart`,
+    { headers: {
+      'Content-Type': 'application/json',
+      'Authorization' : `Bearer ${token}`
+    }});
+    return data;
+    
+  } catch (error) {
+    throw error;
+  };
+};
 
 
 

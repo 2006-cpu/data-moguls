@@ -8,4 +8,4 @@ export { default as User } from './User';
 export { default as Orders } from './Orders';
 export { default as Allproducts } from './Allproducts';
 export { default as Footer } from './Footer';
-export {default as Cart} from './Cart'
+export {default as Singleorder} from './Singleorder'

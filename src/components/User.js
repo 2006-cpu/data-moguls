@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router";
 import { NavLink } from 'react-router-dom';
-import { getUserByUsername } from '../api';
+import { getUserByUsername, getUserOrdersById } from '../api';
 import './Styles.css';
 
-export default function User ({user, token, setUser}) {
-  const getUserInfo = async () => {
+export default function User ({user, token, orders, setOrders}) {
+  const fetchOrders = async () => {
     try {
-      const userInfo = await getUserByUsername(token);
-      setUser(userInfo);
+      const allOrders = await getUserOrdersById(user.id, token);
+
+      setOrders(allOrders);
     } catch (error) {
       throw error;
     };
   };
 
-  useEffect(()=> {
-    getUserInfo();
+  useEffect(() => {
+    fetchOrders();
   }, []);
 
   return <>
@@ -29,10 +30,16 @@ export default function User ({user, token, setUser}) {
           <p className='description'>Admin? {user.isAdmin ? 'Yes' : 'No'}</p>
           {user.imageURL ? <img className='thumbnail' src={user.imageURL} /> : <div className='thumbnail'></div>}
         </div>
-        <div className='orderhistory'>
-          <h2>Order History</h2>
-        </div>
       </div>
+      <div key={user.id + 1} className='user-card'>
+        <h2>Order History:</h2>
+        {orders ? orders.map((order, indx) => {
+          return <div key={order.id}>
+          <NavLink to={`/order/${order.id}`}>Order {indx + 1}: {order.status}</NavLink>
+          </div>
+        }) : ''}
+      </div>
+      
     </div>
   </>
 };

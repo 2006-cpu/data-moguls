@@ -31,7 +31,6 @@ ordersRouter.get("/", [requireUser, requireAdmin], async (req, res, next) => {
 });
 
 ordersRouter.get("/cart", requireUser, async (req, res, next) => {
-    const { productId } = req.params;
     try {
         const cart = await getCartByUser(req.user.id);
 

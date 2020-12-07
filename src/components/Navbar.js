@@ -3,7 +3,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { getCurrentToken, clearCurrentUser, clearCurrentToken } from '../auth';
 import './Styles.css';
 
-export default function Navbar({token, setUser, setToken}) {
+export default function Navbar({token, setUser, setToken, cart}) {
   const history = useHistory();
 
   const handleClick = (event) => {
@@ -24,7 +24,7 @@ export default function Navbar({token, setUser, setToken}) {
         <NavLink to='/' className='button'>HOME</NavLink>
         <NavLink to='/products' className='button'>SHOP PRODUCTS</NavLink>
         <NavLink to='/users' className='button'>MY INFO</NavLink>
-        <NavLink to='/orders' className='button'>VIEW CART</NavLink>
+        <NavLink to={`/order/${cart.id}`} className='button'>VIEW CART</NavLink>
         <button className='button' onClick={handleClick}>LOGOUT</button>
       </div> :
 

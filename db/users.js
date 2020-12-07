@@ -1,5 +1,6 @@
 const { client } = require("./client");
 const bcrypt = require("bcrypt");
+const { getOrdersByUser } = require("./orders");
 const SALT_COUNT = 10;
 
 async function createUser({
@@ -97,9 +98,13 @@ async function getUserByUsername(username) {
     `,
             [username]
         );
+        
         if (!user) {
             return null;
         }
+
+        const allOrders = await getOrdersByUser()
+
         return user;
     } catch (error) {
         throw error;
