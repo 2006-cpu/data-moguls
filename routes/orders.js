@@ -64,7 +64,7 @@ ordersRouter.post("/", requireUser, async (req, res, next) => {
     }
 });
 
-ordersRouter.patch("/:orderId", requireAdminOrUser, async (req, res, next) => {
+ordersRouter.patch("/:orderId", requireAdmin, async (req, res, next) => {
 
     const { orderId } = req.params;
     const { status } = req.body;
@@ -78,7 +78,7 @@ ordersRouter.patch("/:orderId", requireAdminOrUser, async (req, res, next) => {
     }
 });
 
-ordersRouter.delete("/:orderId", requireAdminOrUser, async (req, res, next) => {
+ordersRouter.delete("/:orderId", requireAdmin, async (req, res, next) => {
     const { orderId } = req.params;
     try {
         const order = await cancelOrder(orderId);
