@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { getUserByUsername } from '../api';
 import './Styles.css';
 
-export default function User () {
+export default function User() {
   let { username } = useParams();
   const [user, setUser] = useState([]);
 
@@ -29,7 +29,7 @@ export default function User () {
           <h2>User profile for {user.username}</h2>
           <p className='description'>First Name: {user.firstName}</p>
           <p className='description'>Last Name: {user.lastName}</p>
-          <p className='description'>Email: ${user.email}</p>
+          <p className='description'>Email: {user.email}</p>
           <p className='description'>Admin? {user.isAdmin ? 'Yes' : 'No'}</p>
           {user.imageURL ? <img className='thumbnail' src={user.imageURL} /> : <div className='thumbnail'></div>}
         </div>

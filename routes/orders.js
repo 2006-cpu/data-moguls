@@ -15,7 +15,6 @@ const {
 const {
     requireAdmin,
     requireUser,
-    requireAdminOrUser
 } = require("./utils");
 
 const { addProductToOrder } = require("../db/orderProducts");
@@ -88,7 +87,7 @@ ordersRouter.delete("/:orderId", requireAdmin, async (req, res, next) => {
     }
 });
 
-ordersRouter.post("/:orderId/products", requireUser, async (req, res, next) => {
+ordersRouter.post("/:orderId/products", requireAdmin, async (req, res, next) => {
     const { orderId } = req.params;
     const { productId, price, quantity } = req.body;
 
