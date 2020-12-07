@@ -19,7 +19,6 @@ export async function signUp(username, password, firstName, lastName, email, ima
           'Content-Type': 'application/json'
         }
       });
-    localStorage.setItem('data.token', data.token)
     return data;
   } catch (error) {
     throw error;
@@ -36,17 +35,16 @@ export async function logIn(username, password) {
           'Content-Type': 'application/json'
         }
       });
-    localStorage.setItem('data.token', data.token)
     return data;
   } catch (error) {
     throw error;
   }
 }
 
-export async function getUserByUsername(username) {
+export async function getUser(username, token ) {
 
   try {
-    const { data } = await axios.get(`/api/users/me`, { username },
+    const { data } = await axios.get(`/api/users/me`, { username, token },
     { headers: {
       'Content-Type': 'application/json'
     }}
@@ -57,6 +55,8 @@ export async function getUserByUsername(username) {
     throw error;
   }
 }
+
+getUser();
 
 export async function getProductById(id) {
   try {
