@@ -4,25 +4,10 @@ import { NavLink } from 'react-router-dom';
 import { getUserByUsername } from '../api';
 import './Styles.css';
 
-export default function User () {
-  let { username } = useParams();
-  const [user, setUser] = useState([]);
+export default function User ({user, setUser}) {
+  return <h1 className='user'>Under construction</h1>
 
-  const fetchUser = async () => {
-    try {
-      const userFetched = await getUserByUsername(username);
-
-      setUser(userFetched);
-    } catch (error) {
-      throw error;
-    };
-  };
-
-  useEffect(() => {
-    fetchUser();
-  }, []);
-
-  return (<>
+  /* return (<>
     <div className='user'>
       <div key={user.id} className='user-card'>
         <div className='userdata'>
@@ -38,5 +23,5 @@ export default function User () {
         </div>
       </div>
     </div>
-  </>)
+  </>) */
 };

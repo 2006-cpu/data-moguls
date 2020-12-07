@@ -36,7 +36,7 @@ export async function logIn(username, password) {
           'Content-Type': 'application/json'
         }
       });
-    localStorage.setItem('data.token', data.token)
+      
     return data;
   } catch (error) {
     throw error;

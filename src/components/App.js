@@ -1,5 +1,4 @@
-import React from 'react';
-import { getCurrentToken } from '../auth';
+import React, {useEffect, useState} from 'react';
 
 import {
   BrowserRouter as Router,
@@ -13,12 +12,23 @@ import { Header, Navbar, Orders, Login, Signup, User, Product, Allproducts, Foot
 import './Styles.css';
 
 export default function App() {
+  const [token, setToken] = useState(null);
+  const [user, setUser] = useState('');
+
+  const fetchCurrentUser = () => {
+    const token = localStorage.getItem('currentToken');
+    {token ? setToken(token) : ''};
+};
+
+  useEffect(() => {
+    fetchCurrentUser();
+  }, []);
 
   return (
     <Router>
       <div className="App">
         <Header />
-        <Navbar />
+        <Navbar token={token} setUser={setUser} setToken={setToken}/>
         <Switch>
 
           <Route exact path='/'>
@@ -41,20 +51,20 @@ export default function App() {
           </Route>
 
           <Route path='/login'>
-            <Login />
+            <Login setToken={setToken} setUser={setUser} token={token}/>
           </Route>
 
           <Route path='/signup'>
             <Signup />
           </Route>
 
-          ({getCurrentToken() ? <Route path='/users'>
-            <User />
-          </Route> : null})
+          <Route path='/users'>
+            <User user={user} setUser={setUser}/>
+          </Route>
 
-          ({getCurrentToken() ? <Route path='/orders'>
+          <Route path='/orders'>
             <Orders />
-          </Route> : null})
+          </Route>
 
           <Route path='/order/:orderId'>
             <Cart />

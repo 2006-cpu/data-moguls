@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { getCurrentToken, clearCurrentUser, clearCurrentToken } from '../auth';
 import './Styles.css';
 
-export default function Navbar() {
-
-  const [token, setToken] = useState('');
-  const [user, setUser] = useState('');
+export default function Navbar({token, setUser, setToken}) {
+  const history = useHistory();
 
   const handleClick = (event) => {
     event.preventDefault();
@@ -14,13 +12,13 @@ export default function Navbar() {
     setUser('');
     clearCurrentUser();
     clearCurrentToken();
-    window.location.reload();
-    alert('You are now logged out!')
+    alert('You are now logged out!');
+    history.push('/');
   };
 
   return (<>
 
-    {getCurrentToken() ?
+    {token ?
 
       <div className='navbar'>
         <NavLink to='/' className='button'>HOME</NavLink>
