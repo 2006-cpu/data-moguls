@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from "react-router";
 import { NavLink } from 'react-router-dom';
-import { getUserByUsername, getUserOrdersById } from '../api';
+import { getUserOrdersById } from '../api';
 import './Styles.css';
 
 export default function User ({user, token, orders, setOrders}) {
@@ -17,7 +16,7 @@ export default function User ({user, token, orders, setOrders}) {
 
   useEffect(() => {
     fetchOrders();
-  }, []);
+  }, [user]);
 
   return <>
     <div className='user'>

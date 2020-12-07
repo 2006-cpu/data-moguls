@@ -19,7 +19,6 @@ export async function signUp(username, password, firstName, lastName, email, ima
           'Content-Type': 'application/json'
         }
       });
-    localStorage.setItem('data.token', data.token)
     return data;
   } catch (error) {
     throw error;
@@ -56,8 +55,8 @@ export async function getUserByUsername(token) {
     return data;
   } catch (error) {
     throw error;
-  }
-}
+  };
+};
 
 export async function getProductById(id) {
   try {
