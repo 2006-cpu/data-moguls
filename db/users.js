@@ -111,10 +111,39 @@ async function getUserByUsername(username) {
     }
 }
 
+async function updateUser(id, fields) {
+
+    const setString = Object.keys(fields).map(
+        (key, index) => `"${key}"=$${index + 1}`
+    ).join(', ');
+
+    const setValues = Object.values(fields);
+    setValues.push(id);
+
+
+    if (setString.length === 0) {
+        return;
+    }
+
+    try {
+        const result = await client.query(`
+        UPDATE users
+        SET ${setString}
+        WHERE id=$${setValues.length}
+        RETURNING *;
+      `, setValues);
+
+        return result;
+    } catch (error) {
+        throw error;
+    }
+}
+
 module.exports = {
     createUser,
     getUser,
     getAllUsers,
     getUserById,
     getUserByUsername,
+    updateUser,
 };
