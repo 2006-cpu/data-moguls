@@ -51,7 +51,6 @@ export async function getUserByUsername(username) {
       'Content-Type': 'application/json'
     }}
     );
-    console.log(data);
     return data;
   } catch (error) {
     throw error;
@@ -92,6 +91,15 @@ export async function getAllOrders() {
   try {
     const { data } = await axios.get('/api/orders');
 
+    return data;
+  } catch (error) {
+    throw error;
+  };
+};
+
+export async function createOrder(status, userId) {
+  try {
+    const { data } = await axios.post(`/api/products` );
     return data;
   } catch (error) {
     throw error;

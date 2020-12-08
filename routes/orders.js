@@ -63,7 +63,7 @@ ordersRouter.post("/", requireUser, async (req, res, next) => {
     }
 });
 
-ordersRouter.patch("/:orderId", requireAdminOrUser, async (req, res, next) => {
+ordersRouter.patch("/:orderId", requireAdmin, async (req, res, next) => {
 
     const { orderId } = req.params;
     const { status } = req.body;
