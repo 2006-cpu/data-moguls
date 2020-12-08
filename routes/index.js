@@ -49,6 +49,9 @@ apiRouter.use('/users', usersRouter);
 const ordersRouter = require('./orders');
 apiRouter.use('/orders', ordersRouter);
 
+const stripeRouter = require('./Stripe');
+apiRouter.use('/stripe', stripeRouter);
+
 apiRouter.use((error, req, res, next) => {
   res.send(error);
 });

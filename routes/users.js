@@ -95,7 +95,7 @@ usersRouter.post("/login", async (req, res, next) => {
   }
 });
 
-usersRouter.get("/me", requireUser, async (req, res, next) => {
+/*usersRouter.get("/me", requireUser, async (req, res, next) => {
   const prefix = "Bearer ";
   const auth = req.header("Authorization");
 
@@ -125,7 +125,7 @@ usersRouter.get("/me", requireUser, async (req, res, next) => {
     });
   }
 });
-
+*/
 usersRouter.get("/:userId/orders", requireUser, async (req, res, next) => {
   const { userId } = req.params;
   try {
