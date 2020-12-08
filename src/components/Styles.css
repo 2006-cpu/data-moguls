@@ -664,3 +664,11 @@ body {
   padding-right: 2rem;
   z-index: 1000;
 }
+
+.cart {
+  margin-bottom: 10rem;
+}
+
+#payButton {
+  background-color: rgb(118, 190, 118);
+}

@@ -1,6 +1,7 @@
 
 const { client } = require('./client');
-const { createOrder } = require('./orders');
+const { createOrderProduct } = require('./orderProducts');
+const { createOrder, getOrdersByUser } = require('./orders');
 const { createProduct } = require('./products')
 const { createUser } = require('./users')
 
@@ -267,7 +268,7 @@ async function createInitialOrders(){
   console.log('Starting to create orders...');
 
   const ordersToCreate = [
-    {userId: 2, status: 'created'}, {userId: 1, status: 'created'}, {userId: 3, status: 'created'}
+    {userId: 2, status: 'created'}, {userId: 1, status: 'created'}, {userId: 3, status: 'created'}, {userId: 2, status: 'cancelled'}, {userId: 1, status: 'completed'}, {userId: 3, status: 'completed'}
   ];
 
   try {
@@ -282,31 +283,45 @@ async function createInitialOrders(){
 };
 
 async function createInitialOrderProducts(){
+  const orderProductsToCreate = [
+    {productId: 1, orderId: 1, price: 499, quantity: 1},
+    {productId: 4, orderId: 1, price: 2598, quantity: 2},
+    {productId: 5, orderId: 2, price: 799, quantity: 1},
+    {productId: 4, orderId: 2, price: 1299, quantity: 1},
+    {productId: 1, orderId: 3, price: 998, quantity: 1},
+    {productId: 1, orderId: 3, price: 499, quantity: 1},
+    {productId: 9, orderId: 4, price: 998, quantity: 2},
+    {productId: 4, orderId: 4, price: 1299, quantity: 1},
+    {productId: 13, orderId: 5, price: 499, quantity: 1},
+    {productId: 7, orderId: 5, price: 799, quantity: 1},
+    {productId: 7, orderId: 6, price: 799, quantity: 1},
+    {productId: 14, orderId: 6, price: 599, quantity: 1}
+  ]
   try {
-    await client.query(`
-      INSERT INTO order_products("productId", "orderId", price, quantity)
-      Values (4, 1, 1299, 1);
-    `);
-    await client.query(`
-      INSERT INTO order_products("productId", "orderId", price, quantity)
-      Values (5, 1, 799, 1);
-    `);
-    await client.query(`
-      INSERT INTO order_products("productId", "orderId", price, quantity)
-      Values (1, 3, 998, 2);
-    `);
-    await client.query(`
-      INSERT INTO order_products("productId", "orderId", price, quantity)
-      Values (1, 2, 499, 1);
-    `);
+    
+    const orderProducts = await Promise.all(orderProductsToCreate.map(createOrderProduct));
+    console.log('Order products created:');
+    console.log(orderProducts);
+    console.log('Finished creating order products!');
   } catch (error) {
     throw error;
   };
 };
 
+/* async function testDb () {
+  try {
+    const orders = await getOrdersByUser(2);
+
+    console.log("THESEA RE USER 1 orders", orders);
+  } catch (error) {
+    throw error;
+  };
+}; */
+
 async function rebuildDB() {
   try {
     client.connect();
+    /* await testDb(); */
     await dropTables();
     await buildTables();
     await createInitialUsers();
