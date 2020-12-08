@@ -19,7 +19,6 @@ export async function signUp(username, password, firstName, lastName, email, ima
           'Content-Type': 'application/json'
         }
       });
-    localStorage.setItem('data.token', data.token)
     return data;
   } catch (error) {
     throw error;
@@ -36,27 +35,28 @@ export async function logIn(username, password) {
           'Content-Type': 'application/json'
         }
       });
-    localStorage.setItem('data.token', data.token)
+      
     return data;
   } catch (error) {
     throw error;
   }
 }
 
-export async function getUserByUsername(username) {
+export async function getUserByUsername(token) {
 
   try {
-    const { data } = await axios.get(`/api/users/me`, { username },
+    const { data } = await axios.get(`/api/users/me`,
     { headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization' : `Bearer ${token}`
     }}
     );
-    console.log(data);
+
     return data;
   } catch (error) {
     throw error;
-  }
-}
+  };
+};
 
 export async function getProductById(id) {
   try {
@@ -98,6 +98,50 @@ export async function getAllOrders() {
   };
 };
 
+export async function getUserOrdersById(id, token){
+  try {
+    const { data } = await axios.get(`/api/users/${id}/orders`,
+    { headers: {
+      'Content-Type': 'application/json',
+      'Authorization' : `Bearer ${token}`
+    }}
+    );
+    
+    return data;
+  } catch (error) {
+    throw error;
+  };
+};
 
+export async function getUsersCart(token){
+  try {
+    const { data } = await axios.get(`/api/orders/cart`,
+    { headers: {
+      'Content-Type': 'application/json',
+      'Authorization' : `Bearer ${token}`
+    }});
+    return data;
+    
+  } catch (error) {
+    throw error;
+  };
+};
 
+export async function addProductToOrder(orderId, productId, price, quantity, token) {
+
+  try {
+
+    const { data } = await axios.post(`/api/orders/${orderId}/products`, { productId, price, quantity },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization' : `Bearer ${token}`
+        }
+      });
+      
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
 

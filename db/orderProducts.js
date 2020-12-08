@@ -1,6 +1,6 @@
-
-
 const { client } = require("./index.js");
+
+const { getOrderById } = require('./orders');
 
 async function createOrderProduct({ productId, orderId, price, quantity }) {
     try {
@@ -36,21 +36,23 @@ async function addProductToOrder({ orderId, productId, price, quantity }) {
         `, [orderId, productId]);
 
         if (orderProduct) {
-            const updatedOrderProduct = await updateOrderProduct({
+            await updateOrderProduct({
                 id: orderProduct.id,
-                price,
-                quantity
+                price: (price * (quantity + 1)),
+                quantity: (quantity + 1)
             });
-            return updatedOrderProduct;
         } else {
-            const newOrderProduct = await createOrderProduct({
+            await createOrderProduct({
                 orderId,
                 productId,
                 price,
                 quantity
             })
-            return newOrderProduct;
-        }
+        };
+
+        const newOrder = getOrderById(orderId);
+
+        return newOrder;
     } catch (error) {
         throw error;
     }

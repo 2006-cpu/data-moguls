@@ -30,7 +30,6 @@ ordersRouter.get("/", [requireUser, requireAdmin], async (req, res, next) => {
 });
 
 ordersRouter.get("/cart", requireUser, async (req, res, next) => {
-    const { productId } = req.params;
     try {
         const cart = await getCartByUser(req.user.id);
 
@@ -44,6 +43,17 @@ ordersRouter.get("/cart", requireUser, async (req, res, next) => {
         next({ name, message });
     }
 });
+
+ordersRouter.get("/:orderId", async(req, res, next) => {
+    const { orderId } = req.params;
+    try {
+        const order = await getOrderById(orderId);
+
+        res.send(order);
+    } catch (error) {
+        throw error;
+    }
+})
 
 ordersRouter.post("/", requireUser, async (req, res, next) => {
 
@@ -63,7 +73,7 @@ ordersRouter.post("/", requireUser, async (req, res, next) => {
     }
 });
 
-ordersRouter.patch("/:orderId", requireAdminOrUser, async (req, res, next) => {
+ordersRouter.patch("/:orderId", async (req, res, next) => {
 
     const { orderId } = req.params;
     const { status } = req.body;
@@ -87,7 +97,7 @@ ordersRouter.delete("/:orderId", requireAdmin, async (req, res, next) => {
     }
 });
 
-ordersRouter.post("/:orderId/products", requireAdmin, async (req, res, next) => {
+ordersRouter.post("/:orderId/products", requireUser, async (req, res, next) => {
     const { orderId } = req.params;
     const { productId, price, quantity } = req.body;
 
@@ -98,6 +108,7 @@ ordersRouter.post("/:orderId/products", requireAdmin, async (req, res, next) => 
             price,
             quantity
         });
+        
         res.send(orderProduct);
     } catch (error) {
         next(error);

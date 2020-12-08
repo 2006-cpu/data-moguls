@@ -1,5 +1,4 @@
-import React from 'react';
-import { getCurrentToken } from '../auth';
+import React, {useEffect, useState} from 'react';
 
 import {
   BrowserRouter as Router,
@@ -9,16 +8,57 @@ import {
   NavLink
 } from 'react-router-dom';
 
-import { Header, Navbar, Orders, Login, Signup, User, Product, Allproducts, Footer } from './';
+import { Header, Navbar, Orders, Login, Signup, User, Product, Allproducts, Footer, Singleorder } from './';
 import './Styles.css';
 
+import { getUserByUsername, getUsersCart, getUserOrdersById } from '../api';
+
 export default function App() {
+  const [token, setToken] = useState(null);
+  const [user, setUser] = useState('');
+  const [orders, setOrders] = useState('');
+  const [cart, setCart] = useState('');
+
+  const fetchCurrentUser = async () => {
+    const token = localStorage.getItem('currentToken');
+    {token ? setToken(token) : ''};
+    try {
+      const userInfo = await getUserByUsername(token);
+      
+      setUser(userInfo);
+    } catch (error) {
+      throw error;
+    };
+  };
+
+  const fetchCart = async () => {
+    try {
+      const cart = await getUsersCart(token);
+      if(cart.name === 'NoOrder'){
+        setCart('')
+      } else{
+        setCart(cart);
+      }; 
+      
+
+    } catch (error) {
+      throw error;
+    }
+  }
+ 
+  useEffect(() => {
+    fetchCurrentUser();
+  }, []);
+
+  useEffect(() => {
+    fetchCart();
+  }, [token]);
 
   return (
     <Router>
       <div className="App">
         <Header />
-        <Navbar />
+        <Navbar token={token} setUser={setUser} setToken={setToken} cart={cart}/>
         <Switch>
 
           <Route exact path='/'>
@@ -37,24 +77,28 @@ export default function App() {
           </Route>
 
           <Route path='/product/:productId'>
-            <Product />
+            <Product cart={cart} token={token} setCart={setCart}/>
           </Route>
 
           <Route path='/login'>
-            <Login />
+            <Login setToken={setToken} setUser={setUser} token={token} setOrders={setOrders}/>
           </Route>
 
           <Route path='/signup'>
-            <Signup />
+            <Signup setUser={setUser} setToken={setToken}/>
           </Route>
 
-          ({getCurrentToken() ? <Route path='/users'>
-            <User />
-          </Route> : null})
+          <Route path='/users'>
+            <User user={user} token={token} setUser={setUser} orders={orders} setOrders={setOrders}/>
+          </Route>
 
-          ({getCurrentToken() ? <Route path='/orders'>
+          <Route path='/orders'>
             <Orders />
-          </Route> : null})
+          </Route>
+
+          <Route path='/order/:orderId'>
+            <Singleorder cart={cart}/>
+          </Route>
 
           <Redirect to='/' />
 

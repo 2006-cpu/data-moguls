@@ -13,7 +13,7 @@ async function createOrder({ status, userId }) {
 async function addProductsToOrderObj(order) {
     try {
         const { rows: products } = await client.query(`
-            SELECT products.id, products.name, products.price, order_products.quantity, order_products.price AS "totalProductPrice", products."inStock"
+            SELECT products.id, products.name, products.price, products."imageURL", order_products.quantity, order_products.price AS "totalProductPrice", products."inStock"
             FROM order_products
             JOIN products on order_products."productId" = products.id AND "orderId" = $1;
         `, [order.id]);
@@ -62,33 +62,22 @@ async function getOrderById(id) {
     };
 };
 
-async function getOrdersByUser(username) {
+async function getOrdersByUser(id) {
     try {
-        const { rows: [user] } = await client.query(`
-            SELECT * FROM users
-            WHERE username = $1;
-        `, [username]);
-
-        if (!user) {
-            return {
-                name: 'NoUserFound',
-                message: `There is no user under username: ${username}`
-            };
-        };
 
         const { rows: orders } = await client.query(`
             SELECT * FROM orders
             WHERE orders."userId" = $1;
-        `, [user.id]);
+        `, [id]);
 
-        if (!order) {
+        if (!orders) {
             return {
                 name: 'NoOrderFoundForUser',
-                message: `There are no orders found unser username: ${username}`
+                message: `There are no orders found for user with id: ${id}`
             };
         };
 
-        const newOrders = await addProductsToOrderObj(orders);
+        const newOrders = await Promise.all(orders.map(addProductsToOrderObj));
 
         return newOrders;
     } catch (error) {
