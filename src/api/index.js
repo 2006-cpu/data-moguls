@@ -35,28 +35,28 @@ export async function logIn(username, password) {
           'Content-Type': 'application/json'
         }
       });
+      
     return data;
   } catch (error) {
     throw error;
   }
 }
 
-export async function getUser(username, token ) {
+export async function getUserByUsername(token) {
 
   try {
-    const { data } = await axios.get(`/api/users/me`, { username, token },
+    const { data } = await axios.get(`/api/users/me`,
     { headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization' : `Bearer ${token}`
     }}
     );
-    console.log(data);
+
     return data;
   } catch (error) {
     throw error;
-  }
-}
-
-getUser();
+  };
+};
 
 export async function getProductById(id) {
   try {
@@ -98,6 +98,34 @@ export async function getAllOrders() {
   };
 };
 
+export async function getUserOrdersById(id, token){
+  try {
+    const { data } = await axios.get(`/api/users/${id}/orders`,
+    { headers: {
+      'Content-Type': 'application/json',
+      'Authorization' : `Bearer ${token}`
+    }}
+    );
+    
+    return data;
+  } catch (error) {
+    throw error;
+  };
+};
+
+export async function getUsersCart(token){
+  try {
+    const { data } = await axios.get(`/api/orders/cart`,
+    { headers: {
+      'Content-Type': 'application/json',
+      'Authorization' : `Bearer ${token}`
+    }});
+    return data;
+    
+  } catch (error) {
+    throw error;
+  };
+};
 
 
 

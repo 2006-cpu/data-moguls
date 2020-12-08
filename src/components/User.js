@@ -1,28 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from "react-router";
-// import { NavLink } from 'react-router-dom';
-import { getUser } from '../api';
+import { NavLink } from 'react-router-dom';
+import { getUserOrdersById } from '../api';
 import './Styles.css';
 
-export default function User() {
-  let { username } = useParams();
-  const [user, setUser] = useState([]);
-
-  const fetchUser = async () => {
+export default function User ({user, token, orders, setOrders}) {
+  const fetchOrders = async () => {
     try {
-      const userFetched = await getUser(username);
+      const allOrders = await getUserOrdersById(user.id, token);
 
-      setUser(userFetched);
+      setOrders(allOrders);
     } catch (error) {
       throw error;
     };
   };
 
   useEffect(() => {
-    fetchUser();
-  }, []);
+    fetchOrders();
+  }, [user]);
 
-  return (<>
+  return <>
     <div className='user'>
       <div key={user.id} className='user-card'>
         <div className='userdata'>
@@ -33,10 +29,16 @@ export default function User() {
           <p className='description'>Admin? {user.isAdmin ? 'Yes' : 'No'}</p>
           {user.imageURL ? <img className='thumbnail' src={user.imageURL} /> : <div className='thumbnail'></div>}
         </div>
-        <div className='orderhistory'>
-          <h2>Order History</h2>
-        </div>
       </div>
+      <div key={user.id + 1} className='user-card'>
+        <h2>Order History:</h2>
+        {orders.length > 0 ? orders.map((order, indx) => {
+          return <div key={order.id}>
+          <NavLink to={`/order/${order.id}`} className='button'>Order {indx + 1}: {order.status}</NavLink>
+          </div>
+        }) : <h2>No orders</h2>}
+      </div>
+      
     </div>
-  </>)
+  </>
 };
