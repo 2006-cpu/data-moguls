@@ -1,7 +1,7 @@
 
 const { client } = require('./client');
 const { createOrderProduct } = require('./orderProducts');
-const { createOrder, getOrdersByUser } = require('./orders');
+const { createOrder, getOrdersByUser, updateOrder } = require('./orders');
 const { createProduct } = require('./products')
 const { createUser } = require('./users')
 
@@ -295,10 +295,13 @@ async function createInitialOrderProducts(){
     {productId: 13, orderId: 5, price: 499, quantity: 1},
     {productId: 7, orderId: 5, price: 799, quantity: 1},
     {productId: 7, orderId: 6, price: 799, quantity: 1},
-    {productId: 14, orderId: 6, price: 599, quantity: 1}
+    {productId: 14, orderId: 6, price: 599, quantity: 1},
+    {productId: 2, orderId: 7, price: 1797, quantity: 3},
+    {productId: 3, orderId: 7, price: 499, quantity: 1},
+    {productId: 6, orderId: 8, price: 1299, quantity: 1},
+    {productId: 14, orderId: 8, price: 599, quantity: 1}
   ]
   try {
-    
     const orderProducts = await Promise.all(orderProductsToCreate.map(createOrderProduct));
     console.log('Order products created:');
     console.log(orderProducts);
@@ -308,20 +311,9 @@ async function createInitialOrderProducts(){
   };
 };
 
-/* async function testDb () {
-  try {
-    const orders = await getOrdersByUser(2);
-
-    console.log("THESEA RE USER 1 orders", orders);
-  } catch (error) {
-    throw error;
-  };
-}; */
-
 async function rebuildDB() {
   try {
     client.connect();
-    /* await testDb(); */
     await dropTables();
     await buildTables();
     await createInitialUsers();

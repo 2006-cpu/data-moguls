@@ -137,71 +137,38 @@ async function getCartByUser(id) {
         throw error;
     };
 };
-const updateOrder = async ({ id, ...fields }) => {
-    const fieldKeys = Object.keys(fields);
 
-    const setString = fieldKeys
-        .map((fieldName, index) => {
-            return `"${fieldName}"=$${index + 1}`;
-        })
-        .join(", ");
+async function updateOrder(id, fields = {}) {
 
-    const setValues = Object.values(fields);
-    setValues.push(id);
+    const setString = Object.keys(fields).map((key, index) =>
+        `"${key}"=$${index + 1}`).join(', ');
 
-    if (fieldKeys.length === 0) {
+    if (setString.length === 0) {
         return;
-    }
+    };
 
     try {
-        const {
-            rows: [order],
-        } = await client.query(
-            `
+        const { rows: [order] } = await client.query(`
             UPDATE orders
             SET ${setString}
-            WHERE id = $${setValues.length}
+            WHERE id = ${id}
             RETURNING *;
-            `,
-            setValues
-        );
-        return order;
+        `, Object.values(fields));
+
+        if (!order) {
+            return {
+                name: 'NoOrderFound',
+                message: `There are no orders with id: ${id}.`
+            };
+        };
+
+        const newOrder = await addProductsToOrderObj(order);
+
+        return newOrder;
     } catch (error) {
         throw error;
-    }
+    };
 };
-
-// async function updateOrder(id, fields = {}) {
-
-//     const setString = Object.keys(fields).map((key, index) =>
-//         `"${key}"=$${index + 1}`).join(', ');
-
-//     if (setString.length === 0) {
-//         return;
-//     };
-
-//     try {
-//         const { rows: [order] } = await client.query(`
-//             UPDATE orders
-//             SET ${setString}
-//             WHERE id = ${id}
-//             RETURNING *;
-//         `, Object.values(fields));
-
-//         if (!order) {
-//             return {
-//                 name: 'NoOrderFound',
-//                 message: `There are no orders with id: ${id}.`
-//             };
-//         };
-
-//         const newOrder = await addProductsToOrderObj(order);
-
-//         return newOrder;
-//     } catch (error) {
-//         throw error;
-//     };
-// };
 
 async function completeOrder(id) {
     try {
