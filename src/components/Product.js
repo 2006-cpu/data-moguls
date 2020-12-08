@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router";
 import { NavLink } from 'react-router-dom';
-import { getProductById } from '../api';
+import { addProductToOrder, getProductById } from '../api';
 import { getCurrentToken } from '../auth';
 import './Styles.css';
 
-export default function Product() {
+export default function Product({cart, token, setCart}) {
 
     let { productId } = useParams();
     const [product, setProduct] = useState([]);
@@ -13,16 +13,8 @@ export default function Product() {
     const fetchProduct = async () => {
         try {
             const productFetched = await getProductById(productId);
-
+            
             setProduct(productFetched);
-        } catch (error) {
-            throw error;
-        };
-    };
-
-    const addProductToCart = () => {
-        try {
-            console.log("ADD SOMETHING")
         } catch (error) {
             throw error;
         };
@@ -31,6 +23,19 @@ export default function Product() {
     useEffect(() => {
         fetchProduct();
     }, [])
+
+    
+
+    const addProductToCart = async () => {
+        try {
+            const quantity = 1;
+            const newCart = await addProductToOrder(cart.id, product.id, product.price, quantity, token);
+
+            setCart(newCart);
+        } catch (error) {
+            throw error;
+        };
+    };
 
     return <div className='product'>
         <div key={product.id} className='product-card'>
