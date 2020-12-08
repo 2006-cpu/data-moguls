@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import { signUp } from '../api';
+import { NavLink, useHistory } from 'react-router-dom';
+import { signUp, getUserByUsername } from '../api';
+import { storeCurrentUser, storeCurrentToken} from '../auth';
 import './Styles.css';
 
-export default function Signup() {
+export default function Signup({setUser, setToken}) {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -13,14 +14,25 @@ export default function Signup() {
   const [imageURL, setImageURL] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
 
+  const history = useHistory();
+
   const handleSignUp = async (event) => {
 
     try {
       event.preventDefault();
       const data = await signUp(username, password, firstName, lastName, email, imageURL, isAdmin);
 
-      if (data && data.user) {
+      if (data && data.message === 'Thank you for signing up!') {
+        const userInfo = await getUserByUsername(data.token);
+        
+        setUser(userInfo);
+        setToken(data.token);
+        
+        storeCurrentToken(data.token);
+        storeCurrentUser(data.username);
+        
         alert(data.message);
+        history.push('/users');
       } else {
         alert(data.message);
       }

@@ -77,7 +77,7 @@ export default function App() {
           </Route>
 
           <Route path='/product/:productId'>
-            <Product />
+            <Product cart={cart} token={token} setCart={setCart}/>
           </Route>
 
           <Route path='/login'>
@@ -85,7 +85,7 @@ export default function App() {
           </Route>
 
           <Route path='/signup'>
-            <Signup />
+            <Signup setUser={setUser} setToken={setToken}/>
           </Route>
 
           <Route path='/users'>
