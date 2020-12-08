@@ -127,5 +127,21 @@ export async function getUsersCart(token){
   };
 };
 
+export async function addProductToOrder(orderId, productId, price, quantity, token) {
 
+  try {
+
+    const { data } = await axios.post(`/api/orders/${orderId}/products`, { productId, price, quantity },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization' : `Bearer ${token}`
+        }
+      });
+      
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
 

@@ -268,7 +268,7 @@ async function createInitialOrders(){
   console.log('Starting to create orders...');
 
   const ordersToCreate = [
-    {userId: 2, status: 'created'}, {userId: 1, status: 'created'}, {userId: 3, status: 'created'}, {userId: 2, status: 'cancelled'}, {userId: 1, status: 'completed'}, {userId: 3, status: 'completed'}
+    {userId: 2, status: 'cancelled'}, {userId: 1, status: 'completed'}, {userId: 3, status: 'completed'}, {userId: 4, status: 'cancelled'}
   ];
 
   try {

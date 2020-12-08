@@ -1,6 +1,6 @@
 const { client } = require("./client");
 const bcrypt = require("bcrypt");
-const { getOrdersByUser } = require("./orders");
+const { getOrdersByUser, createOrder } = require("./orders");
 const SALT_COUNT = 10;
 
 async function createUser({
@@ -26,6 +26,9 @@ async function createUser({
             [username, hashedPassword, firstName, lastName, email, imageURL, isAdmin]
         );
         delete user.password;
+
+        await createOrder({status: 'created', userId: user.id});
+        
         return user;
     } catch (error) {
         throw error;
