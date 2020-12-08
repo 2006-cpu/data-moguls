@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import { logIn } from '../api';
-import './Components.css';
+import React, { useState, useEffect } from 'react';
+import { NavLink, useHistory } from 'react-router-dom';
+import { storeCurrentUser, storeCurrentToken, getCurrentToken } from '../auth';
+import { logIn, getUserByUsername, getUserOrdersById } from '../api';
+import './Styles.css';
 
-export default function Login() {
+export default function Login({token, setUser, setToken, setOrders}) {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [token, setToken] = useState('');
-  const [user, setUser] = useState('');
+  const history = useHistory();
 
   const handleLogin = async (event) => {
 
@@ -16,10 +16,17 @@ export default function Login() {
       event.preventDefault();
       const data = await logIn(username, password);
 
-      if (data) {
-        setUser(data.user);
+      if (data && data.message === 'You are logged in!') {
+        const userInfo = await getUserByUsername(data.token);
+        
+        setUser(userInfo);
         setToken(data.token);
+        
+        storeCurrentToken(data.token);
+        storeCurrentUser(data.username);
+        
         alert(data.message);
+        history.push('/users');
       } else {
         alert(data.message);
       }
@@ -34,7 +41,7 @@ export default function Login() {
         <form
           className='login-card'
           onSubmit={handleLogin}>
-                    <h2>Log In Form</h2>
+          <h2>Log In Form</h2>
           <label>Username: </label>
           <input type="text" value={username} onChange={(event) => {
             setUsername(event.target.value)

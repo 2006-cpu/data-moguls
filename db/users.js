@@ -1,5 +1,6 @@
 const { client } = require("./client");
 const bcrypt = require("bcrypt");
+const { getOrdersByUser, createOrder } = require("./orders");
 const SALT_COUNT = 10;
 
 async function createUser({
@@ -25,6 +26,9 @@ async function createUser({
             [username, hashedPassword, firstName, lastName, email, imageURL, isAdmin]
         );
         delete user.password;
+
+        await createOrder({status: 'created', userId: user.id});
+        
         return user;
     } catch (error) {
         throw error;
@@ -97,10 +101,42 @@ async function getUserByUsername(username) {
     `,
             [username]
         );
+        
         if (!user) {
             return null;
         }
+
+        const allOrders = await getOrdersByUser()
+
         return user;
+    } catch (error) {
+        throw error;
+    }
+}
+
+async function updateUser(id, fields) {
+
+    const setString = Object.keys(fields).map(
+        (key, index) => `"${key}"=$${index + 1}`
+    ).join(', ');
+
+    const setValues = Object.values(fields);
+    setValues.push(id);
+
+
+    if (setString.length === 0) {
+        return;
+    }
+
+    try {
+        const result = await client.query(`
+        UPDATE users
+        SET ${setString}
+        WHERE id=$${setValues.length}
+        RETURNING *;
+      `, setValues);
+
+        return result;
     } catch (error) {
         throw error;
     }
@@ -112,4 +148,5 @@ module.exports = {
     getAllUsers,
     getUserById,
     getUserByUsername,
+    updateUser,
 };

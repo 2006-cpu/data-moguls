@@ -1,15 +1,15 @@
 const express = require('express');
 const apiRouter = require('express').Router();
 
-const {getUserById} = require('../db');
+const { getUserById } = require('../db');
 const jwt = require('jsonwebtoken');
-const { JWT_SECRET } = process.env;
+const { JWT_SECRET = 'dontTell' } = process.env;
 
 apiRouter.use(async (req, res, next) => {
   const prefix = 'Bearer ';
   const auth = req.header('Authorization');
 
-  if (!auth) { 
+  if (!auth) {
     next();
   } else if (auth.startsWith(prefix)) {
     const token = auth.slice(prefix.length);
@@ -27,17 +27,9 @@ apiRouter.use(async (req, res, next) => {
   } else {
     next({
       name: 'AuthorizationHeaderError',
-      message: `Authorization token must start with ${ prefix }`
+      message: `Authorization token must start with ${prefix}`
     });
   }
-});
-
-apiRouter.use((req, res, next) => {
-  if (req.user) {
-    console.log("User is set:", req.user);
-  }
-
-  next();
 });
 
 const productsRouter = require('./products');

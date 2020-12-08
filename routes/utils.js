@@ -9,6 +9,7 @@ function requireUser(req, res, next) {
   next();
 }
 
+
 function requireAdmin(req, res, next) {
   if (!req.user) {
     next({
@@ -28,4 +29,5 @@ function requireAdmin(req, res, next) {
 module.exports = {
   requireUser,
   requireAdmin,
+
 };

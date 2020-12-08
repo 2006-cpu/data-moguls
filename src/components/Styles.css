@@ -35,6 +35,7 @@ body {
   padding: 2rem;
   margin-left: 10rem;
   margin-right: 10rem;
+  margin-bottom: 7rem;
 }
 
 .home h1 {
@@ -208,6 +209,7 @@ body {
   border-radius: 7px;
   padding: 1rem;
   margin: 1rem;
+  margin-bottom: 7rem;
 }
 
 .login-card h2 {
@@ -318,6 +320,7 @@ body {
   border-radius: 7px;
   padding: 1rem;
   margin: 1rem;
+  margin-bottom: 7rem;
 }
 
 .signup-card h2 {
@@ -408,21 +411,22 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  align-items: flex-start;
   flex-wrap: wrap;
-  align-items: top;
   font-family: 'Marmelad', sans-serif;
   color: #333;
   padding: 2rem;
   padding-bottom: 0rem;
   margin-left: 5rem;
   margin-right: 5rem;
-  margin-bottom: 5rem;
+  margin-bottom: 10rem;
 }
 
 .all-products .product-card {
   display: flex;
-  flex-basis: 270px;
+  width: 270px;
   flex-direction: column;
+  align-self: flex-end;
   font-size: 1rem;
   border: 1px solid #999;
   box-shadow: 5px 5px 10px 1px #999;
@@ -431,11 +435,16 @@ body {
   margin: 1rem;
 }
 
-.product-card h3 {
+.all-products .hidden {
+  display: none;
+  border: none;
+}
+
+.all-products .product-card h3 {
   margin-bottom: .8rem;
 }
 
-.thumbnail {
+.all-products .thumbnail {
   width: 230px;
   padding: 2rem;
 }
@@ -458,20 +467,23 @@ body {
   margin-bottom: 5rem;
 }
 
+
 .product .product-card {
   display: flex;
-  flex-basis: 500px;
-  flex-direction: column;
+  flex-basis: 900px;
+  flex-direction: row;
   font-size: 1rem;
   border: 1px solid #999;
   box-shadow: 5px 5px 10px 1px #999;
   border-radius: 7px;
   padding: 1rem;
   margin: 1rem;
+  margin-bottom: 7rem;
 }
 
-.product .product-card h3 {
+.product .product-card h2 {
   margin-bottom: .8rem;
+  margin-top: 2rem;
 }
 
 .image {
@@ -488,8 +500,34 @@ body {
 }
 
 .product .product-card button {
-  display: flex;
+  display: inline-block;
+  width: 95%;
   justify-content: center;
+  font-family: 'Marmelad', sans-serif;
+  font-size: 1.2rem;
+  padding: .6rem;
+  margin-left: .5rem;
+  margin-right: .5rem;
+  margin-top: 1rem;
+  letter-spacing: .1rem;
+  text-decoration: none;
+  background-color: #FF6666;
+  color: #FFF;
+  border: 1px solid white;
+  border-radius: 7px;
+}
+
+.product .product-card button:hover {
+  background-color: #000;
+  color: #FFF;
+  border: 1px solid #666;
+}
+
+.product .product-card .button {
+  display: inline-block;
+  width: 95%;
+  justify-content: center;
+  text-align: center;
   font-family: 'Marmelad', sans-serif;
   font-size: 1.2rem;
   padding: .6rem;
@@ -504,12 +542,71 @@ body {
   border: 1px solid #666;
 }
 
-.product .product-card button {
-  background-color: #FF6666;
+.product .product-card .button:hover {
+  background-color: #000;
   color: #FFF;
   border: 1px solid white;
 }
 
+/* USER */
+
+.user {
+  margin-top: 9.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: top;
+  font-family: 'Marmelad', sans-serif;
+  color: #333;
+  padding: 2rem;
+  padding-bottom: 0rem;
+  margin-left: 5rem;
+  margin-right: 5rem;
+  margin-bottom: 5rem;
+}
+
+.user .user-card {
+  display: flex;
+  flex-basis: 900px;
+  flex-direction: row;
+  font-size: 1rem;
+  border: 1px solid #999;
+  box-shadow: 5px 5px 10px 1px #999;
+  border-radius: 7px;
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.user .user-card h2 {
+  margin-bottom: .8rem;
+  margin-top: .5rem;
+}
+
+.user .user-card .description {
+  font-family: 'Marmelad', sans-serif;
+  font-size: 1.2rem;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+  color: #333;
+}
+
+.user .thumbnail {
+  background-image: url(./images/defaultimage.png);
+  width: 300px;
+  height: 300px;
+  margin-top: 2rem;
+}
+
+.userdata {
+  width: 320px;
+  padding: 1.5rem;
+}
+
+.orderhistory {
+  width: 580px;
+  padding: 1.5rem;
+}
 /* ORDERS */
 
 .orders {
@@ -566,4 +663,12 @@ body {
   padding-left: 2rem;
   padding-right: 2rem;
   z-index: 1000;
+}
+
+.cart {
+  margin-bottom: 10rem;
+}
+
+#payButton {
+  background-color: rgb(118, 190, 118);
 }
