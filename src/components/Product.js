@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router";
 import { NavLink } from 'react-router-dom';
 import { addProductToOrder, getProductById } from '../api';
-import { getCurrentToken } from '../auth';
 import './Styles.css';
 
-export default function Product({cart, token, setCart}) {
+export default function Product({ cart, token, setCart }) {
 
     let { productId } = useParams();
     const [product, setProduct] = useState([]);
@@ -13,7 +12,7 @@ export default function Product({cart, token, setCart}) {
     const fetchProduct = async () => {
         try {
             const productFetched = await getProductById(productId);
-            
+
             setProduct(productFetched);
         } catch (error) {
             throw error;
@@ -24,14 +23,12 @@ export default function Product({cart, token, setCart}) {
         fetchProduct();
     }, [])
 
-    
-
     const addProductToCart = async () => {
         try {
             const quantity = 1;
             const newCart = await addProductToOrder(cart.id, product.id, product.price, quantity, token);
-
             setCart(newCart);
+            alert('Your order has been placed in your cart.')
         } catch (error) {
             throw error;
         };
@@ -48,7 +45,7 @@ export default function Product({cart, token, setCart}) {
                 <p className='description'>Category: {product.category}</p>
                 <p className='description'>Price: ${product.price * .01}</p>
                 <p className='description' style={{ color: '#FF6666' }}>{product.inStock ? 'In Stock!' : 'Out of Stock'}</p>
-                <button onClick={addProductToCart}>Order</button>
+                {token ? <button onClick={addProductToCart}>ORDER PRODUCT</button> : ''}
                 <NavLink to='/products' className='button'>BACK TO PRODUCTS</NavLink>
             </div>
         </div>

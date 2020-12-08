@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   BrowserRouter as Router,
@@ -8,10 +8,10 @@ import {
   NavLink
 } from 'react-router-dom';
 
-import { Header, Navbar, Orders, Login, Signup, User, Product, Allproducts, Footer, Singleorder } from './';
+import { Header, Navbar, Login, Signup, User, Product, Allproducts, Footer, Singleorder } from './';
 import './Styles.css';
 
-import { getUserByUsername, getUsersCart, getUserOrdersById } from '../api';
+import { getUserByUsername, getUsersCart } from '../api';
 
 export default function App() {
   const [token, setToken] = useState(null);
@@ -21,10 +21,10 @@ export default function App() {
 
   const fetchCurrentUser = async () => {
     const token = localStorage.getItem('currentToken');
-    {token ? setToken(token) : ''};
+    { token ? setToken(token) : '' };
     try {
       const userInfo = await getUserByUsername(token);
-      
+
       setUser(userInfo);
     } catch (error) {
       throw error;
@@ -34,18 +34,18 @@ export default function App() {
   const fetchCart = async () => {
     try {
       const cart = await getUsersCart(token);
-      if(cart.name === 'NoOrder'){
+      if (cart.name === 'NoOrder') {
         setCart('')
-      } else{
+      } else {
         setCart(cart);
-      }; 
-      
+      };
+
 
     } catch (error) {
       throw error;
     }
   }
- 
+
   useEffect(() => {
     fetchCurrentUser();
   }, []);
@@ -58,7 +58,7 @@ export default function App() {
     <Router>
       <div className="App">
         <Header />
-        <Navbar token={token} setUser={setUser} setToken={setToken} cart={cart}/>
+        <Navbar token={token} setUser={setUser} setToken={setToken} cart={cart} />
         <Switch>
 
           <Route exact path='/'>
@@ -77,28 +77,24 @@ export default function App() {
           </Route>
 
           <Route path='/product/:productId'>
-            <Product cart={cart} token={token} setCart={setCart}/>
+            <Product cart={cart} token={token} setCart={setCart} />
           </Route>
 
           <Route path='/login'>
-            <Login setToken={setToken} setUser={setUser} token={token} setOrders={setOrders}/>
+            <Login setToken={setToken} setUser={setUser} token={token} setOrders={setOrders} />
           </Route>
 
           <Route path='/signup'>
-            <Signup setUser={setUser} setToken={setToken}/>
+            <Signup setUser={setUser} setToken={setToken} />
           </Route>
 
-          <Route path='/users'>
-            <User user={user} token={token} setUser={setUser} orders={orders} setOrders={setOrders}/>
-          </Route>
+          {token ? <Route path='/users'>
+            <User user={user} token={token} setUser={setUser} orders={orders} setOrders={setOrders} />
+          </Route> : null}
 
-          <Route path='/orders'>
-            <Orders />
-          </Route>
-
-          <Route path='/order/:orderId'>
-            <Singleorder cart={cart}/>
-          </Route>
+          {token ? <Route path='/order/:orderId'>
+            <Singleorder cart={cart} />
+          </Route> : null}
 
           <Redirect to='/' />
 

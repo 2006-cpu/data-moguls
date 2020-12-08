@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
-import { getCurrentToken, clearCurrentUser, clearCurrentToken } from '../auth';
+import { clearCurrentUser, clearCurrentToken } from '../auth';
 import './Styles.css';
 
-export default function Navbar({token, setUser, setToken, cart}) {
+export default function Navbar({ token, setUser, setToken, cart }) {
   const history = useHistory();
 
   const handleClick = (event) => {

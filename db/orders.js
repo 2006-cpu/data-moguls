@@ -171,38 +171,6 @@ const updateOrder = async ({ id, ...fields }) => {
     }
 };
 
-// async function updateOrder(id, fields = {}) {
-
-//     const setString = Object.keys(fields).map((key, index) =>
-//         `"${key}"=$${index + 1}`).join(', ');
-
-//     if (setString.length === 0) {
-//         return;
-//     };
-
-//     try {
-//         const { rows: [order] } = await client.query(`
-//             UPDATE orders
-//             SET ${setString}
-//             WHERE id = ${id}
-//             RETURNING *;
-//         `, Object.values(fields));
-
-//         if (!order) {
-//             return {
-//                 name: 'NoOrderFound',
-//                 message: `There are no orders with id: ${id}.`
-//             };
-//         };
-
-//         const newOrder = await addProductsToOrderObj(order);
-
-//         return newOrder;
-//     } catch (error) {
-//         throw error;
-//     };
-// };
-
 async function completeOrder(id) {
     try {
         const { rows: [order] } = await client.query(`
@@ -246,29 +214,6 @@ const cancelOrder = async (id) => {
         throw error;
     }
 };
-// async function cancelOrder(id) {
-//     try {
-//         const { rows: [order] } = await client.query(`
-//             UPDATE orders
-//             SET status = 'cancel'
-//             WHERE id = $1
-//             RETURNING *;
-//         `, [id]);
-
-//         if (!order) {
-//             return {
-//                 name: 'NoOrderFound',
-//                 message: `There are no orders with id: ${id}.`
-//             };
-//         };
-
-//         const newOrder = await addProductsToOrderObj(order);
-
-//         return newOrder;
-//     } catch (error) {
-//         throw error;
-//     };
-// };
 
 module.exports = {
     createOrder,
