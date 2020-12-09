@@ -6,8 +6,6 @@ const {
     createOrder,
     getAllOrders,
     getOrderById,
-    getOrdersByUser,
-    getOrderByProduct,
     getCartByUser,
     cancelOrder,
     updateOrder,
@@ -44,7 +42,7 @@ ordersRouter.get("/cart", requireUser, async (req, res, next) => {
     }
 });
 
-ordersRouter.get("/:orderId", async(req, res, next) => {
+ordersRouter.get("/:orderId", async (req, res, next) => {
     const { orderId } = req.params;
     try {
         const order = await getOrderById(orderId);
@@ -108,7 +106,7 @@ ordersRouter.post("/:orderId/products", requireUser, async (req, res, next) => {
             price,
             quantity
         });
-        
+
         res.send(orderProduct);
     } catch (error) {
         next(error);

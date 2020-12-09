@@ -213,29 +213,6 @@ const cancelOrder = async (id) => {
         throw error;
     }
 };
-// async function cancelOrder(id) {
-//     try {
-//         const { rows: [order] } = await client.query(`
-//             UPDATE orders
-//             SET status = 'cancel'
-//             WHERE id = $1
-//             RETURNING *;
-//         `, [id]);
-
-//         if (!order) {
-//             return {
-//                 name: 'NoOrderFound',
-//                 message: `There are no orders with id: ${id}.`
-//             };
-//         };
-
-//         const newOrder = await addProductsToOrderObj(order);
-
-//         return newOrder;
-//     } catch (error) {
-//         throw error;
-//     };
-// };
 
 module.exports = {
     createOrder,

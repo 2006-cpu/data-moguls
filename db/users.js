@@ -18,17 +18,17 @@ async function createUser({
             rows: [user],
         } = await client.query(
             `
-        INSERT INTO users(username, password, "firstName", "lastName", email, "imageURL", "isAdmin") 
-        VALUES($1, $2, $3, $4, $5, $6, $7) 
-        ON CONFLICT (username) DO NOTHING 
+        INSERT INTO users(username, password, "firstName", "lastName", email, "imageURL", "isAdmin")
+        VALUES($1, $2, $3, $4, $5, $6, $7)
+        ON CONFLICT (username) DO NOTHING
         RETURNING *;
         `,
             [username, hashedPassword, firstName, lastName, email, imageURL, isAdmin]
         );
         delete user.password;
 
-        await createOrder({status: 'created', userId: user.id});
-        
+        await createOrder({ status: 'created', userId: user.id });
+
         return user;
     } catch (error) {
         throw error;
@@ -101,7 +101,7 @@ async function getUserByUsername(username) {
     `,
             [username]
         );
-        
+
         if (!user) {
             return null;
         }
