@@ -12,6 +12,10 @@ body {
 
 /* HOME */
 
+.homePage {
+  padding-bottom: .1rem;
+}
+
 .home {
   display: flex;
   flex-direction: column;
@@ -393,7 +397,7 @@ body {
   font-family: 'Marmelad', sans-serif;
   color: #333;
   padding: 2rem;
-  padding-bottom: 0rem;
+  padding-bottom: 5rem;
   margin-left: 5rem;
   margin-right: 5rem;
   margin-bottom: 10rem;
@@ -595,7 +599,7 @@ body {
   color: #333;
   font-size: 1.3rem;
   padding: 2rem;
-  padding-bottom: 0rem;
+  padding-bottom: 5rem;
   margin-left: 10rem;
   margin-right: 10rem;
   margin-bottom: 10rem;

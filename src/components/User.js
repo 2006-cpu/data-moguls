@@ -30,7 +30,7 @@ export default function User({ user, token, orders, setOrders }) {
           {user.imageURL ? <img className='thumbnail' src={user.imageURL} /> : <div className='thumbnail'></div>}
         </div>
         <div key={user.id + 1} className='orderhistory'>
-          <h2>Order History for {user.firstName} {user.lastName}: </h2>
+          <h2>Order History: </h2>
           {orders.length > 0 ? orders.map((order, indx) => {
             return <div key={order.id}>
               <NavLink to={`/order/${order.id}`} className='button'>Order {indx + 1}: {order.status}</NavLink>

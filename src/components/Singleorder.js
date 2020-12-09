@@ -50,19 +50,21 @@ export default function Singleorder({ cart }) {
 
         return <div className='cart'>
             <h1>This is a {thisOrder.status} order.</h1>
-            {thisOrder.products ? (
-                thisOrder.products.map(product => {
-                    total = product.totalProductPrice + total;
-                    return <div key={product.id}>
-                        <div className='cart-card'><img className='thumbnail' src={product.imageURL} />
-                            <h3>{product.name}</h3>
-                            <p>Quantity: {product.quantity}</p>
-                            <p>Price: ${product.totalProductPrice * .01}</p>
+                <div className='cart-card'>
+                {thisOrder.products ? (
+                    thisOrder.products.map(product => {
+                        total = product.totalProductPrice + total;
+                        return <div key={product.id}>
+                            <img className='thumbnail' src={product.imageURL} />
+                                <h3>{product.name}</h3>
+                                <p>Quantity: {product.quantity}</p>
+                                <p>Price: ${product.totalProductPrice * .01}</p>
+                            
                         </div>
-                    </div>
-                })
-            ) : ''}
-            <br />
+                    })
+                ) : ''}
+                </div>
+                <br />
             <h2>Total:  ${(total * .01).toFixed(2)}</h2>
         </div>
     }
