@@ -30,13 +30,13 @@ export default function Product({ cart, token, setCart }) {
             const quantity = document.getElementById("quantity").value;
 
             if(quantity === ''){
-                alert("Don't forget to add quantity!!")
+                setAlert("Please remember to add quantity.")
             } else{
                 const newCart = await addProductToOrder(cart.id, product.id, product.price * quantity, quantity, token);
                 setCart(newCart);
                 setAlert('Your order has been placed in your cart.')
             };
-            
+
         } catch (error) {
             throw error;
         };
