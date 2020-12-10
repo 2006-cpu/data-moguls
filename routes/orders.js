@@ -6,8 +6,6 @@ const {
     createOrder,
     getAllOrders,
     getOrderById,
-    getOrdersByUser,
-    getOrderByProduct,
     getCartByUser,
     cancelOrder,
     updateOrder,
@@ -73,24 +71,24 @@ ordersRouter.post("/", requireUser, async (req, res, next) => {
     }
 });
 
-ordersRouter.patch("/:orderId", async (req, res, next) => {
+ordersRouter.patch("/:orderId", requireUser, async (req, res, next) => {
 
     const { orderId } = req.params;
     const { status } = req.body;
-    const { userId } = req.user.id;
 
     try {
-        const order = await updateOrder({ orderId, status, userId });
+        const order = await updateOrder(orderId, {status});
         res.send(order);
     } catch (error) {
         next(error);
     }
 });
 
-ordersRouter.delete("/:orderId", requireAdmin, async (req, res, next) => {
+ordersRouter.delete("/:orderId", requireUser, async (req, res, next) => {
     const { orderId } = req.params;
     try {
         const order = await cancelOrder(orderId);
+
         res.send(order);
     } catch (error) {
         next(error);
