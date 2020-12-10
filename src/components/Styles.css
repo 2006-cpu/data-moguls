@@ -12,6 +12,10 @@ body {
 
 /* HOME */
 
+.homePage {
+  padding-bottom: .1rem;
+}
+
 .home {
   display: flex;
   flex-direction: column;
@@ -157,29 +161,6 @@ body {
   background-color: #666;
   color: #FFF;
   border: 1px solid white;
-}
-
-/* SEARCH */
-
-.search {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  background: #CCC;
-}
-
-.search input {
-  height: 2.7rem;
-  justify-content: center;
-  font-family: 'Marmelad', sans-serif;
-  font-size: 1.2rem;
-  padding: .6rem;
-  margin-left: .5rem;
-  margin-right: .5rem;
-  letter-spacing: .1rem;
-  border-radius: 7px;
-  border: 1px solid #FF6666;
 }
 
 /* LOGIN */
@@ -416,7 +397,7 @@ body {
   font-family: 'Marmelad', sans-serif;
   color: #333;
   padding: 2rem;
-  padding-bottom: 0rem;
+  padding-bottom: 5rem;
   margin-left: 5rem;
   margin-right: 5rem;
   margin-bottom: 10rem;
@@ -466,7 +447,6 @@ body {
   margin-right: 5rem;
   margin-bottom: 5rem;
 }
-
 
 .product .product-card {
   display: flex;
@@ -599,17 +579,18 @@ body {
 }
 
 .userdata {
-  width: 320px;
+  width: 350px;
   padding: 1.5rem;
 }
 
 .orderhistory {
-  width: 580px;
+  width: 550px;
   padding: 1.5rem;
 }
-/* ORDERS */
 
-.orders {
+/* CART */
+
+.cart {
   margin-top: 9.5rem;
   display: flex;
   flex-direction: column;
@@ -618,9 +599,30 @@ body {
   color: #333;
   font-size: 1.3rem;
   padding: 2rem;
-  padding-bottom: 0rem;
+  padding-bottom: 5rem;
   margin-left: 10rem;
   margin-right: 10rem;
+  margin-bottom: 10rem;
+}
+
+.cart .cart-card {
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
+  border: 1px solid #999;
+  box-shadow: 5px 5px 10px 1px #999;
+  border-radius: 7px;
+  padding: 3rem;
+  margin: 1rem;
+}
+
+.cart .cart-card .description {
+  margin-bottom: 2rem;
+}
+
+.cart .cart-card .thumbnail {
+  width: 100px;
+  height: 100px;
 }
 
 /* FOOTER */
@@ -665,10 +667,7 @@ body {
   z-index: 1000;
 }
 
-.cart {
-  margin-bottom: 10rem;
-}
-
 #payButton {
   background-color: rgb(118, 190, 118);
+  margin-top: 1.5rem;
 }

@@ -35,7 +35,7 @@ export async function logIn(username, password) {
           'Content-Type': 'application/json'
         }
       });
-      
+
     return data;
   } catch (error) {
     throw error;
@@ -46,10 +46,12 @@ export async function getUserByUsername(token) {
 
   try {
     const { data } = await axios.get(`/api/users/me`,
-    { headers: {
-      'Content-Type': 'application/json',
-      'Authorization' : `Bearer ${token}`
-    }}
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      }
     );
 
     return data;
@@ -98,30 +100,34 @@ export async function getAllOrders() {
   };
 };
 
-export async function getUserOrdersById(id, token){
+export async function getUserOrdersById(id, token) {
   try {
     const { data } = await axios.get(`/api/users/${id}/orders`,
-    { headers: {
-      'Content-Type': 'application/json',
-      'Authorization' : `Bearer ${token}`
-    }}
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      }
     );
-    
+
     return data;
   } catch (error) {
     throw error;
   };
 };
 
-export async function getUsersCart(token){
+export async function getUsersCart(token) {
   try {
     const { data } = await axios.get(`/api/orders/cart`,
-    { headers: {
-      'Content-Type': 'application/json',
-      'Authorization' : `Bearer ${token}`
-    }});
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      });
     return data;
-    
+
   } catch (error) {
     throw error;
   };
@@ -135,10 +141,10 @@ export async function addProductToOrder(orderId, productId, price, quantity, tok
       {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization' : `Bearer ${token}`
+          'Authorization': `Bearer ${token}`
         }
       });
-      
+
     return data;
   } catch (error) {
     throw error;

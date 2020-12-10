@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { signUp, getUserByUsername } from '../api';
-import { storeCurrentUser, storeCurrentToken} from '../auth';
 import './Styles.css';
 
-export default function Signup({setUser, setToken}) {
+export default function Signup({ setUser, setToken }) {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -24,15 +23,9 @@ export default function Signup({setUser, setToken}) {
 
       if (data && data.message === 'Thank you for signing up!') {
         const userInfo = await getUserByUsername(data.token);
-        
-        setUser(userInfo);
-        setToken(data.token);
-        
-        storeCurrentToken(data.token);
-        storeCurrentUser(data.username);
-        
+
         alert(data.message);
-        history.push('/users');
+        history.push('/login');
       } else {
         alert(data.message);
       }

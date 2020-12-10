@@ -6,8 +6,6 @@ const {
     createOrder,
     getAllOrders,
     getOrderById,
-    getOrdersByUser,
-    getOrderByProduct,
     getCartByUser,
     cancelOrder,
     updateOrder,
@@ -73,24 +71,24 @@ ordersRouter.post("/", requireUser, async (req, res, next) => {
     }
 });
 
-ordersRouter.patch("/:orderId", async (req, res, next) => {
+ordersRouter.patch("/:orderId", requireUser, async (req, res, next) => {
 
     const { orderId } = req.params;
     const { status } = req.body;
-    const { userId } = req.user.id;
 
     try {
-        const order = await updateOrder({ orderId, status, userId });
+        const order = await updateOrder(orderId, {status});
         res.send(order);
     } catch (error) {
         next(error);
     }
 });
 
-ordersRouter.delete("/:orderId", requireAdmin, async (req, res, next) => {
+ordersRouter.delete("/:orderId", requireUser, async (req, res, next) => {
     const { orderId } = req.params;
     try {
         const order = await cancelOrder(orderId);
+
         res.send(order);
     } catch (error) {
         next(error);
@@ -108,48 +106,12 @@ ordersRouter.post("/:orderId/products", requireUser, async (req, res, next) => {
             price,
             quantity
         });
-        
+
         res.send(orderProduct);
     } catch (error) {
         next(error);
     }
 }
 );
-
-// ordersRouter.patch('/:orderId', requireUser, async (req, res, next) => {
-//     const { orderId } = req.params;
-//     const { status } = req.body;
-//     const { userId } = req.user.id;
-//     const order = getOrderById(orderId)
-//     if (req.user.isAdmin === true || req.user.id === order.userId) {
-//         try {
-//             const order = await updateOrder(orderId, status, userId);
-//             res.send(order);
-//         } catch (error) {
-//             next(error);
-//         }
-//     } else {
-//         next({ message: "Do Not Have Permissions, Must Be The User or Admin" })
-//     }
-// })
-
-// ordersRouter.delete('/:orderId', requireUser, async (req, res, next) => {
-//     const { orderId } = req.params;
-//     const order = getOrderById(orderId)
-//     if (req.user.isAdmin === true || req.user.id === order.userId) {
-//         try {
-//             const order = await cancelOrder(order)
-//             res.send(order)
-//         } catch (error) {
-//             next(error)
-//         }
-//     } else {
-//         next({ message: "Do Not Have Permissions, Must Be The User or Admin" })
-//     }
-// })
-
-
-
-
 
 module.exports = ordersRouter;
