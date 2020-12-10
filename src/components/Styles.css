@@ -538,6 +538,14 @@ body {
   border: 1px solid white;
 }
 
+#quantity {
+  width: 3rem;
+  margin-left: 1rem;
+  border: solid black;
+  padding: .5rem;
+  border-radius: 5px;
+}
+
 .product-card .alert {
   font-size: 1.1rem;
   color: #FF0000;
@@ -614,7 +622,7 @@ body {
   color: #333;
   font-size: 1.3rem;
   padding: 2rem;
-  padding-bottom: 5rem;
+  padding-bottom: 7rem;
   margin-left: 10rem;
   margin-right: 10rem;
   margin-bottom: 10rem;
