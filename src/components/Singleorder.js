@@ -20,7 +20,7 @@ export default function Singleorder({ cart }) {
                             <img className='thumbnail' src={product.imageURL} />
                             <h3>{product.name}</h3>
                             <p >Quantity: {product.quantity}</p>
-                            <p className='description'>Price: ${product.totalProductPrice * .01}</p>
+                            <p className='description'>Price: ${(product.totalProductPrice * .01).toFixed(2)}</p>
                         </div>)
                 })}
             </div>
@@ -58,7 +58,7 @@ export default function Singleorder({ cart }) {
                             <img className='thumbnail' src={product.imageURL} />
                                 <h3>{product.name}</h3>
                                 <p>Quantity: {product.quantity}</p>
-                                <p>Price: ${product.totalProductPrice * .01}</p>
+                                <p>Price: ${(product.totalProductPrice * .01).toFixed(2)}</p>
                             
                         </div>
                     })
