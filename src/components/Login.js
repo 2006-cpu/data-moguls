@@ -8,6 +8,7 @@ export default function Login({ token, setUser, setToken, setOrders }) {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [alert, setAlert] = useState({});
   const history = useHistory();
 
   const handleLogin = async (event) => {
@@ -25,10 +26,10 @@ export default function Login({ token, setUser, setToken, setOrders }) {
         storeCurrentToken(data.token);
         storeCurrentUser(data.username);
 
-        alert(data.message);
+        setAlert(data);
         history.push('/users');
       } else {
-        alert(data.message);
+        setAlert(data);
       }
     } catch (error) {
       console.error(error);
@@ -41,6 +42,7 @@ export default function Login({ token, setUser, setToken, setOrders }) {
         <form
           className='login-card'
           onSubmit={handleLogin}>
+          <div className='alert'>{alert.message}</div>
           <h2>Log In Form</h2>
           <label>Username: </label>
           <input type="text" value={username} onChange={(event) => {
