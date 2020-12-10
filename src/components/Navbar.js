@@ -12,7 +12,6 @@ export default function Navbar({ token, setUser, setToken, cart }) {
     setUser('');
     clearCurrentUser();
     clearCurrentToken();
-    alert('You are now logged out!');
     history.push('/');
   };
 
