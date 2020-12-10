@@ -8,6 +8,7 @@ export default function Product({ cart, token, setCart }) {
 
     let { productId } = useParams();
     const [product, setProduct] = useState([]);
+    const [alert, setAlert] = useState('')
 
     const fetchProduct = async () => {
         try {
@@ -33,8 +34,9 @@ export default function Product({ cart, token, setCart }) {
             } else{
                 const newCart = await addProductToOrder(cart.id, product.id, product.price * quantity, quantity, token);
                 setCart(newCart);
-                alert('Your order has been placed in your cart.')
+                setAlert('Your order has been placed in your cart.')
             };
+            
         } catch (error) {
             throw error;
         };
@@ -46,6 +48,7 @@ export default function Product({ cart, token, setCart }) {
                 <img className='image' src={product.imageURL} />
             </div>
             <div>
+                <div className='alert'>{alert}</div>
                 <h2>{product.name}</h2>
                 <p className='description' style={{ fontStyle: 'italic' }}>{product.description}</p>
                 <p className='description'>Category: {product.category}</p>

@@ -274,6 +274,11 @@ body {
   border: 1px solid white;
 }
 
+.login-card .alert {
+  font-size: 1.1rem;
+  color: #FF0000;
+}
+
 /* SIGN UP */
 
 .signup {
@@ -383,6 +388,11 @@ body {
   background-color: #FF6666;
   color: #FFF;
   border: 1px solid white;
+}
+
+.signup-card .alert {
+  font-size: 1.1rem;
+  color: #FF0000;
 }
 
 /* ALL PRODUCTS */
@@ -534,6 +544,11 @@ body {
   border: solid black;
   padding: .5rem;
   border-radius: 5px;
+}
+
+.product-card .alert {
+  font-size: 1.1rem;
+  color: #FF0000;
 }
 
 /* USER */

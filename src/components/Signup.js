@@ -12,6 +12,7 @@ export default function Signup({ setUser, setToken }) {
   const [email, setEmail] = useState('');
   const [imageURL, setImageURL] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
+  const [alert, setAlert] = useState({});
 
   const history = useHistory();
 
@@ -24,10 +25,10 @@ export default function Signup({ setUser, setToken }) {
       if (data && data.message === 'Thank you for signing up!') {
         const userInfo = await getUserByUsername(data.token);
 
-        alert(data.message);
+        setAlert(data);
         history.push('/login');
       } else {
-        alert(data.message);
+        setAlert(data);
       }
     } catch (error) {
       console.error(error);
@@ -40,6 +41,7 @@ export default function Signup({ setUser, setToken }) {
         <form
           className='signup-card'
           onSubmit={handleSignUp}>
+          <div className='alert'>{alert.message}</div>
           <h2>Sign Up Form</h2>
           <label>Username: </label>
           <input type="text" value={username} onChange={(event) => {
