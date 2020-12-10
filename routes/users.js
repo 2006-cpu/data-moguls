@@ -4,7 +4,6 @@ const usersRouter = express.Router();
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET = 'dontTell' } = process.env;
 
-const bcrypt = require("bcrypt");
 
 const { getUserByUsername, createUser, getOrdersByUser, getUser } = require("../db");
 const { requireUser } = require("./utils");
