@@ -5,9 +5,9 @@ const jwt = require("jsonwebtoken");
 const { JWT_SECRET = 'dontTell' } = process.env;
 
 const bcrypt = require("bcrypt");
-
-const { getUserByUsername, createUser, getOrdersByUser } = require("../db");
-const { requireUser } = require("./utils");
+const { getOrdersByUser } = require('../db/orders')
+const { getUserByUsername, createUser, getAllUsers } = require("../db/users");
+const { requireUser, isAdmin } = require("./utils");
 
 usersRouter.post("/register", async (req, res, next) => {
   const {
@@ -114,5 +114,36 @@ usersRouter.get("/me", requireUser, async (req, res, next) => {
     throw error;
   };
 });
+
+usersRouter.get("/", isAdmin, async (req, res, next) => {
+
+  try {
+    const users = await getAllUsers()
+
+    res.send(users);
+  } catch ({ name, message }) {
+    next({ name, message });
+  }
+});
+
+usersRouter.patch("/:userId", isAdmin, async (req, res, next) => {
+  try {
+    const {
+      params: { userId } = {},
+      body: user
+    } = req;
+
+    if (user.id || user.password || user.imageURL || user.isAdmin) {
+      return res.sendStatus(403)
+    }
+
+    await updateUser(userId, user)
+
+    res.sendStatus(204);
+  } catch (error) {
+    next(error);
+  }
+});
+
 
 module.exports = usersRouter;
