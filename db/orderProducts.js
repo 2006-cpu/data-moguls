@@ -38,8 +38,8 @@ async function addProductToOrder({ orderId, productId, price, quantity }) {
         if (orderProduct) {
             await updateOrderProduct({
                 id: orderProduct.id,
-                price: (price * (orderProduct.quantity + 1)),
-                quantity: (orderProduct.quantity + 1)
+                price: (price + orderProduct.price),
+                quantity: (orderProduct.quantity + Number(quantity))
             });
         } else {
             await createOrderProduct({

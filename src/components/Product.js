@@ -23,12 +23,18 @@ export default function Product({ cart, token, setCart }) {
         fetchProduct();
     }, [])
 
-    const addProductToCart = async () => {
+    const addProductToCart = async (event) => {
         try {
-            const quantity = 1;
-            const newCart = await addProductToOrder(cart.id, product.id, product.price, quantity, token);
-            setCart(newCart);
-            alert('Your order has been placed in your cart.')
+            event.preventDefault();
+            const quantity = document.getElementById("quantity").value;
+
+            if(quantity === ''){
+                alert("Don't forget to add quantity!!")
+            } else{
+                const newCart = await addProductToOrder(cart.id, product.id, product.price * quantity, quantity, token);
+                setCart(newCart);
+                alert('Your order has been placed in your cart.')
+            };
         } catch (error) {
             throw error;
         };
@@ -45,7 +51,11 @@ export default function Product({ cart, token, setCart }) {
                 <p className='description'>Category: {product.category}</p>
                 <p className='description'>Price: ${product.price * .01}</p>
                 <p className='description' style={{ color: '#FF6666' }}>{product.inStock ? 'In Stock!' : 'Out of Stock'}</p>
-                {token ? <button onClick={addProductToCart}>ORDER PRODUCT</button> : ''}
+                <form>
+                    {token ? (<><label htmlFor='quantity'>Quantity: </label>
+                    <input type='number' id='quantity' min='1'/>
+                    <button onClick={addProductToCart}>ORDER PRODUCT</button></>) : ''}
+                </form>
                 <NavLink to='/products' className='button'>BACK TO PRODUCTS</NavLink>
             </div>
         </div>
