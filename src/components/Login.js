@@ -27,7 +27,8 @@ export default function Login({ token, setUser, setToken, setOrders }) {
         storeCurrentUser(data.username);
 
         setAlert(data);
-        history.push('/users');
+        setTimeout(function() { history.push('/users'); }, 2000);
+        // history.push('/users');
       } else {
         setAlert(data);
       }
