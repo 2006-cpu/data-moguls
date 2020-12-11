@@ -5,8 +5,8 @@ const jwt = require("jsonwebtoken");
 const { JWT_SECRET = 'dontTell' } = process.env;
 
 
-const { getUserByUsername, createUser, getOrdersByUser, getUser } = require("../db");
-const { requireUser } = require("./utils");
+const { getUserByUsername, createUser, getOrdersByUser, getUser, updateUser } = require("../db");
+const { requireUser, isAdmin } = require("./utils");
 
 usersRouter.post("/register", async (req, res, next) => {
   const {
