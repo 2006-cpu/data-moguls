@@ -35,7 +35,6 @@ export async function logIn(username, password) {
           'Content-Type': 'application/json'
         }
       });
-
     return data;
   } catch (error) {
     throw error;
