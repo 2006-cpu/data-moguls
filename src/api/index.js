@@ -1,6 +1,8 @@
 
 import axios from 'axios';
 
+import { storeCurrentToken } from "../auth/"
+
 export async function getSomething() {
   try {
     const { data } = await axios.get('/api');
@@ -143,6 +145,46 @@ export async function addProductToOrder(orderId, productId, price, quantity, tok
           'Authorization': `Bearer ${token}`
         }
       });
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function deleteProduct(id, token) {
+  try {
+    const { data } = await axios.delete(`api/products/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function completeOrder(id, token) {
+  try {
+    const { data } = await axios.patch(`api/${id}/complete`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function cancelOrder(id, token) {
+  try {
+    const { data } = await axios.delete(`api/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
     return data;
   } catch (error) {
