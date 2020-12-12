@@ -19,13 +19,6 @@ Frontend: React.js, CSS, JavaScript
 The root React code starts in the src/index.js file. All React component files, as well as CSS style sheets can be located in the src/components folder. Additionally, all image files are located in the public/assets folder.
 
 
-Environment Variables
-
-DB_URL=<your-database-connection-string>
-JWT_SECRET=some-very-secret-key
-SOME_ENV_VAR=something-else-cool
-    
-    
 Project Structure
 
 ├── db
