@@ -4,9 +4,8 @@ const usersRouter = express.Router();
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET = 'dontTell' } = process.env;
 
-const bcrypt = require("bcrypt");
 
-const { getUserByUsername, createUser, getOrdersByUser } = require("../db");
+const { getUserByUsername, createUser, getOrdersByUser, getUser } = require("../db");
 const { requireUser } = require("./utils");
 
 usersRouter.post("/register", async (req, res, next) => {
@@ -79,9 +78,8 @@ usersRouter.post("/login", async (req, res, next) => {
   }
 
   try {
-    const user = await getUserByUsername(username);
-
-    if (user && bcrypt.compare(password, user.password)) {
+    const user = await getUser({ username, password });
+    if (user) {
       const token = jwt.sign(user, JWT_SECRET);
       res.send({ message: "You are logged in!", token, username });
     } else {
