@@ -14,14 +14,14 @@ export default function Singleorder({ cart }) {
             <div className='cart-card'>
                 {cart.products.map(product => {
                     total = product.totalProductPrice + total;
-                    return (
+                    return (<div>
                         <div key={product.id}>
                             <img className='thumbnail' src={product.imageURL} />
                             <h3>{product.name}</h3>
                             <p >Quantity: {product.quantity}</p>
                             <p className='description'>Price: ${(product.totalProductPrice * .01).toFixed(2)}</p>
                         </div>
-                    )
+                    </div>)
                 })}
             </div>
             <br />
