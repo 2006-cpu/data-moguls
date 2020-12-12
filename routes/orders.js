@@ -1,4 +1,4 @@
-const e = require("express");
+
 const express = require("express");
 const ordersRouter = express.Router();
 
@@ -77,7 +77,7 @@ ordersRouter.patch("/:orderId", requireUser, async (req, res, next) => {
     const { status } = req.body;
 
     try {
-        const order = await updateOrder(orderId, {status});
+        const order = await updateOrder(orderId, { status });
         res.send(order);
     } catch (error) {
         next(error);
