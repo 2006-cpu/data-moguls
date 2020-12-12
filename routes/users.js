@@ -135,7 +135,7 @@ usersRouter.patch("/:userId", isAdmin, async (req, res, next) => {
       return res.sendStatus(403)
     }
 
-    await updateUser(userId, user)
+    const updatedUser = await updateUser(userId, user)
 
     res.sendStatus(204);
   } catch (error) {
