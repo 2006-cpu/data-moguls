@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router";
-import { getOrderById } from '../api';
+import { getOrderById, removeProductFromOrder } from '../api';
 import './Styles.css';
 
 export default function Singleorder({ cart }) {
