@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router";
 import { getOrderById, removeProductFromOrder } from '../api';
+import { useHistory } from 'react-router-dom';
 import './Styles.css';
 
-export default function Singleorder({ cart, setCart, token }) {
+export default function Productcart ({ cart, setCart, token }) {
     let { orderId } = useParams();
+
+    const history = useHistory();
+
+    const handleClick = () => {
+        setTimeout(function(){ history.push('/thankyou'); }, 500);
+    };
 
     const displayCart = () => {
         let total = 0;
@@ -14,7 +21,8 @@ export default function Singleorder({ cart, setCart, token }) {
             <div className='cart-card'>
                 {cart.products.map(product => {
                     total = product.totalProductPrice + total;
-                    return (<div key={product.id}>
+                    return (<div key={product.id} style={{borderBottom: '1px solid black', marginBottom: '3rem' }}>
+
                         <img className='thumbnail' src={product.imageURL} />
                         <h3>{product.name}</h3>
                         <p >Quantity: {product.quantity}</p>
@@ -24,20 +32,17 @@ export default function Singleorder({ cart, setCart, token }) {
                             const newProducts = cart.products.filter(({ id }) => {
 
                                 return (id !== product.id)
-
                             })
                             const newCart = { ...cart, products: newProducts }
-
                             setCart(newCart)
-
-                        }}> Delete </button>
+                        }}>REMOVE</button>
                     </div>)
                 })}
             </div>
             <br />
             <div className='cart-card2'>
                 <div>
-                    <button className="button" id="payButton">CHECK OUT</button>
+                    <button className="button" id="payButton" onClick={handleClick}>CHECK OUT</button>
                 </div>
                 <div>
                     <div className='price'><p>Subtotal:</p><p> ${(total * .01).toFixed(2)}</p></div>
