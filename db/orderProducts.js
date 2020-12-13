@@ -108,10 +108,28 @@ async function destroyOrderProduct(id) {
     }
 }
 
+async function removeOrderFromProduct({ productId, orderId }) {
+    try {
+        const {
+            rows: [order_product],
+        } = await client.query(`
+            DELETE
+            FROM order_products
+            WHERE "productId" = $1
+            AND "orderId" = $2
+            RETURNING *;
+            `, [productId, orderId])
+        return order_product
+    } catch (error) {
+        throw error
+    }
+}
+
 module.exports = {
     getOrderProductById,
     addProductToOrder,
     updateOrderProduct,
     destroyOrderProduct,
     createOrderProduct,
+    removeOrderFromProduct,
 };

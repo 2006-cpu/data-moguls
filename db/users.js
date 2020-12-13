@@ -59,12 +59,12 @@ async function getUser({ username, password }) {
 
 async function getAllUsers() {
     try {
-        const { rows } = await client.query(`
+        const { rows: users } = await client.query(`
         SELECT *
         FROM users;
     `);
         delete user.password;
-        return rows;
+        return users;
     } catch (error) {
         throw error;
     }

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router";
-import { getOrderById } from '../api';
+import { getOrderById, removeProductFromOrder } from '../api';
 import './Styles.css';
 
-export default function Singleorder({ cart }) {
+export default function Singleorder({ cart, setCart, token }) {
     let { orderId } = useParams();
 
     const displayCart = () => {
@@ -19,6 +19,18 @@ export default function Singleorder({ cart }) {
                         <h3>{product.name}</h3>
                         <p >Quantity: {product.quantity}</p>
                         <p className='description'>Price: ${(product.totalProductPrice * .01).toFixed(2)}</p>
+                        <button onClick={async () => {
+                            await removeProductFromOrder({ orderId: cart.id, productId: product.id }, token)
+                            const newProducts = cart.products.filter(({ id }) => {
+
+                                return (id !== product.id)
+
+                            })
+                            const newCart = { ...cart, products: newProducts }
+
+                            setCart(newCart)
+
+                        }}> Delete </button>
                     </div>)
                 })}
             </div>
