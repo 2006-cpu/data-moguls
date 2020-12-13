@@ -27,6 +27,7 @@ export default function Singleorder({ cart, setCart, token }) {
 
                             })
                             const newCart = { ...cart, products: newProducts }
+
                             setCart(newCart)
 
                         }}> Delete </button>
