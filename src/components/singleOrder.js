@@ -21,10 +21,12 @@ export default function Singleorder({ cart, setCart, token }) {
                         <p className='description'>Price: ${(product.totalProductPrice * .01).toFixed(2)}</p>
                         <button onClick={async () => {
                             await removeProductFromOrder({ orderId: cart.id, productId: product.id }, token)
-                            const newProducts = cart.products.filter(({ id }) => (id !== product.productId))
+                            const newProducts = cart.products.filter(({ id }) => {
+
+                                return (id !== product.id)
+
+                            })
                             const newCart = { ...cart, products: newProducts }
-                            console.log('newCart', newCart)
-                            console.log('newProduct', newProducts)
                             setCart(newCart)
 
                         }}> Delete </button>
