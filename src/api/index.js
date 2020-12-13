@@ -1,7 +1,6 @@
 
 import axios from 'axios';
 
-import { storeCurrentToken } from "../auth/"
 
 export async function getSomething() {
   try {
@@ -145,6 +144,16 @@ export async function addProductToOrder(orderId, productId, price, quantity, tok
           'Authorization': `Bearer ${token}`
         }
       });
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function removeProductFromOrder(productId) {
+  try {
+    const data = axios.delete(`api/order_products/${productId}`);
 
     return data;
   } catch (error) {
