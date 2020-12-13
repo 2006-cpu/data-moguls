@@ -93,7 +93,7 @@ export default function App() {
           </Route> : null}
 
           {token ? <Route path='/order/:orderId'>
-            <Singleorder cart={cart} />
+            <Singleorder cart={cart} setCart={setCart} token={token} />
           </Route> : null}
 
           <Redirect to='/' />

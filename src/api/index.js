@@ -151,9 +151,15 @@ export async function addProductToOrder(orderId, productId, price, quantity, tok
   }
 }
 
-export async function removeProductFromOrder(productId) {
+export async function removeProductFromOrder({ orderId, productId }, token) {
   try {
-    const data = axios.delete(`api/order_products/${productId}`);
+    const { data } = await axios.delete(`/api/order_products/${orderId}/${productId}`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      });
 
     return data;
   } catch (error) {
@@ -163,7 +169,7 @@ export async function removeProductFromOrder(productId) {
 
 export async function deleteProduct(id, token) {
   try {
-    const { data } = await axios.delete(`api/products/${id}`, {
+    const { data } = await axios.delete(`/api/products/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -176,7 +182,7 @@ export async function deleteProduct(id, token) {
 
 export async function completeOrder(id, token) {
   try {
-    const { data } = await axios.patch(`api/${id}/complete`, {
+    const { data } = await axios.patch(`/api/${id}/complete`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -189,7 +195,7 @@ export async function completeOrder(id, token) {
 
 export async function cancelOrder(id, token) {
   try {
-    const { data } = await axios.delete(`api/${id}`, {
+    const { data } = await axios.delete(`/api/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
