@@ -14,8 +14,7 @@ export default function Singleorder({ cart }) {
             <div className='cart-card'>
                 {cart.products.map(product => {
                     total = product.totalProductPrice + total;
-                    return (<div>
-                        <div key={product.id}>
+                    return (<div key={product.id}>
                             <img className='thumbnail' src={product.imageURL} />
                             <h3>{product.name}</h3>
                             <p >Quantity: {product.quantity}</p>
