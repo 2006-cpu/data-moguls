@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router";
-import { getOrderById, removeProductFromOrder } from '../api';
+import { getOrderById } from '../api';
 import './Styles.css';
 
-export default function Singleorder({ cart, setCart, token }) {
+export default function Singleorder({ cart }) {
     let { orderId } = useParams();
 
     const displayCart = () => {
@@ -14,23 +14,13 @@ export default function Singleorder({ cart, setCart, token }) {
             <div className='cart-card'>
                 {cart.products.map(product => {
                     total = product.totalProductPrice + total;
-                    return (<div key={product.id}>
-                        <img className='thumbnail' src={product.imageURL} />
-                        <h3>{product.name}</h3>
-                        <p >Quantity: {product.quantity}</p>
-                        <p className='description'>Price: ${(product.totalProductPrice * .01).toFixed(2)}</p>
-                        <button onClick={async () => {
-                            await removeProductFromOrder({ orderId: cart.id, productId: product.id }, token)
-                            const newProducts = cart.products.filter(({ id }) => {
-
-                                return (id !== product.id)
-
-                            })
-                            const newCart = { ...cart, products: newProducts }
-
-                            setCart(newCart)
-
-                        }}> Delete </button>
+                    return (<div>
+                        <div key={product.id}>
+                            <img className='thumbnail' src={product.imageURL} />
+                            <h3>{product.name}</h3>
+                            <p >Quantity: {product.quantity}</p>
+                            <p className='description'>Price: ${(product.totalProductPrice * .01).toFixed(2)}</p>
+                        </div>
                     </div>)
                 })}
             </div>
