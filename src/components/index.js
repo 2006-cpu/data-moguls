@@ -7,4 +7,5 @@ export { default as Signup } from './Signup';
 export { default as User } from './User';
 export { default as Allproducts } from './Allproducts';
 export { default as Footer } from './Footer';
-export { default as Singleorder } from './singleOrder'
+export { default as Productcart } from './Productcart';
+export { default as Thankyou } from './Thankyou';
