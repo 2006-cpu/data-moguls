@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:ital,wght@1,500&family=Marmelad&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Niconne&display=swap');
 * {
   border: 0;
   margin: 0;
@@ -43,9 +44,10 @@ body {
 }
 
 .home h1 {
-  font-family: 'Marmelad', sans-serif;
+  font-family: 'Niconne', cursive;
   align-self: center;
-  font-size: 2.5rem;
+  font-size: 3.5rem;
+  letter-spacing: .2rem;
   font-style: italic;
   color: black;
   margin-bottom: 2rem;
@@ -94,7 +96,7 @@ body {
   justify-content: space-between;
   align-content: center;
   background: #FF6666;
-  padding: .3rem;
+  padding: .2rem;
   position: fixed;
   top: 0px;
   right: 0px;
@@ -103,12 +105,12 @@ body {
 }
 
 .title {
-  font-family: 'Alegreya Sans SC', sans-serif;
-  font-size: 4rem;
-  font-weight: bold;
+  font-family: 'Niconne', cursive;
+  font-size: 4.5rem;
+  font-style: italic;
   color: white;
   text-shadow: 1px 1px 3px black;
-  letter-spacing: .7rem;
+  letter-spacing: .3rem;
   margin-left: 1.5rem;
 }
 
