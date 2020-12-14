@@ -73,7 +73,7 @@ export default function Productcart ({ cart, setCart, token }) {
 
         return (<div className='cart'>
 
-            <h2>This is a {thisOrder.status} order.</h2>
+            <h2 className='orderTitle'>This is a {thisOrder.status} order :</h2>
             <div className='cart-card'>
                 {thisOrder.products ? (
                     thisOrder.products.map(product => {
@@ -88,17 +88,6 @@ export default function Productcart ({ cart, setCart, token }) {
                 ) : ''}
             </div>
             <br />
-            <div className='cart-card2'>
-                <div>
-                    <button className="button" id="payButton">CHECK OUT</button>
-                </div>
-                <div>
-                    <div className='price'><p>Subtotal:</p><p> ${(total * .01).toFixed(2)}</p></div>
-                    <div className='price'><p>Sales Tax:</p><p> ${((total * .01) * .085).toFixed(2)}</p></div>
-                    {total ? <div className='price'><p>Shipping:</p><p> ${(((total * .01) * .05) + 5).toFixed(2)}</p></div> : <div className='price'><p>Shipping:</p><p> ${((total * .01) * .05).toFixed(2)}</p></div>}
-                    {total ? <div className='price'><h3>Total:</h3> <h3>${(((total * .01) * 1.135) + 5).toFixed(2)}</h3></div> : <div className='price'><h3>Total:</h3> <h3>${((total * .01) * 1.135).toFixed(2)}</h3></div>}
-                </div>
-            </div>
         </div>)
     }
 
