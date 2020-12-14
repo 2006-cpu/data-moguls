@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:ital,wght@1,500&family=Marmelad&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Niconne&display=swap');
 * {
   border: 0;
   margin: 0;
@@ -43,9 +44,10 @@ body {
 }
 
 .home h1 {
-  font-family: 'Marmelad', sans-serif;
+  font-family: 'Niconne', cursive;
   align-self: center;
-  font-size: 2.5rem;
+  font-size: 3.5rem;
+  letter-spacing: .2rem;
   font-style: italic;
   color: black;
   margin-bottom: 2rem;
@@ -94,7 +96,7 @@ body {
   justify-content: space-between;
   align-content: center;
   background: #FF6666;
-  padding: .3rem;
+  padding: .2rem;
   position: fixed;
   top: 0px;
   right: 0px;
@@ -103,12 +105,12 @@ body {
 }
 
 .title {
-  font-family: 'Alegreya Sans SC', sans-serif;
-  font-size: 4rem;
-  font-weight: bold;
+  font-family: 'Niconne', cursive;
+  font-size: 4.5rem;
+  font-style: italic;
   color: white;
   text-shadow: 1px 1px 3px black;
-  letter-spacing: .7rem;
+  letter-spacing: .3rem;
   margin-left: 1.5rem;
 }
 
@@ -669,17 +671,43 @@ body {
 }
 
 .cart .cart-card .description {
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
   color: #339933;
   font-size: 1.2rem;
 }
 
 .cart .cart-card .thumbnail {
-  width: 100px;
-  height: 100px;
-  margin-bottom: 1.5rem;
+  width: 120px;
+  height: 120px;
+  margin-bottom: 1rem;
 }
 
+.cart .cart-card button {
+  display: inline-block;
+  width: 15%;
+  justify-content: flex-start;
+  font-family: 'Marmelad', sans-serif;
+  font-size: .7rem;
+  padding: .3rem;
+  margin-bottom: 2rem;
+  letter-spacing: .1rem;
+  text-decoration: none;
+  background-color:#FF6666;
+  color: #FFF;
+  border-radius: 7px;
+  border: 1px solid #666;
+}
+
+.cart .cart-card button:hover {
+  background-color: #000;
+  color: #FFF;
+  border: 1px solid white;
+}
+
+#payButton {
+  background-color: rgb(118, 190, 118);
+  margin-top: 1.5rem;
+}
 
 /* FOOTER */
 
@@ -723,7 +751,18 @@ body {
   z-index: 1000;
 }
 
-#payButton {
-  background-color: rgb(118, 190, 118);
-  margin-top: 1.5rem;
+/* THANK YOU */
+
+.thankyou {
+  margin-top: 15rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Marmelad', sans-serif;
+  color: #333;
+  font-size: 1.7rem;
+  padding: 2rem;
+  padding-bottom: 0rem;
+  margin-left: 10rem;
+  margin-right: 10rem;
 }

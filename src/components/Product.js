@@ -29,14 +29,13 @@ export default function Product({ cart, token, setCart }) {
             event.preventDefault();
             const quantity = document.getElementById("quantity").value;
 
-            if(quantity === ''){
+            if (quantity === '') {
                 setAlert("Please remember to add quantity.")
-            } else{
+            } else {
                 const newCart = await addProductToOrder(cart.id, product.id, product.price * quantity, quantity, token);
                 setCart(newCart);
                 setAlert('Your order has been placed in your cart.')
             };
-
         } catch (error) {
             throw error;
         };
@@ -61,8 +60,8 @@ export default function Product({ cart, token, setCart }) {
                 <p className='description' style={{ color: '#FF6666' }}>{product.inStock ? 'In Stock!' : 'Out of Stock'}</p>
                 <form>
                     {token ? (<><label htmlFor='quantity'>Quantity: </label>
-                    <input type='number' id='quantity' min='1'/>
-                    <button onClick={addProductToCart}>PURCHASE PRODUCT</button></>) : <button onClick={mustLogIn}>PURCHASE PRODUCT</button>}
+                        <input type='number' id='quantity' min='1' />
+                        <button onClick={addProductToCart}>PURCHASE PRODUCT</button></>) : <button onClick={mustLogIn}>PURCHASE PRODUCT</button>}
                 </form>
                 <NavLink to='/products' className='button'>BACK TO PRODUCTS</NavLink>
             </div>

@@ -8,7 +8,7 @@ import {
   NavLink
 } from 'react-router-dom';
 
-import { Header, Navbar, Login, Signup, User, Product, Allproducts, Footer, Singleorder } from './';
+import { Header, Navbar, Login, Signup, User, Product, Allproducts, Footer, Productcart, Thankyou } from './';
 import './Styles.css';
 
 import { getUserByUsername, getUsersCart } from '../api';
@@ -93,8 +93,12 @@ export default function App() {
           </Route> : null}
 
           {token ? <Route path='/order/:orderId'>
-            <Singleorder cart={cart} />
+            <Productcart cart={cart} setCart={setCart} token={token} />
           </Route> : null}
+
+          <Route path='/thankyou'>
+            <Thankyou />
+          </Route>
 
           <Redirect to='/' />
 

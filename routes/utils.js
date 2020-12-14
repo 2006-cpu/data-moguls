@@ -25,8 +25,21 @@ function requireAdmin(req, res, next) {
   next();
 }
 
+function isAdmin(req, res, next) {
+  if (!req.user.isAdmin) {
+    next({
+      name: "UnauthenticatedUserError",
+      message: "You must be an admin to perform this action",
+    });
+  }
+
+  next();
+}
+
+
 module.exports = {
   requireUser,
   requireAdmin,
+  isAdmin
 
 };
