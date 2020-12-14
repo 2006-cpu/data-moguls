@@ -17,7 +17,7 @@ export default function Productcart ({ cart, setCart, token }) {
         let total = 0;
 
         return (<div className='cart'>
-            <h2>My Cart:</h2>
+            <h2 style={{color: '#FFF', marginLeft: '1rem'}}>My Cart:</h2>
             <div className='cart-card'>
                 {cart.products.map(product => {
                     total = product.totalProductPrice + total;
@@ -42,7 +42,7 @@ export default function Productcart ({ cart, setCart, token }) {
             <br />
             <div className='cart-card2'>
                 <div>
-                    <button className="button" id="payButton" onClick={handleClick}>CHECK OUT</button>
+                    <button className="paybutton" id="payButton" onClick={handleClick}>CHECK OUT</button>
                 </div>
                 <div>
                     <div className='price'><p>Subtotal:</p><p> ${(total * .01).toFixed(2)}</p></div>
