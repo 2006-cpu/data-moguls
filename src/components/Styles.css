@@ -8,48 +8,69 @@
 }
 
 body {
-  height: 100vh;
+  height: 100%;
+  background-image: url(./images/homeimage2.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: left top;
+  background-repeat: no-repeat;
+  background-size: 112%;
+  background-blend-mode: lighten;
+  background-color: rgba( 75, 50, 50, 0.3);
 }
 
 /* HOME */
 
-.homePage {
-  padding-bottom: .1rem;
-}
-
 .home {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: left;
   font-family: 'Marmelad', sans-serif;
-  color: #333;
+  color: #FFF;
   font-size: 1.3rem;
   padding: 2rem;
   padding-bottom: 0rem;
-  margin-left: 10rem;
-  margin-right: 10rem;
+  margin-top: 10rem;
+  margin-left: 3rem;
+}
+
+.home-card {
+  display: flex;
+  min-width: 625px;
+  max-width: 625px;
+  flex-direction: column;
+  font-size: 1.3rem;
+  border-radius: 7px;
+  padding: 1rem;
+  margin-left: 1rem;
+  margin-bottom: 5rem;
+}
+
+.home-card p {
+  color: #FFF;
+  text-shadow: 3px 3px 3px #333;
 }
 
 .home2 {
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: flex-start;
   font-family: 'Marmelad', sans-serif;
   color: #333;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   padding: 2rem;
   margin-left: 10rem;
   margin-right: 10rem;
-  margin-bottom: 7rem;
 }
 
 .home h1 {
   font-family: 'Niconne', cursive;
-  align-self: center;
-  font-size: 3.5rem;
+  align-self: left;
+  text-shadow: 3px 3px 3px #333;
+  font-size: 3rem;
   letter-spacing: .2rem;
   font-style: italic;
-  color: black;
+  color: #FFF;
   margin-bottom: 2rem;
 }
 
@@ -66,24 +87,25 @@ body {
   height: 25rem;
 }
 
-.button {
+.home-card .button {
   display: inline-block;
   font-family: 'Marmelad', sans-serif;
-  font-size: 1.2rem;
+  align-items: left;
+  width: 40%;
+  font-size: 1.1rem;
   padding: .6rem;
   margin-left: .5rem;
   margin-right: .5rem;
   letter-spacing: .1rem;
   text-decoration: none;
-  background-color: #FF6666;
+  background-color: #FF8A06;
   color: #FFF;
   border-radius: 7px;
   border: 1px solid #666;
 }
 
-.button:hover {
+.home-card .button:hover {
   background-color: #666;
-  text-decoration: underline;
   color: #FFF;
   border: 1px solid white;
 }
@@ -95,7 +117,6 @@ body {
   flex-direction: row;
   justify-content: space-between;
   align-content: center;
-  background: #FF6666;
   padding: .2rem;
   position: fixed;
   top: 0px;
@@ -108,10 +129,10 @@ body {
   font-family: 'Niconne', cursive;
   font-size: 4.5rem;
   font-style: italic;
-  color: white;
-  text-shadow: 1px 1px 3px black;
+  color: #FFF;
+  text-shadow: 3px 3px 3px #333;
   letter-spacing: .3rem;
-  margin-left: 1.5rem;
+  margin-left: 2.5rem;
 }
 
 .slogan {
@@ -119,10 +140,11 @@ body {
   font-size: 1.8rem;
   font-weight: bold;
   color: white;
-  text-shadow: 1px 1px 3px black;
+  text-shadow: 1px 1px 3px #333;
   font-style: italic;
   letter-spacing: .2rem;
   margin-right: 1.5rem;
+  margin-top: 1rem;
 }
 
 /* NAVBAR */
@@ -133,14 +155,13 @@ body {
   justify-content: flex-end;
   align-items: center;
   font-family: 'Balsamic Sans', sans-serif;
-  background: #CCC;
   padding: 1rem;
+  padding-top: 0rem;
   position: fixed;
   z-index: 1000;
   top: 87px;
   right: 0px;
   left: 0px;
-  border-bottom: 1px solid black;
 }
 
 .navbar .button {
@@ -153,14 +174,14 @@ body {
   margin-right: .5rem;
   letter-spacing: .1rem;
   text-decoration: none;
-  background-color: #FF6666;
+  background-color: #666;
   color: #FFF;
   border-radius: 7px;
   border: 1px solid #666;
 }
 
 .navbar .button:hover {
-  background-color: #666;
+  background-color: #FF8A06;
   color: #FFF;
   border: 1px solid white;
 }
@@ -171,20 +192,19 @@ body {
   margin-top: 11rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: left;
   font-family: 'Marmelad', sans-serif;
   color: #333;
   font-size: 1.3rem;
   padding: 2rem;
   padding-bottom: 0rem;
-  margin-left: 10rem;
-  margin-right: 10rem;
+  margin-left: 4rem;
 }
 
 .login-card {
   display: flex;
-  background-color: #EEE;
   min-width: 400px;
+  max-width: 400px;
   flex-direction: column;
   font-size: 1rem;
   border: 1px solid #999;
@@ -192,11 +212,12 @@ body {
   border-radius: 7px;
   padding: 1rem;
   margin: 1rem;
-  margin-bottom: 7rem;
+  margin-bottom: 4rem;
 }
 
 .login-card h2 {
   height: 2.7rem;
+  color: #FFF;
   justify-content: center;
   font-family: 'Marmelad', sans-serif;
   font-size: 1.8rem;
@@ -208,6 +229,7 @@ body {
 
 .login-card label {
   height: 2.7rem;
+  color: #FFF;
   justify-content: center;
   font-family: 'Marmelad', sans-serif;
   font-size: 1.2rem;
@@ -227,7 +249,7 @@ body {
   margin-right: .5rem;
   letter-spacing: .1rem;
   border-radius: 7px;
-  border: 1px solid #FF6666;
+  border: 1px solid #FF8A06;
 }
 
 .login-card button {
@@ -241,7 +263,7 @@ body {
   margin-top: 1rem;
   letter-spacing: .1rem;
   text-decoration: none;
-  background-color: #FF6666;
+  background-color: #FF8A06;
   color: #FFF;
   border-radius: 7px;
   border: 1px solid #666;
@@ -265,20 +287,21 @@ body {
   letter-spacing: .1rem;
   text-decoration: none;
   background-color: #CCC;
-  color: #FF3333;
+  color: #FF8A06;
   border-radius: 7px;
   border: 1px solid #666;
 }
 
 .login-card .button:hover {
-  background-color: #FF6666;
+  background-color: #FF8A06;
   color: #FFF;
   border: 1px solid white;
 }
 
 .login-card .alert {
   font-size: 1.1rem;
-  color: #FF0000;
+  color: #FF8A06;
+  margin-left: 1rem;
 }
 
 /* SIGN UP */
@@ -287,20 +310,20 @@ body {
   margin-top: 11rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: left;
   font-family: 'Marmelad', sans-serif;
   color: #333;
   font-size: 1.3rem;
   padding: 2rem;
   padding-bottom: 0rem;
-  margin-left: 10rem;
-  margin-right: 10rem;
+  margin-left: 4rem;
+  margin-bottom: 7rem;
 }
 
 .signup-card {
   display: flex;
-  background-color: #EEE;
   min-width: 400px;
+  max-width: 400px;
   flex-direction: column;
   font-size: 1rem;
   border: 1px solid #999;
@@ -308,12 +331,12 @@ body {
   border-radius: 7px;
   padding: 1rem;
   margin: 1rem;
-  margin-bottom: 7rem;
 }
 
 .signup-card h2 {
   height: 2.7rem;
   justify-content: center;
+  color: #FFF;
   font-family: 'Marmelad', sans-serif;
   font-size: 1.8rem;
   padding: .6rem;
@@ -325,6 +348,7 @@ body {
 .signup-card label {
   height: 2.7rem;
   justify-content: center;
+  color: #FFF;
   font-family: 'Marmelad', sans-serif;
   font-size: 1.2rem;
   padding: .6rem;
@@ -343,7 +367,7 @@ body {
   margin-right: .5rem;
   letter-spacing: .1rem;
   border-radius: 7px;
-  border: 1px solid #FF6666;
+  border: 1px solid #FF8A06;
 }
 
 .signup-card button {
@@ -357,7 +381,7 @@ body {
   margin-top: 1rem;
   letter-spacing: .1rem;
   text-decoration: none;
-  background-color: #FF6666;
+  background-color:#FF8A06;
   color: #FFF;
   border-radius: 7px;
   border: 1px solid #666;
@@ -381,43 +405,47 @@ body {
   letter-spacing: .1rem;
   text-decoration: none;
   background-color: #CCC;
-  color: #FF3333;
+  color: #FF8A06;
   border-radius: 7px;
   border: 1px solid #666;
 }
 
 .signup-card .button:hover {
-  background-color: #FF6666;
+  background-color: #FF8A06;
   color: #FFF;
   border: 1px solid white;
 }
 
 .signup-card .alert {
   font-size: 1.1rem;
-  color: #FF0000;
+  color: #FF8A06;
+  margin-left: 1rem;
 }
 
 /* ALL PRODUCTS */
 
 .all-products {
-  margin-top: 10rem;
+  margin-top: 11rem;
+  max-height: 90%;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   font-family: 'Marmelad', sans-serif;
   color: #333;
   padding: 2rem;
-  padding-bottom: 5rem;
   margin-left: 5rem;
   margin-right: 5rem;
-  margin-bottom: 10rem;
+  overflow-x: scroll;
+  margin-bottom: 5rem;
 }
 
 .all-products .product-card {
   display: flex;
-  width: 270px;
+  min-width: 300px;
+  max-width: 300px;
+  background-color: #FFF;
   flex-direction: column;
   align-self: flex-end;
   font-size: 1rem;
@@ -448,16 +476,15 @@ body {
   margin-top: 9.5rem;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: left;
   flex-wrap: wrap;
   align-items: top;
   font-family: 'Marmelad', sans-serif;
   color: #333;
   padding: 2rem;
   padding-bottom: 0rem;
-  margin-left: 5rem;
-  margin-right: 5rem;
-  margin-bottom: 5rem;
+  margin-left: 3rem;
+  margin-bottom: 7rem;
 }
 
 .product .product-card {
@@ -466,11 +493,12 @@ body {
   flex-direction: row;
   font-size: 1rem;
   border: 1px solid #999;
+  background-color: #FFF;
   box-shadow: 5px 5px 10px 1px #999;
   border-radius: 7px;
   padding: 1rem;
   margin: 1rem;
-  margin-bottom: 7rem;
+  margin-bottom: 6rem;
 }
 
 .product .product-card h2 {
@@ -503,7 +531,7 @@ body {
   margin-top: 1rem;
   letter-spacing: .1rem;
   text-decoration: none;
-  background-color: #FF6666;
+  background-color: #FF8A06;
   color: #FFF;
   border: 1px solid white;
   border-radius: 7px;
@@ -529,7 +557,7 @@ body {
   letter-spacing: .1rem;
   text-decoration: none;
   background-color: #CCC;
-  color: #FF3333;
+  color: #FF8A06;
   border-radius: 7px;
   border: 1px solid #666;
 }
@@ -550,7 +578,7 @@ body {
 
 .product-card .alert {
   font-size: 1.3rem;
-  color: #FF0000;
+  color: #ff6666;
 }
 
 /* USER */
@@ -559,7 +587,7 @@ body {
   margin-top: 9.5rem;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: left;
   flex-wrap: wrap;
   align-items: top;
   font-family: 'Marmelad', sans-serif;
@@ -568,12 +596,14 @@ body {
   padding-bottom: 0rem;
   margin-left: 5rem;
   margin-right: 5rem;
-  margin-bottom: 5rem;
+  margin-bottom: 7rem;
 }
 
 .user .user-card {
   display: flex;
-  flex-basis: 900px;
+  min-width: 900px;
+  max-width: 900px;
+  background: #FFF;
   flex-direction: row;
   font-size: 1rem;
   border: 1px solid #999;
@@ -613,26 +643,51 @@ body {
   padding: 1.5rem;
 }
 
+.user .user-card .button {
+  display: inline-block;
+  width: 95%;
+  justify-content: center;
+  text-align: center;
+  font-family: 'Marmelad', sans-serif;
+  font-size: 1.2rem;
+  padding: .6rem;
+  margin-left: .5rem;
+  margin-right: .5rem;
+  margin-top: 1rem;
+  letter-spacing: .1rem;
+  text-decoration: none;
+  color: #FFF;
+  background-color: #FF8A06;
+  border-radius: 7px;
+  border: 1px solid #666;
+}
+
+.user .user-card .button:hover {
+  background-color: #000;
+  color: #FFF;
+  border: 1px solid white;
+}
+
 /* CART */
 
 .cart {
   margin-top: 9.5rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: left;
   font-family: 'Marmelad', sans-serif;
   color: #333;
   font-size: 1.3rem;
   padding: 2rem;
   padding-bottom: 7rem;
-  margin-left: 10rem;
-  margin-right: 10rem;
-  margin-bottom: 10rem;
+  margin-left: 4rem;
+  margin-bottom: 5rem;
 }
 
 .cart .cart-card {
   display: flex;
   width: 600px;
+  background: #FFF;
   flex-direction: column;
   font-size: 1rem;
   border: 1px solid #999;
@@ -650,17 +705,17 @@ body {
   flex-direction: row;
   font-size: 1.3rem;
   border: 1px solid #999;
-  background-color: #EEE;
   box-shadow: 5px 5px 10px 1px #999;
   border-radius: 7px;
   padding: 2rem;
-  margin: .3rem;
+  margin: 1rem;
   margin-top: 0rem;
 }
 
 .cart .price {
   display: flex;
   width: 200px;
+  color: #FFF;
   justify-content: space-between;
   flex-direction: row;
   font-size: 1.3rem;
@@ -692,7 +747,7 @@ body {
   margin-bottom: 2rem;
   letter-spacing: .1rem;
   text-decoration: none;
-  background-color:#FF6666;
+  background-color:#FF8A06;
   color: #FFF;
   border-radius: 7px;
   border: 1px solid #666;
@@ -704,9 +759,27 @@ body {
   border: 1px solid white;
 }
 
-#payButton {
-  background-color: rgb(118, 190, 118);
+.paybutton {
+  background-color:#66AA66;
   margin-top: 1.5rem;
+  border-radius: 7px;
+  font-size: 1.2rem;
+  padding: .3rem;
+  border: 1px solid #FFF;
+  text-align: center;
+  font-family: 'Marmelad', sans-serif;
+  font-size: 1.2rem;
+  padding: .6rem;
+  margin-left: .5rem;
+  margin-right: .5rem;
+  margin-top: 1rem;
+  letter-spacing: .1rem;
+  text-decoration: none;
+  color: #FFF;
+}
+
+.paybutton:hover {
+  background-color: #333;
 }
 
 /* FOOTER */
@@ -719,7 +792,7 @@ body {
   letter-spacing: .15rem;
   color: white;
   justify-content: space-around;
-  background: #999;
+  background: #000;
   padding: .5rem;
   padding-left: 2rem;
   padding-right: 2rem;
@@ -727,7 +800,6 @@ body {
   bottom: 0px;
   right: 0px;
   left: 0px;
-  border-top: 2px solid #FF6666;
 }
 
 .footer a {
@@ -739,7 +811,7 @@ body {
 }
 
 .footer a:hover {
-  color: #000;
+  color: #FF8A06;
   text-decoration: underline;
 }
 
@@ -757,12 +829,11 @@ body {
   margin-top: 15rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: left;
   font-family: 'Marmelad', sans-serif;
-  color: #333;
+  color: #FFF;
   font-size: 1.7rem;
   padding: 2rem;
   padding-bottom: 0rem;
-  margin-left: 10rem;
-  margin-right: 10rem;
+  margin-left: 4rem;
 }
