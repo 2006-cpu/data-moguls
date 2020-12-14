@@ -123,6 +123,7 @@ body {
   right: 0px;
   left: 0px;
   z-index: 999;
+  background-color: rgb(0, 0, 0, .85);
 }
 
 .title {
@@ -162,6 +163,7 @@ body {
   top: 87px;
   right: 0px;
   left: 0px;
+  padding-top: 1.3rem;
 }
 
 .navbar .button {
@@ -213,6 +215,7 @@ body {
   padding: 1rem;
   margin: 1rem;
   margin-bottom: 4rem;
+  background-color: rgb(0, 0, 0, .9);
 }
 
 .login-card h2 {
@@ -307,7 +310,7 @@ body {
 /* SIGN UP */
 
 .signup {
-  margin-top: 11rem;
+  margin-top: 7rem;
   display: flex;
   flex-direction: column;
   align-items: left;
@@ -317,7 +320,6 @@ body {
   padding: 2rem;
   padding-bottom: 0rem;
   margin-left: 4rem;
-  margin-bottom: 7rem;
 }
 
 .signup-card {
@@ -331,6 +333,7 @@ body {
   border-radius: 7px;
   padding: 1rem;
   margin: 1rem;
+  background-color: rgb(0, 0, 0, .9);
 }
 
 .signup-card h2 {
@@ -710,6 +713,7 @@ body {
   padding: 2rem;
   margin: 1rem;
   margin-top: 0rem;
+  background-color: rgb(0, 0, 0, .9);
 }
 
 .cart .price {
@@ -780,6 +784,11 @@ body {
 
 .paybutton:hover {
   background-color: #333;
+}
+
+.orderTitle{
+  color: white;
+  margin-left: 1.2rem;
 }
 
 /* FOOTER */
