@@ -30,8 +30,8 @@ body {
   font-size: 1.3rem;
   padding: 2rem;
   padding-bottom: 0rem;
-  margin-top: 10rem;
-  margin-left: 3rem;
+  margin-top: 11rem;
+  margin-left: 4rem;
 }
 
 .home-card {
@@ -123,7 +123,15 @@ body {
   right: 0px;
   left: 0px;
   z-index: 999;
-  background-color: rgb(0, 0, 0, .85);
+  /* background-color: rgb(0, 0, 0, .85); */
+  background-image: url(./images/homeimage2.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: left top;
+  background-repeat: no-repeat;
+  background-size: 112%;
+  background-blend-mode: lighten;
+  background-color: rgba( 75, 50, 50, 0.3);
 }
 
 .title {
@@ -214,8 +222,9 @@ body {
   border-radius: 7px;
   padding: 1rem;
   margin: 1rem;
-  margin-bottom: 4rem;
-  background-color: rgb(0, 0, 0, .9);
+  margin-left: 1rem;
+  margin-bottom: 5rem;
+  background-color: rgb(0, 0, 0, .3);
 }
 
 .login-card h2 {
@@ -310,7 +319,7 @@ body {
 /* SIGN UP */
 
 .signup {
-  margin-top: 7rem;
+  margin-top: 11rem;
   display: flex;
   flex-direction: column;
   align-items: left;
@@ -333,7 +342,9 @@ body {
   border-radius: 7px;
   padding: 1rem;
   margin: 1rem;
-  background-color: rgb(0, 0, 0, .9);
+  margin-left: 1rem;
+  margin-bottom: 5rem;
+  background-color: rgb(0, 0, 0, .3);
 }
 
 .signup-card h2 {
@@ -438,7 +449,7 @@ body {
   font-family: 'Marmelad', sans-serif;
   color: #333;
   padding: 2rem;
-  margin-left: 5rem;
+  margin-left: 4rem;
   margin-right: 5rem;
   overflow-x: scroll;
   margin-bottom: 5rem;
@@ -446,8 +457,8 @@ body {
 
 .all-products .product-card {
   display: flex;
-  min-width: 300px;
-  max-width: 300px;
+  min-width: 270px;
+  max-width: 270px;
   background-color: #FFF;
   flex-direction: column;
   align-self: flex-end;
@@ -457,6 +468,8 @@ body {
   border-radius: 7px;
   padding: 1rem;
   margin: 1rem;
+  margin-left: 1rem;
+  margin-bottom: 5rem;
 }
 
 .all-products .hidden {
@@ -471,12 +484,13 @@ body {
 .all-products .thumbnail {
   width: 230px;
   padding: 2rem;
+  align-self: center;
 }
 
 /* PRODUCT */
 
 .product {
-  margin-top: 9.5rem;
+  margin-top: 11rem;
   display: flex;
   flex-direction: row;
   justify-content: left;
@@ -486,8 +500,7 @@ body {
   color: #333;
   padding: 2rem;
   padding-bottom: 0rem;
-  margin-left: 3rem;
-  margin-bottom: 7rem;
+  margin-left: 4rem;
 }
 
 .product .product-card {
@@ -501,7 +514,8 @@ body {
   border-radius: 7px;
   padding: 1rem;
   margin: 1rem;
-  margin-bottom: 6rem;
+  margin-left: 1rem;
+  margin-bottom: 5rem;
 }
 
 .product .product-card h2 {
@@ -587,9 +601,10 @@ body {
 /* USER */
 
 .user {
-  margin-top: 9.5rem;
+  margin-top: 11rem;
+  font-size: 1.3rem;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: left;
   flex-wrap: wrap;
   align-items: top;
@@ -597,9 +612,7 @@ body {
   color: #333;
   padding: 2rem;
   padding-bottom: 0rem;
-  margin-left: 5rem;
-  margin-right: 5rem;
-  margin-bottom: 7rem;
+  margin-left: 4rem;
 }
 
 .user .user-card {
@@ -614,6 +627,8 @@ body {
   border-radius: 7px;
   padding: 1rem;
   margin: 1rem;
+  margin-bottom: 5rem;
+  margin-left: 1rem;
 }
 
 .user .user-card h2 {
@@ -674,7 +689,7 @@ body {
 /* CART */
 
 .cart {
-  margin-top: 9.5rem;
+  margin-top: 11rem;
   display: flex;
   flex-direction: column;
   align-items: left;
@@ -684,26 +699,29 @@ body {
   padding: 2rem;
   padding-bottom: 7rem;
   margin-left: 4rem;
-  margin-bottom: 5rem;
 }
 
 .cart .cart-card {
   display: flex;
-  width: 600px;
+  min-width: 650px;
+  max-width: 650px;
   background: #FFF;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: nowrap;
   font-size: 1rem;
   border: 1px solid #999;
   box-shadow: 5px 5px 10px 1px #999;
   border-radius: 7px;
   padding: 3rem;
+  padding-bottom: 1rem;
   margin: 1rem;
-  margin-bottom: .5rem;
+  margin-left: 1rem;
 }
 
 .cart .cart-card2 {
   display: flex;
-  width: 600px;
+  min-width: 650px;
+  max-width: 650px;
   justify-content: space-between;
   flex-direction: row;
   font-size: 1.3rem;
@@ -713,7 +731,7 @@ body {
   padding: 2rem;
   margin: 1rem;
   margin-top: 0rem;
-  background-color: rgb(0, 0, 0, .9);
+  background-color: rgb(0, 0, 0, .5);
 }
 
 .cart .price {
@@ -743,7 +761,7 @@ body {
 
 .cart .cart-card button {
   display: inline-block;
-  width: 15%;
+  width: 25%;
   justify-content: flex-start;
   font-family: 'Marmelad', sans-serif;
   font-size: .7rem;
@@ -789,6 +807,15 @@ body {
 .orderTitle{
   color: white;
   margin-left: 1.2rem;
+}
+
+.left {
+  width: 200px;
+}
+
+.right {
+  width: 500px;
+  margin-left: 2rem;
 }
 
 /* FOOTER */
