@@ -27,7 +27,7 @@ export default function Productcart({ cart, setCart, token }) {
                         </div>
                         <div className='right'>
                             <h3>{product.name}</h3>
-                            <p >Quantity: {product.quantity}</p>
+                            <p>Quantity: {product.quantity}</p>
                             <p className='description'>Price: ${(product.totalProductPrice * .01).toFixed(2)}</p>
                             <button onClick={async () => {
                                 await removeProductFromOrder({ orderId: cart.id, productId: product.id }, token)
@@ -45,7 +45,7 @@ export default function Productcart({ cart, setCart, token }) {
             <br />
             <div className='cart-card2'>
                 <div>
-                    <button className="paybutton" id="payButton" onClick={handleClick}>CHECK OUT</button>
+                    {total ? <button className="paybutton" id="payButton" onClick={handleClick}>CHECK OUT</button> : <></>}
                 </div>
                 <div>
                     <div className='price'><p>Subtotal:</p><p> ${(total * .01).toFixed(2)}</p></div>
@@ -76,16 +76,20 @@ export default function Productcart({ cart, setCart, token }) {
 
         return (<div className='cart'>
 
-            <h2 className='orderTitle'>This is a {thisOrder.status} order :</h2>
-            <div className='cart-card'>
+            <h2 style={{ color: '#FFF', marginLeft: '1rem' }}>This is a {thisOrder.status} order:</h2>
+            <div>
                 {thisOrder.products ? (
                     thisOrder.products.map(product => {
                         total = product.totalProductPrice + total;
-                        return (<div key={product.id}>
+                        return (<div key={product.id} className='cart-card'>
+                            <div className='left'>
                             <img className='thumbnail' src={product.imageURL} />
+                            </div>
+                            <div className='right'>
                             <h3>{product.name}</h3>
                             <p>Quantity: {product.quantity}</p>
-                            <p>Price: ${(product.totalProductPrice * .01).toFixed(2)}</p>
+                            <p className='description'>Price: ${(product.totalProductPrice * .01).toFixed(2)}</p>
+                            </div>
                         </div>)
                     })
                 ) : ''}
