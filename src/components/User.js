@@ -20,9 +20,10 @@ export default function User({ user, token, orders, setOrders }) {
 
   return <>
     <div className='user'>
+    <h2 style={{ color: '#FFF', marginLeft: '1rem' }}>User Profile:</h2>
       <div key={user.id} className='user-card'>
         <div className='userdata'>
-          <h2>User profile</h2>
+          {/* <h2>User profile</h2> */}
           <p className='description'>First Name: <u>{user.firstName}</u></p>
           <p className='description'>Last Name: <u>{user.lastName}</u></p>
           <p className='description'>Email: <u>{user.email}</u></p>

@@ -17,25 +17,28 @@ export default function Productcart({ cart, setCart, token }) {
         let total = 0;
 
         return (<div className='cart'>
-            <h2 style={{color: '#FFF', marginLeft: '1rem'}}>My Cart:</h2>
-            <div className='cart-card'>
+            <h2 style={{ color: '#FFF', marginLeft: '1rem' }}>My Cart:</h2>
+            <div>
                 {cart.products.map(product => {
                     total = product.totalProductPrice + total;
-                    return (<div key={product.id} style={{ borderBottom: '1px solid black', marginBottom: '3rem' }}>
+                    return (<div key={product.id} style={{ borderBottom: '1px solid black' }} className='cart-card'>
+                        <div className='left'>
+                            <img className='thumbnail' src={product.imageURL} />
+                        </div>
+                        <div className='right'>
+                            <h3>{product.name}</h3>
+                            <p >Quantity: {product.quantity}</p>
+                            <p className='description'>Price: ${(product.totalProductPrice * .01).toFixed(2)}</p>
+                            <button onClick={async () => {
+                                await removeProductFromOrder({ orderId: cart.id, productId: product.id }, token)
+                                const newProducts = cart.products.filter(({ id }) => {
 
-                        <img className='thumbnail' src={product.imageURL} />
-                        <h3>{product.name}</h3>
-                        <p >Quantity: {product.quantity}</p>
-                        <p className='description'>Price: ${(product.totalProductPrice * .01).toFixed(2)}</p>
-                        <button onClick={async () => {
-                            await removeProductFromOrder({ orderId: cart.id, productId: product.id }, token)
-                            const newProducts = cart.products.filter(({ id }) => {
-
-                                return (id !== product.id)
-                            })
-                            const newCart = { ...cart, products: newProducts }
-                            setCart(newCart)
-                        }}>REMOVE</button>
+                                    return (id !== product.id)
+                                })
+                                const newCart = { ...cart, products: newProducts }
+                                setCart(newCart)
+                            }}>REMOVE</button>
+                        </div>
                     </div>)
                 })}
             </div>
