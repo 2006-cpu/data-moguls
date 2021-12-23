@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "seed:dev": "nodemon ./db/seed.js",
-    "seed": "node ./db/seed.js",
+    "seed": "node ./db/init_db",
     "postinstall": "npm run client:build",
     "client:dev": "react-scripts start",
     "client:build": "react-scripts build",
