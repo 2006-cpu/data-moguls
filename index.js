@@ -11,9 +11,6 @@ server.use(morgan('dev'));
 const bodyParser = require('body-parser');
 server.use(bodyParser.json());
 
-// const cors = require('cors')
-// server.use(cors())
-
 // here's our static files
 const path = require('path');
 server.use(express.static(path.join(__dirname, 'build')));
