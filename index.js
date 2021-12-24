@@ -11,9 +11,21 @@ server.use(morgan('dev'));
 const bodyParser = require('body-parser');
 server.use(bodyParser.json());
 
+// const cors = require('cors')
+// server.use(cors())
+
 // here's our static files
 const path = require('path');
 server.use(express.static(path.join(__dirname, 'build')));
+
+server.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 
 // here's our API
 server.use('/api', require('./routes'));
@@ -32,7 +44,7 @@ server.use((err, req, res, next) => {
 })
 
 // connect to the server
-const { PORT = 5000 } = process.env;
+const { PORT = 4000 } = process.env;
 server.listen(PORT, async () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 

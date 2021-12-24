@@ -72,7 +72,11 @@ export async function getProductById(id) {
 
 export async function getAllProducts() {
   try {
-    const { data } = await axios.get('/api/products');
+    const { data } = await axios.get('/api/products', {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
 
     return data;
   } catch (error) {
